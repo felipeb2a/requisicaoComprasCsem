@@ -1,0 +1,10 @@
+Menu Ferramentas ... Opções ... iReport, aba Classpath e adicionar o jar do driver jdbc, marque a opção reloadable.
+
+ADICIONAR APENAS OS JARs NA PASTA lib IREPORT
+1. Adicionar biblioteca/botao direito sobre o preojeto/Bibliotecas/adicionar biblioteca/Criar Ireport/adicionar JAR PASTA>
+2. Adicione os jars da pasta lib ireport todas
+
+1. Adicionar biblioteca/bortao direito sobre o preojeto/Bibliotecas/adicionar biblioteca/Criar nova/adicionar JAR PASTA>
+2. navegue ate a pasta de instalaçao do ireport/C:\Users\usuario\appdata\Roaming\NetBeans\8.0.2\modules\ext>
+3. Adicione todas as bibliotecas dentro da pasta ext e fora.
+

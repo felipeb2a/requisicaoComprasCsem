@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="1890" pageHeight="595" orientation="Landscape" columnWidth="1890" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="04a3c543-3671-472a-a922-136b5782b20d">
+	<property name="ireport.zoom" value="1.6105100000000077"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[select r.CodRequisicao, s.NomeSolicitante, r.DataSolicitacao, r.DataCriacao, r.DataAprov, p.NomeProjeto, i.NomeItem, f.NomeFornecedor, e.EtapaRequisicao, f.TempoProducao, f.Logistica, r.DataPrevisaoEntrega, r.DataEntrega, u.Nome from Requisicoes r inner join Solicitante s on s.CodSolicitante = r.CodSolicitante inner join Projetos p on p.CodProjeto = r.CodProjeto inner join Item i on i.CodRequisicao = r.CodRequisicao inner join Fornecedores f on f.CodRequisicao = r.CodRequisicao inner join Usuario u on u.CodUsuario = r.CodUsuario inner join EtapaRequisicao e on e.CodEtapaRequisicao = r.CodEtapaRequisicao group by r.CodRequisicao]]>
+	</queryString>
+	<field name="CodRequisicao" class="java.lang.Integer"/>
+	<field name="NomeSolicitante" class="java.lang.String"/>
+	<field name="DataSolicitacao" class="java.sql.Timestamp"/>
+	<field name="DataCriacao" class="java.sql.Timestamp"/>
+	<field name="DataAprov" class="java.sql.Timestamp"/>
+	<field name="NomeProjeto" class="java.lang.String"/>
+	<field name="NomeItem" class="java.lang.String"/>
+	<field name="NomeFornecedor" class="java.lang.String"/>
+	<field name="EtapaRequisicao" class="java.lang.String"/>
+	<field name="TempoProducao" class="java.lang.Integer"/>
+	<field name="Logistica" class="java.lang.Integer"/>
+	<field name="DataPrevisaoEntrega" class="java.sql.Timestamp"/>
+	<field name="DataEntrega" class="java.sql.Timestamp"/>
+	<field name="Nome" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<frame>
+				<reportElement uuid="595f1c60-8c3f-4809-bf3d-4ff4bfc1f6b4" mode="Opaque" x="0" y="0" width="1890" height="66" backcolor="#71AD48"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement uuid="8b8f67bb-e79f-422a-b80c-acd232f67e88" x="677" y="37" width="274" height="29" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font fontName="Calibri" size="22"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="3372e3f7-2e07-462a-8374-ae88f78bdb3c" x="6" y="0" width="672" height="66" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Follow Up de Compras SUNEW]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement uuid="93b27aa3-3370-4487-bd0c-6d592710b382" mode="Opaque" x="0" y="70" width="1890" height="32" forecolor="#000000" backcolor="#71AD48"/>
+				<staticText>
+					<reportElement uuid="588b6a6c-4486-4c19-80f1-8897cda8c428" style="Column header" x="6" y="0" width="53" height="32" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Número]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8178a299-cb5e-4fad-95ac-2b8956cb21bb" style="Column header" x="61" y="0" width="94" height="32" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Solicitante]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="e6353e6a-acfe-4857-98a7-ee53e4766dd1" style="Column header" x="157" y="0" width="79" height="32" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Solicitação]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="909b1c46-0d62-49af-a267-382baae76bba" style="Column header" x="238" y="0" width="79" height="32" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Requisição]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="c42645c4-b1f0-42b2-a8f5-1ab2608a6bc8" style="Column header" x="319" y="0" width="81" height="32" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Aprovação]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="3cc634ba-59c8-45e5-9d39-37d26ccd61a3" style="Column header" x="402" y="0" width="105" height="32" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Centro de Custo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="afad01fe-7019-4301-929d-cd6e85e2baec" style="Column header" x="509" y="0" width="337" height="32" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Descrição]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="c9015415-f522-4f65-9a30-a29e7f03adf7" style="Column header" x="848" y="0" width="293" height="32" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fornecedor]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="a841c80d-5cb6-48c0-9982-c11b3479e622" style="Column header" x="1143" y="0" width="170" height="32" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Etapa]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1234cc50-4cd9-431a-be85-d8cae7993f2c" style="Column header" x="1315" y="0" width="126" height="32" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tempo de Produção]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="40055298-8fba-48bc-a5fa-857aa7214df3" style="Column header" x="1443" y="0" width="74" height="32" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Logística]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="eb3985b8-1d92-42ec-b68c-9338d7409040" style="Column header" x="1519" y="0" width="125" height="32" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Previsão de Entrega]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="621a8541-347b-4822-a996-a7c445714f37" style="Column header" x="1646" y="0" width="142" height="32" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Data do Recebimento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1f24e2fe-2feb-494a-a18e-95f48c9bc307" style="Column header" x="1790" y="0" width="100" height="32" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Requisitante]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="18" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<frame>
+				<reportElement uuid="337b12ba-379a-4d11-82cf-e6fdab9b562c" style="Row" mode="Opaque" x="0" y="0" width="1890" height="18"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="861b9a3f-25e9-4ec3-a2e1-3d3a76dbf8c2" style="Detail" positionType="Float" x="6" y="0" width="53" height="18"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{CodRequisicao}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="0e3cc1a0-909b-431c-9854-3721bba6f33e" style="Detail" positionType="Float" x="61" y="0" width="94" height="18"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NomeSolicitante}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+					<reportElement uuid="1c225cda-28f1-4365-841c-3dea7166e266" style="Detail" positionType="Float" x="157" y="0" width="79" height="18"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($F{DataSolicitacao}.equals(null) ? "-" : $F{DataSolicitacao})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+					<reportElement uuid="8c9f3451-a5bb-49ee-b4a3-b8278c4c314e" style="Detail" positionType="Float" x="238" y="0" width="79" height="18"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($F{DataCriacao}.equals(null) ? "-" : $F{DataCriacao})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+					<reportElement uuid="ad5707ca-9932-4e95-bccd-a763bd80839d" style="Detail" positionType="Float" x="319" y="0" width="81" height="18"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($F{DataAprov}.equals(null) ? "-" : $F{DataAprov})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="12d32931-2735-484e-8ecf-028e49fdce37" style="Detail" positionType="Float" x="401" y="0" width="105" height="18"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NomeProjeto}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="7e1bd7f5-0fac-4391-aaf4-78dbf8d189b9" style="Detail" positionType="Float" x="509" y="0" width="337" height="18"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NomeItem}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="65f772c5-b12d-4417-a286-69df2cfa9d16" style="Detail" positionType="Float" x="848" y="0" width="293" height="18"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NomeFornecedor}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="d93a0f29-4ebf-4209-8a87-2b1c7eefd78b" style="Detail" positionType="Float" x="1143" y="0" width="170" height="18"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($F{EtapaRequisicao}.equals(null) ? "-" : $F{EtapaRequisicao})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="5685a6f3-ea60-48b7-9288-9221479a6e7c" style="Detail" positionType="Float" x="1315" y="0" width="126" height="18"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TempoProducao}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="2d879b19-0029-42d5-8bc5-90603038ce92" style="Detail" positionType="Float" x="1443" y="0" width="74" height="18"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Logistica}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+					<reportElement uuid="d34f85ce-1c23-4e14-9e7a-c7234b518855" style="Detail" positionType="Float" x="1519" y="0" width="125" height="18"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($F{DataPrevisaoEntrega}.equals(null) ? "-" : $F{DataPrevisaoEntrega})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+					<reportElement uuid="4e43661f-36c3-46b7-b983-99545813dfdb" style="Detail" positionType="Float" x="1646" y="0" width="142" height="18"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($F{DataEntrega}.equals(null) ? "-" : $F{DataEntrega})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="c60fe185-e7d8-4eb4-8904-be07f0874159" style="Detail" positionType="Float" x="1790" y="0" width="100" height="18"/>
+					<textElement>
+						<font fontName="Calibri" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Nome}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

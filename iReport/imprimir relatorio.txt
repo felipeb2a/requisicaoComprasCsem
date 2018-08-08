@@ -1,0 +1,1 @@
+Ao gerar o jar do projeto para que o relatório seja impresso copie apasta relatorio para pasta onde se encontra o jar
