@@ -31,12 +31,11 @@ public class AcessDB {
         //MYSQL 8.0 REQUER SSL E TIMEZONE
         String ssl = "?useSSL=false";
         String timeZone = "&useTimezone=true&serverTimezone=UTC";
-        //String usuario = "root";
-        //String senha = "root";
-        String usuario = "compras";
-        String senha = "Compr@s2017";
-        String url = "jdbc:mysql://" + endereco + "/" + database + ssl + timeZone;
-
+        String usuario = "root";
+        String senha = "root";
+        //String url = "jdbc:mysql://" + endereco + "/" + database + ssl + timeZone;
+        String url = "jdbc:mysql://" + endereco + "/" + database;
+        //System.out.println(url);
         return DriverManager.getConnection(url, usuario, senha);
         /*######################################################################################*/
     }
