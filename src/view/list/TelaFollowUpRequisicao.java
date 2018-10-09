@@ -30,6 +30,7 @@ import model.Format;
 import model.Icone;
 import model.LogArquivoTexto;
 import model.Report;
+import model.ReportExcel;
 import model.Requisicoes;
 import model.StatusRequisicao;
 import model.Usuario;
@@ -249,6 +250,7 @@ public class TelaFollowUpRequisicao extends javax.swing.JFrame {
         btBuscar = new javax.swing.JButton();
         txtDataInicial = new com.toedter.calendar.JDateChooser();
         txtDataFinal = new com.toedter.calendar.JDateChooser();
+        cbTipo = new javax.swing.JComboBox<>();
         menu = new javax.swing.JMenuBar();
         jMenuEmpresa = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -309,6 +311,9 @@ public class TelaFollowUpRequisicao extends javax.swing.JFrame {
 
         txtDataFinal.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        cbTipo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Nacional", "Internacional", "Completo" }));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -322,14 +327,17 @@ public class TelaFollowUpRequisicao extends javax.swing.JFrame {
                         .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(btBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbUsuario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbUsuario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1293, Short.MAX_VALUE)
                     .addComponent(jSeparator1))
                 .addGap(0, 0, 0))
@@ -341,14 +349,15 @@ public class TelaFollowUpRequisicao extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btBuscar)
-                    .addComponent(lbTitulo)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lbUsuario)
-                        .addComponent(lbLogin)
-                        .addComponent(lbNivel))
-                    .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDataFinal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lbTitulo)
+                        .addComponent(lbNivel)
+                        .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtDataFinal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbLogin)
+                    .addComponent(lbUsuario)
+                    .addComponent(btBuscar))
                 .addGap(7, 7, 7)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -358,7 +367,7 @@ public class TelaFollowUpRequisicao extends javax.swing.JFrame {
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lbLogin, lbNivel, lbUsuario});
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btBuscar, lbTitulo, txtDataFinal, txtDataInicial});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btBuscar, cbTipo, lbTitulo, txtDataFinal, txtDataInicial});
 
         menu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
@@ -507,6 +516,27 @@ public class TelaFollowUpRequisicao extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btVoltarActionPerformed
 
+    private void btVoltar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltar2ActionPerformed
+        FileCompras fileCompras = new FileCompras();
+        String user = lbLogin.getText();
+        fileCompras.FOLLOWUP(nameDb, user);
+    }//GEN-LAST:event_btVoltar2ActionPerformed
+
+    private void btAlterarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarSenhaActionPerformed
+        try {
+            //TELA INF FINC
+            TelaAlterarSenha tela = new TelaAlterarSenha();
+            //this.setVisible(false);
+            tela.ObterLogin(obterLogin);
+            tela.nameDb(nameDb);
+            tela.mostrarTela(mostrarTela);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaFollowUpRequisicao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaFollowUpRequisicao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btAlterarSenhaActionPerformed
+
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
         boolean valida = true;
         String msgErro = "";
@@ -542,17 +572,18 @@ public class TelaFollowUpRequisicao extends javax.swing.JFrame {
                 dataFinal = txtDataFinal.getDate();
                 String user = lbLogin.getText();
                 String nivel = lbNivel.getText();
+                String tipo = (String) cbTipo.getSelectedItem();
                 //CRIAR PASTA FOLLOW-UP
                 VerificaParametro verifica = new VerificaParametro();
                 verifica.VerficaNameDBCriaPastaFollowUp(nivel, nameDb, user);
 
-                Report report = new Report();
-                report.geraRelatorioFollowUp(user, dataInicial, dataFinal, nameDb);
+                //Report report = new Report();
+                //report.geraRelatorioFollowUp(user, dataInicial, dataFinal, nameDb);
+                ReportExcel reportExcel = new ReportExcel();
+                reportExcel.gerarFollowUpExcel(user, dataInicial, dataFinal, tipo,nameDb);
                 //VOLTAR
                 JOptionPane.showMessageDialog(this, "Relatório gerado com Sucesso!");
                 btVoltarActionPerformed(evt);
-            } catch (ParseException ex) {
-                Logger.getLogger(TelaFollowUpRequisicao.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 //LOG
                 LogArquivoTexto log = new LogArquivoTexto();
@@ -569,27 +600,6 @@ public class TelaFollowUpRequisicao extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, msgErro);
         }
     }//GEN-LAST:event_btBuscarActionPerformed
-
-    private void btVoltar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltar2ActionPerformed
-        FileCompras fileCompras = new FileCompras();
-        String user = lbLogin.getText();
-        fileCompras.FOLLOWUP(nameDb, user);
-    }//GEN-LAST:event_btVoltar2ActionPerformed
-
-    private void btAlterarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarSenhaActionPerformed
-        try {
-            //TELA INF FINC
-            TelaAlterarSenha tela = new TelaAlterarSenha();
-            //this.setVisible(false);
-            tela.ObterLogin(obterLogin);
-            tela.nameDb(nameDb);
-            tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaFollowUpRequisicao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaFollowUpRequisicao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btAlterarSenhaActionPerformed
 
     private void tbRequisicaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRequisicaoMouseClicked
 
@@ -666,6 +676,7 @@ public class TelaFollowUpRequisicao extends javax.swing.JFrame {
     private javax.swing.JButton btBuscar;
     private javax.swing.JMenuItem btVoltar;
     private javax.swing.JMenuItem btVoltar2;
+    private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;

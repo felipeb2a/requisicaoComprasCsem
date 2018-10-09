@@ -313,6 +313,7 @@ public class TelaRequisicaoNova extends javax.swing.JFrame {
     //CARREGAR REQUISICAO
     public void carregarRequisicaoApartir(Requisicoes requisicao) throws SQLException, ClassNotFoundException {
         try {
+            
             ListarCombobox();
             //StatusRequisicao status = new StatusRequisicao();
             //status.setStatusRequisicao(Status);
@@ -345,7 +346,7 @@ public class TelaRequisicaoNova extends javax.swing.JFrame {
             listaItem = itemDao.localizarItemRequisicao(item, nameDb);
             //BUSCAR REQ
             requisicao = requisicaoDao.localizarRequisicaoParaAprovar(requisicao, nameDb);
-
+            
             //ATRIBUIR VALORES REQUISICAO
             //txtStatus.setText(requisicao.getStatusRequisicao().getStatusRequisicao());
             //txtCodReqTitulo.setText(Integer.toString(requisicao.getId()));
@@ -371,18 +372,20 @@ public class TelaRequisicaoNova extends javax.swing.JFrame {
                 cbTipoAprovador.setSelectedItem("Tecnico");
             }
             txtJustificativa.setText(requisicao.getJustificativa());
-
+            
+            
             //ATRIBUIR VALORES A TABLE FORNECEDOR
             for (Iterator it = listaFornecedor.iterator(); it.hasNext();) {
 
                 fornecedor = (Fornecedor) it.next();
                 Object linha[]
                         = {fornecedor.getNomeFornecedor(), fornecedor.getTelefone(), fornecedor.getEmail(), fornecedor.getContato(),
-                            fornecedor.getInfoAdicionais(), fornecedor.getTempoProducao(), fornecedor.getValorInicial(), fornecedor.getValorFinal(), fornecedor.getEscolha()};
+                            fornecedor.getInfoAdicionais(), fornecedor.getTempoProducao(), fornecedor.getLogistica(), 
+                            fornecedor.getValorInicial(), fornecedor.getValorFinal(), fornecedor.getEscolha()};
 
                 modelFornecedor.addRow(linha);
             }
-
+            
             //ATRIBUIR VALORES A TABLE ITEM
             for (Iterator it = listaItem.iterator(); it.hasNext();) {
 
@@ -393,6 +396,8 @@ public class TelaRequisicaoNova extends javax.swing.JFrame {
 
                 modelItem.addRow(linha);
             }
+            
+            
         } catch (Exception ex) {
             //LOG
             LogArquivoTexto log = new LogArquivoTexto();

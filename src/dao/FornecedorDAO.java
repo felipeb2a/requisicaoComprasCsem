@@ -391,13 +391,12 @@ public class FornecedorDAO extends AcessDB {
         Connection conexao = conectar(nameDb);
 
         // contruindo a consulta
-        String sql = "select f.CodFornecedor, f.CPF, f.CNPJ, f.Banco, f.Agencia, f.Conta from Fornecedores f where f.NomeFornecedor like ?";
+        String sql = "select f.NomeFornecedor, f.CodFornecedor, f.CPF, f.CNPJ, f.Banco, f.Agencia, f.Conta from Fornecedores f where f.NomeFornecedor like ? order by f.CodFornecedor desc limit 1";
 
         // criando o objeto que vai executar a consulta no banco
         PreparedStatement stm = conexao.prepareStatement(sql);
         //DEFINE NOME FORNECEDOR
-        String nomeFornecedor = "%" + fornecedorInformado.getNomeFornecedor() + "%";
-
+        String nomeFornecedor = fornecedorInformado.getNomeFornecedor() + "%";
         stm.setString(1, nomeFornecedor);
         // recebendo o resultado da consulta
         ResultSet resultado = stm.executeQuery();
@@ -406,13 +405,14 @@ public class FornecedorDAO extends AcessDB {
 
         // criando objeto de retorno
         while (resultado.next()) {
-
             fornecedorRetorno.setId(resultado.getInt("CodFornecedor"));
             fornecedorRetorno.setCpf(resultado.getString("CPF"));
             fornecedorRetorno.setCnpj(resultado.getString("CNPJ"));
             fornecedorRetorno.setBanco(resultado.getString("Banco"));
             fornecedorRetorno.setAgencia(resultado.getString("Agencia"));
             fornecedorRetorno.setConta(resultado.getString("Conta"));
+            
+            System.out.println(fornecedorRetorno.getNomeFornecedor());
         }
         // Encerrando a conexão.
         conexao.close();

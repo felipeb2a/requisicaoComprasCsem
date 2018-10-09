@@ -512,7 +512,6 @@ public class TelaInfomacoesFinanceiras extends javax.swing.JFrame {
                 requisicao.setId(Integer.parseInt(txtCodRequisicao.getText()));
                 fornecedor.setRequisicao(requisicao);
                 fornecedor = fornecedorDao.localizarFornecedorInfAdicionaisPreencher(fornecedor, nameDb);
-                System.out.println(fornecedor.getCpf());
                 txtCpf.setText(fornecedor.getCpf());
                 txtCnpj.setText(fornecedor.getCnpj());
                 txtBanco.setText(fornecedor.getBanco());

@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,6 +44,9 @@ import model.Moeda;
 import model.Requisicoes;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.PropertyConfigurator;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import view.initial.TelaLogin;
 
 /**
@@ -109,6 +113,7 @@ public class Teste {
         }
          */
         
+        /*
         File f = new File(pastaCsem);
         //System.out.println(f.getName().contains("591"));
         
@@ -129,6 +134,50 @@ public class Teste {
         
         System.out.println(nome);
         java.awt.Desktop.getDesktop().open(new File(pastaCsem + "\\" + nome));
+    }*/
+        
+         // local do arquivo
+            String filename = "C:/NewExcelFile.xls";
+            HSSFWorkbook workbook = new HSSFWorkbook();
+            HSSFSheet sheet = workbook.createSheet("FirstSheet");
+            // criando as linhas
+            HSSFRow rowhead = sheet.createRow((short) 0);
+            rowhead.createCell(0).setCellValue("Número");
+            rowhead.createCell(1).setCellValue("Solicitante");
+            rowhead.createCell(2).setCellValue("Solicitação");
+            rowhead.createCell(3).setCellValue("Requisição");
+            rowhead.createCell(4).setCellValue("Aprovação");
+            rowhead.createCell(5).setCellValue("Centro de Custo");
+            rowhead.createCell(6).setCellValue("Descrição");
+            rowhead.createCell(7).setCellValue("Fornecedor");
+            rowhead.createCell(8).setCellValue("Etapa");
+            rowhead.createCell(9).setCellValue("Tempo de Produção");
+            rowhead.createCell(10).setCellValue("Logística");
+            rowhead.createCell(11).setCellValue("Previsão");
+            rowhead.createCell(12).setCellValue("Data do Recebimento");
+            rowhead.createCell(13).setCellValue("Requisitante");
+            // definindo seus valores
+            // por exemplo protocolo.getProtocolo();
+            HSSFRow row = sheet.createRow((short) 1);
+            row.createCell(0).setCellValue("Gets");
+            row.createCell(1).setCellValue("Gets");
+            row.createCell(2).setCellValue("Gets");
+            row.createCell(3).setCellValue("Gets");
+            row.createCell(4).setCellValue("Gets");
+            row.createCell(5).setCellValue("Gets");
+            row.createCell(6).setCellValue("Gets");
+            row.createCell(7).setCellValue("Gets");
+            row.createCell(8).setCellValue("Gets");
+            row.createCell(9).setCellValue("Gets");
+            row.createCell(10).setCellValue("Gets");
+            row.createCell(11).setCellValue("Gets");
+            row.createCell(12).setCellValue("Gets");
+            row.createCell(13).setCellValue("Gets");
+
+            FileOutputStream fileOut = new FileOutputStream(filename);
+            workbook.write(fileOut);
+            fileOut.close();
+            System.out.println("Seu arquivo excel foi gerado!");
     }
 
 }

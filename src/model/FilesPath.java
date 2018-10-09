@@ -7,7 +7,7 @@ import java.io.File;
  * @author felipe.ferreira
  */
 public class FilesPath {
-    /*
+    
     //DEFINIR PASTAS PRINCIPAL
     
     //RC
@@ -56,7 +56,7 @@ public class FilesPath {
     private static String pastaSunewGeradoresLog = "\\\\15.0.0.3\\Team\\06. SUNEW GERADORES\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\01. CONTROLE DE COMPRAS\\07. LOGs\\";
     
 /*###################################################################################################################################################################################*/
-    
+    /*
     //DEFINIR PASTAS TESTE
     //RC
     private static String pastaRcCsem = "\\\\15.0.0.3\\Team\\01. CSEM Brasil\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\01. CONTROLE DE COMPRAS\\02. ORDENS DE COMPRAS\\01 - TESTE\\";
