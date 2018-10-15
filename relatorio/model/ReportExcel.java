@@ -53,6 +53,7 @@ public class ReportExcel extends AcessDB {
             //DISABLE GROUP BY FULL GROUP
             sql = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))";
             stm = conexao.prepareStatement(sql);
+            stm.executeQuery();
             
             if (tipo.equals("Nacional")) {
                 //sql = "select r.CodRequisicao, s.NomeSolicitante, r.DataSolicitacao, r.DataCriacao, r.DataAprov, p.NomeProjeto, i.NomeItem, f.NomeFornecedor, e.EtapaRequisicao, f.TempoProducao, f.Logistica, r.DataPrevisaoEntrega, r.DataEntrega, u.Nome, tr.TipoRequisicao from Requisicoes r inner join TipoReq tr on tr.CodTipoReq = r.CodTipoReq inner join Solicitante s on s.CodSolicitante = r.CodSolicitante inner join Projetos p on p.CodProjeto = r.CodProjeto inner join Item i on i.CodRequisicao = r.CodRequisicao inner join Fornecedores f on f.CodRequisicao = r.CodRequisicao inner join Usuario u on u.CodUsuario = r.CodUsuario inner join EtapaRequisicao e on e.CodEtapaRequisicao = r.CodEtapaRequisicao where tr.TipoRequisicao = ? and f.Escolha = 1 and r.DataSolicitacao between ? and ? order by r.CodRequisicao";
