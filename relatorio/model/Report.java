@@ -178,7 +178,7 @@ public class Report extends AcessDB {
             String name = Integer.toString(ordemPagamento.getRequisicoes().getId());
             String numOp = Integer.toString(ordemPagamento.getParcela());
             Connection conexao = conectar(nameDb);
-            System.out.println("Parcela "+ordemPagamento.getParcela() +" ID O "+ ordemPagamento.getId()  +" ID R "+  ordemPagamento.getRequisicoes().getId());
+            //System.out.println("Parcela "+ordemPagamento.getParcela() +" ID O "+ ordemPagamento.getId()  +" ID R "+  ordemPagamento.getRequisicoes().getId());
             //DEFINE RELATORIO DE CADA EMPRESA RC
             Requisicoes requisicoes = new Requisicoes();
             requisicoes.setId(ordemPagamento.getRequisicoes().getId());
@@ -191,9 +191,8 @@ public class Report extends AcessDB {
             PreparedStatement stm = conexao.prepareStatement(sql);
 
             stm.setInt(1, ordemPagamento.getId());
-
+            
             ResultSet resultado = stm.executeQuery();
-
             //implementacao da interface JRDataSource para DataSource ResultSet    
             JRResultSetDataSource jrRS = new JRResultSetDataSource(resultado);
 

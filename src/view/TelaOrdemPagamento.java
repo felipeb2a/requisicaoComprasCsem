@@ -895,7 +895,7 @@ public class TelaOrdemPagamento extends javax.swing.JFrame {
                 ordemPagamentoDao.update(ordemPagamento, nameDb);
                 Report report = new Report();
                 report.geraRelatorioOP(ordemPagamento, nameDb);
-                System.out.println("ID ORDEM " + ordemPagamento.getId() + "ID REQUISICAO" + ordemPagamento.getRequisicoes().getId());
+                //System.out.println("ID ORDEM " + ordemPagamento.getId() + "ID REQUISICAO" + ordemPagamento.getRequisicoes().getId());
             } catch (java.io.FileNotFoundException ex) {
                 JOptionPane.showMessageDialog(this, "O arquivo está aberto");
             } catch (SQLException ex) {
