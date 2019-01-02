@@ -13,13 +13,15 @@ public class Icone {
     public URL getIcone(String nameDb){
          
        Format format = new Format();
-        if (nameDb.equals("csem_" + format.dataAnoAtual())) {
+       String verificaIcone [];
+       verificaIcone = nameDb.split("_");
+        if (verificaIcone[0].equals("csem")) {
             url = this.getClass().getResource("/images/icon_system_csem.png");
         }
-        if (nameDb.equals("sunew_" + format.dataAnoAtual())) {
+        if (verificaIcone[0].equals("sunew")) {
             url = this.getClass().getResource("/images/icon_system_sunew.png");
         }
-        if (nameDb.equals("sunewgeradores_" + format.dataAnoAtual())) {
+        if (verificaIcone[0].equals("sunewgeradores")) {
             url = this.getClass().getResource("/images/icon_system_sunew_geradores.png");
         }        
         return url;

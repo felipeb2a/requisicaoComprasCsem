@@ -185,7 +185,7 @@ public class Report extends AcessDB {
             nivel = requisicaoDao.localizarNivel(requisicoes, nameDb);
             //nameReport = verifica.VerficaNameDBgeraRelatorioOP(nivel, nameDb);
             nameReport = verifica.VerficaNameDBgeraRelatorioOP(nivel, name, nameDb);
-            
+                        
             String sql = "select op.CodRequisicao, op.Parcela, op.DataOP, op.DataVencimento, op.NCM, op.PrevisaoEmbarque, f.NomeFornecedor, p.NomeProjeto, d.Destinacao, t.TipoCobranca, f.CNPJ, f.CPF, f.Banco, f.Agencia, f.Conta, op.ValorPagar, m.Abrev, op.Comentarios from OrdemPagto op  inner join Fornecedores f on f.CodRequisicao = op.CodRequisicao  inner join Requisicoes r on r.CodRequisicao = op.CodRequisicao  inner join Projetos p on p.CodProjeto = r.CodProjeto inner join Destinacao d on d.CodDest = r.CodDest inner join TipoCobranca t on t.CodTipoCobranca = op.CodTipoCobranca inner join Moedas m on m.CodMoeda = r.CodMoeda where op.CodOrdemPagamento = ? and f.Escolha = 1";
 
             PreparedStatement stm = conexao.prepareStatement(sql);
@@ -214,7 +214,6 @@ public class Report extends AcessDB {
             //exporterPdf.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "C:\\Users\\felipe.ferreira\\Downloads\\compras\\ORDENS DE COMPRAS\\SUNEW\\" + ano + "\\" + name + "\\OP - " + name + "." + numOp + ".pdf");
             exporterPdf.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, nameReport[1] + "\\OP - " + name + "." + numOp + ".pdf");
             exporterPdf.exportReport();
-
             //EXPORT TO EXCEL
             //JRXlsExporter exporterXls = new JRXlsExporter();
             //exporterXls.setParameter(JRExporterParameter.INPUT_FILE_NAME, printFileName);

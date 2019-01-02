@@ -1,0 +1,2 @@
+Inserir depois da data de criacao
+, NULL, NULL, NULL, NULL, NULL, 0, '', '', 0, '', NULL, '', 1, 1, 7, 1, 6, 3, 1, 1, 1, 1
