@@ -131,7 +131,7 @@ public class ProjetosDAO extends AcessDB {
         Connection conexao = conectar(nameDb);
 
         // contruindo a consulta
-        String sql = "select * from Projetos";
+        String sql = "select * from Projetos order by CodProjeto";
 
         // criando o objeto que vai executar a consulta no banco
         PreparedStatement stm = conexao.prepareStatement(sql);
