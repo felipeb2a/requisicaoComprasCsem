@@ -29,6 +29,7 @@ public class TelaInfomacoesFinanceiras extends javax.swing.JFrame {
         initComponents();
         //RESTRINGIR BOTAO FECHAR DO JFRAME
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        //MaximizeTela();
     }
 
     //MOSTRAR TELA    
@@ -45,6 +46,10 @@ public class TelaInfomacoesFinanceiras extends javax.swing.JFrame {
         URL url = icon.getIcone(nameDb);
         Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(iconeTitulo);
+    }
+    
+    public void MaximizeTela() {
+        this.setExtendedState(MAXIMIZED_BOTH);
     }
 
     //NOME DB    
@@ -164,7 +169,7 @@ public class TelaInfomacoesFinanceiras extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbTitulo)
-                .addGap(125, 125, 125))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
