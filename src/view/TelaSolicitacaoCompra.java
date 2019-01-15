@@ -119,8 +119,8 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
         JTableHeader cabecalhoItens = tbItens.getTableHeader();
         cabecalhoItens.setFont(new Font("Tahoma", Font.BOLD, 18));
     }
-    
-    public void MaximizeTela(){
+
+    public void MaximizeTela() {
         this.setExtendedState(MAXIMIZED_BOTH);
     }
 
@@ -606,6 +606,7 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
         btArquivar = new javax.swing.JMenuItem();
         btDesarquivar = new javax.swing.JMenuItem();
         btCancelar = new javax.swing.JMenuItem();
+        btDesCancelar = new javax.swing.JMenuItem();
         MenuVoltar = new javax.swing.JMenu();
         btVoltar = new javax.swing.JMenuItem();
 
@@ -1266,6 +1267,16 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
             }
         });
         MenuRequisicao.add(btCancelar);
+
+        btDesCancelar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
+        btDesCancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btDesCancelar.setText("Descancelar");
+        btDesCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDesCancelarActionPerformed(evt);
+            }
+        });
+        MenuRequisicao.add(btDesCancelar);
 
         menu.add(MenuRequisicao);
 
@@ -2261,6 +2272,39 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btAlterarSenhaActionPerformed
 
+    private void btDesCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDesCancelarActionPerformed
+        Object[] options = {"Confirmar", "Descancelar"};
+        int opcao = JOptionPane.showOptionDialog(null, "CLIQUE CONFIRMAR PARA DEFINIR SOLICITACAO COM STATUS NOVA! " + "\n", "A SOLICITAÇÃO SERÁ CANCELADA!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+        if (opcao == 0) {
+            SolicitacoesDAO solicitacoesDao = new SolicitacoesDAO();
+            Solicitacoes solicitacao = new Solicitacoes();
+            solicitacao.setId(Integer.parseInt(txtCodSolicTitulo.getText()));
+            try {
+                solicitacoesDao.desCancelarSolicitacao(solicitacao, nameDb);
+                btVoltarActionPerformed(evt);
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(TelaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                //LOG
+                LogArquivoTexto log = new LogArquivoTexto();
+                String classe = TelaInfomacoesFinanceiras.class.getName();
+                String texto = classe + "\n" + "ERRO: " + ex;
+                try {
+                    log.escreverGeral(texto, nameDb);
+                } catch (Exception ex1) {
+                    Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+            }
+            JOptionPane.showMessageDialog(this, "Requisição descancelada com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Cancelado");
+        }
+    }//GEN-LAST:event_btDesCancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2371,6 +2415,7 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
     private javax.swing.JMenuItem btAprova;
     private javax.swing.JMenuItem btArquivar;
     private javax.swing.JMenuItem btCancelar;
+    private javax.swing.JMenuItem btDesCancelar;
     private javax.swing.JMenuItem btDesarquivar;
     private javax.swing.JMenuItem btEnviar;
     private javax.swing.JButton btFinalizar;

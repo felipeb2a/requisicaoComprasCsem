@@ -558,6 +558,25 @@ public class SolicitacoesDAO extends AcessDB {
         stm.close();
     }
     
+    public void desCancelarSolicitacao(Solicitacoes solicitacao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
+                
+        // conectando ao banco de dados
+        Connection conexao = conectar(nameDb);
+
+        // contruindo a consulta
+        String sql = "update Solicitacoes s set s.CodigoStatus = ? where s.CodSolicitacao = ?";
+
+        // criando o objeto que vai executar a consulta no banco
+        PreparedStatement stm = conexao.prepareStatement(sql);
+               
+        //STATUS NOVA COD 1
+        stm.setInt(1, 1);
+        stm.setInt(2, solicitacao.getId());
+        // recebendo o resultado da consulta
+        stm.executeUpdate();
+        stm.close();
+    }
+    
     public void alterarRequisitanteSolicitacao(Solicitacoes solicitacao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
                 
         // conectando ao banco de dados
