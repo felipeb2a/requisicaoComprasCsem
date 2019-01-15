@@ -1268,7 +1268,7 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
         });
         MenuRequisicao.add(btCancelar);
 
-        btDesCancelar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
+        btDesCancelar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.ALT_MASK));
         btDesCancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btDesCancelar.setText("Descancelar");
         btDesCancelar.addActionListener(new java.awt.event.ActionListener() {
