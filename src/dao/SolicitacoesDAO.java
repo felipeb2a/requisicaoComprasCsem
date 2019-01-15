@@ -278,6 +278,59 @@ public class SolicitacoesDAO extends AcessDB {
         return solicitacao;
     }
     
+    public List<Solicitacoes> FiltrarSolicitacoesUserCancelada(String userInformado, String nameDb) throws SQLException, ClassNotFoundException {
+
+        // lista de retorno
+        List solicitacao = new ArrayList();
+
+        // conectando ao banco de dados
+        Connection conexao = conectar(nameDb);
+
+        // contruindo a consulta
+        String sql = "select  s.CodSolicitacao, s.DataSolicitacao, p.NomeProjeto, t.TipoRequisicao, st.Status, so.NomeSolicitante, sta.Arqvd from Solicitacoes s inner join Projetos p on s.CodProjeto = p.CodProjeto inner join TipoReq t on s.CodTipoReq = t.CodTipoReq inner join StatusRequisicao st on s.CodigoStatus = st.CodStatus inner join Solicitante so on s.CodSolicitante = so.CodSolicitante inner join StatusArq sta on s.CodArq = sta.CodArq inner join Usuario u on u.CodUsuario = s.CodUsuario where u.Nome like ? and st.CodStatus = 5 and s.CodArq = 1 order by s.CodSolicitacao desc";
+
+        // criando o objeto que vai executar a consulta no banco
+        PreparedStatement stm = conexao.prepareStatement(sql);
+
+        String userLike= "%"+userInformado+"%";
+        stm.setString(1, userLike);
+        // recebendo o resultado da consulta
+        ResultSet resultado = stm.executeQuery();
+
+        // criando objeto de retorno
+        while (resultado.next()) {
+            Solicitacoes solicitacaoRetorno;
+            Projetos projetos = new Projetos();
+            TipoRequisicao tipoRequisicao = new TipoRequisicao();
+            StatusRequisicao statusRequisicao = new StatusRequisicao();
+            Usuario usuario = new Usuario();
+            Solicitante solicitante = new Solicitante();
+            StatusArqRequisicao statusArqRequisicao = new StatusArqRequisicao();
+            
+            solicitacaoRetorno = new Solicitacoes();
+            solicitacaoRetorno.setId(resultado.getInt("CodSolicitacao"));
+            //DATA
+            solicitacaoRetorno.setDataSolicitacao(resultado.getDate("DataSolicitacao"));              
+            //PROJETO
+            projetos.setProjeto(resultado.getString("NomeProjeto"));
+            solicitacaoRetorno.setProjetos(projetos);
+            //TIPO REQ
+            tipoRequisicao.setTipoRequisicao(resultado.getString("TipoRequisicao"));
+            solicitacaoRetorno.setTipoRequisicao(tipoRequisicao);
+            //STATUS
+            statusRequisicao.setStatusRequisicao(resultado.getString("Status"));
+            solicitacaoRetorno.setStatusRequisicao(statusRequisicao);                      
+            //SOLICITANTE
+            solicitante.setNomeSolicitante(resultado.getString("NomeSolicitante"));
+            solicitacaoRetorno.setSolicitante(solicitante);
+                        
+            solicitacao.add(solicitacaoRetorno);
+        }
+        // Encerrando a conexão.
+        conexao.close();
+        return solicitacao;
+    }
+    
     public List<Solicitacoes> listaSolicitacoesArquivadas(String userInformado, String nameDb) throws SQLException, ClassNotFoundException {
 
         // lista de retorno
@@ -389,11 +442,12 @@ public class SolicitacoesDAO extends AcessDB {
         Connection conexao = conectar(nameDb);
 
         // contruindo a consulta
-        String sql = "select  s.CodSolicitacao, s.DataSolicitacao, p.NomeProjeto, t.TipoRequisicao, st.Status, so.NomeSolicitante, sta.Arqvd from Solicitacoes s inner join Projetos p on s.CodProjeto = p.CodProjeto inner join TipoReq t on s.CodTipoReq = t.CodTipoReq inner join StatusRequisicao st on s.CodigoStatus = st.CodStatus inner join Solicitante so on s.CodSolicitante = so.CodSolicitante inner join StatusArq sta on s.CodArq = sta.CodArq inner join Usuario u on u.CodUsuario = s.CodUsuario where s.CodigoStatus = 5 order by s.CodSolicitacao desc";
+        String sql = "select  s.CodSolicitacao, s.DataSolicitacao, p.NomeProjeto, t.TipoRequisicao, st.Status, so.NomeSolicitante, sta.Arqvd from Solicitacoes s inner join Projetos p on s.CodProjeto = p.CodProjeto inner join TipoReq t on s.CodTipoReq = t.CodTipoReq inner join StatusRequisicao st on s.CodigoStatus = st.CodStatus inner join Solicitante so on s.CodSolicitante = so.CodSolicitante inner join StatusArq sta on s.CodArq = sta.CodArq inner join Usuario u on u.CodUsuario = s.CodUsuario where u.Nome = ? and s.CodigoStatus = 5 order by s.CodSolicitacao desc";
 
         // criando o objeto que vai executar a consulta no banco
         PreparedStatement stm = conexao.prepareStatement(sql);
-        
+        stm.setString(1, userInformado);
+        System.out.println(userInformado);
         // recebendo o resultado da consulta
         ResultSet resultado = stm.executeQuery();
 

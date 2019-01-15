@@ -162,7 +162,7 @@ public class TelaListaSolicitacaoCancelada extends javax.swing.JFrame {
             //ListarCombobox();
             SolicitacoesDAO solicitacaoDAO = new SolicitacoesDAO();
             String usuario = (String) cbRequisitante.getSelectedItem();
-            List listaSolicitacao = solicitacaoDAO.FiltrarSolicitacoesUser(usuario, nameDb);
+            List listaSolicitacao = solicitacaoDAO.FiltrarSolicitacoesUserCancelada(usuario, nameDb);
             DefaultTableModel model = (DefaultTableModel) tbSolicitacao.getModel();
             model.setNumRows(0);
 
