@@ -330,7 +330,7 @@ public class TelaListaSolicitacaoEnviada extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lbTitulo.setFont(new java.awt.Font("Tahoma", 1, 28)); // NOI18N
-        lbTitulo.setText("SOLICITAÇÕES ARQUIVADAS");
+        lbTitulo.setText("SOLICITAÇÕES ENVIADAS");
 
         lbUsuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbUsuario.setText("Usuário:");

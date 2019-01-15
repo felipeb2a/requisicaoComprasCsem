@@ -230,7 +230,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="28" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="SOLICITA&#xc7;&#xd5;ES ARQUIVADAS"/>
+            <Property name="text" type="java.lang.String" value="SOLICITA&#xc7;&#xd5;ES ENVIADAS"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
