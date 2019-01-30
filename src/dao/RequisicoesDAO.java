@@ -457,7 +457,7 @@ public class RequisicoesDAO extends AcessDB {
         return req;
     }
     
-    public List<Requisicoes> localizarRequisicoesUserAprovadorTecnico(String nivel, String nameDb) throws SQLException, ClassNotFoundException {
+    public List<Requisicoes> localizarRequisicoesUserAprovadorTecnico(String aprovador,String nivel, String nameDb) throws SQLException, ClassNotFoundException {
 
         //UsuarioDAO usuarioDao = new UsuarioDAO();
         //Usuario user;
@@ -472,12 +472,13 @@ public class RequisicoesDAO extends AcessDB {
         Connection conexao = conectar(nameDb);
 
         // contruindo a consulta
-        String sql = "select r.CodRequisicao, r.DataSolicitacao, r.DataCriacao, p.CodProjeto, p.NomeProjeto, tr.CodTipoReq, tr.TipoRequisicao, sr.CodStatus, sr.Status, u.CodUsuario, u.Nome from Requisicoes r inner join Projetos p on p.CodProjeto = r.CodProjeto inner join TipoReq tr on tr.CodTipoReq = r.CodTipoReq inner join StatusRequisicao sr on sr.CodStatus = r.CodigoStatus inner join Usuario u on u.CodUsuario = r.CodUsuario where r.TipoAprovador = ? and sr.Status = 'Enviada' order by CodRequisicao desc";
+        String sql = "select r.CodRequisicao, r.DataSolicitacao, r.DataCriacao, p.CodProjeto, p.NomeProjeto, tr.CodTipoReq, tr.TipoRequisicao, sr.CodStatus, sr.Status, u.CodUsuario, u.Nome from Requisicoes r inner join Projetos p on p.CodProjeto = r.CodProjeto inner join TipoReq tr on tr.CodTipoReq = r.CodTipoReq inner join StatusRequisicao sr on sr.CodStatus = r.CodigoStatus inner join Usuario u on u.CodUsuario = r.CodUsuario where r.TipoAprovador = ? and r.AprovadorTecnico = ? and sr.Status = 'Enviada' order by CodRequisicao desc";
 
         // criando o objeto que vai executar a consulta no banco
         PreparedStatement stm = conexao.prepareStatement(sql);
 
         stm.setString(1, nivel);
+        stm.setString(2, aprovador);
         // recebendo o resultado da consulta
         ResultSet resultado = stm.executeQuery();
 
@@ -514,7 +515,7 @@ public class RequisicoesDAO extends AcessDB {
         return req;
     }
     
-    public List<Requisicoes> localizarRequisicoesUserAprovadorFinanceiro(String nivel, String nameDb) throws SQLException, ClassNotFoundException {
+    public List<Requisicoes> localizarRequisicoesUserAprovadorFinanceiro(String aprovador, String nivel, String nameDb) throws SQLException, ClassNotFoundException {
 
         //UsuarioDAO usuarioDao = new UsuarioDAO();
         //Usuario user;
@@ -529,12 +530,13 @@ public class RequisicoesDAO extends AcessDB {
         Connection conexao = conectar(nameDb);
 
         // contruindo a consulta
-        String sql = "select r.CodRequisicao, r.DataSolicitacao, r.DataCriacao, p.CodProjeto, p.NomeProjeto, tr.CodTipoReq, tr.TipoRequisicao, sr.CodStatus, sr.Status, u.CodUsuario, u.Nome from Requisicoes r inner join Projetos p on p.CodProjeto = r.CodProjeto inner join TipoReq tr on tr.CodTipoReq = r.CodTipoReq inner join StatusRequisicao sr on sr.CodStatus = r.CodigoStatus inner join Usuario u on u.CodUsuario = r.CodUsuario where r.TipoAprovador = ? and sr.Status = 'Enviada' or sr.Status = 'Aprovada Tecnico' order by CodRequisicao desc";
+        String sql = "select r.CodRequisicao, r.DataSolicitacao, r.DataCriacao, p.CodProjeto, p.NomeProjeto, tr.CodTipoReq, tr.TipoRequisicao, sr.CodStatus, sr.Status, u.CodUsuario, u.Nome from Requisicoes r inner join Projetos p on p.CodProjeto = r.CodProjeto inner join TipoReq tr on tr.CodTipoReq = r.CodTipoReq inner join StatusRequisicao sr on sr.CodStatus = r.CodigoStatus inner join Usuario u on u.CodUsuario = r.CodUsuario where r.TipoAprovador = ? and r.Aprovador = ? and sr.Status = 'Enviada' or sr.Status = 'Aprovada Tecnico' order by CodRequisicao desc";
 
         // criando o objeto que vai executar a consulta no banco
         PreparedStatement stm = conexao.prepareStatement(sql);
 
         stm.setString(1, nivel);
+        stm.setString(2, aprovador);
         // recebendo o resultado da consulta
         ResultSet resultado = stm.executeQuery();
 

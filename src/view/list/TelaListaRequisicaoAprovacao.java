@@ -94,9 +94,10 @@ public class TelaListaRequisicaoAprovacao extends javax.swing.JFrame {
             RequisicoesDAO requisicaoDAO = new RequisicoesDAO();
             //String usuario = lbLogin.getText();
             String nivel = lbNivel.getText();
-
+            String login = lbLogin.getText();
+            
             if (nivel.equals("Aprovador Financeiro")) {
-                List listaRequisicao = requisicaoDAO.localizarRequisicoesUserAprovadorFinanceiro(nivel, nameDb);
+                List listaRequisicao = requisicaoDAO.localizarRequisicoesUserAprovadorFinanceiro(login, nivel, nameDb);
                 DefaultTableModel model = (DefaultTableModel) tbRequisicao.getModel();
                 model.setNumRows(0);
 
@@ -111,7 +112,7 @@ public class TelaListaRequisicaoAprovacao extends javax.swing.JFrame {
                     model.addRow(linha);
                 }
             } else {
-                List listaRequisicao = requisicaoDAO.localizarRequisicoesUserAprovadorTecnico(nivel, nameDb);
+                List listaRequisicao = requisicaoDAO.localizarRequisicoesUserAprovadorTecnico(login,nivel, nameDb);
                 DefaultTableModel model = (DefaultTableModel) tbRequisicao.getModel();
                 model.setNumRows(0);
 
