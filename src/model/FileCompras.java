@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import view.list.TelaListaRequisicao;
 
 /**
  *
@@ -42,7 +41,7 @@ public class FileCompras {
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(TelaListaRequisicao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FileCompras.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -60,7 +59,7 @@ public class FileCompras {
                 java.awt.Desktop.getDesktop().open(new File(path.getAtivosSunewGeradores()));
             }
         } catch (IOException ex) {
-            Logger.getLogger(TelaListaRequisicao.class
+            Logger.getLogger(FileCompras.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -79,7 +78,7 @@ public class FileCompras {
                 java.awt.Desktop.getDesktop().open(new File(path.getDadosSunewGeradores()));
             }
         } catch (IOException ex) {
-            Logger.getLogger(TelaListaRequisicao.class
+            Logger.getLogger(FileCompras.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -98,7 +97,26 @@ public class FileCompras {
                 java.awt.Desktop.getDesktop().open(new File(path.getPastaSunewGeradoresFollowUp() + anoBd[1] + "\\" + user));
             }
         } catch (IOException ex) {
-            Logger.getLogger(TelaListaRequisicao.class
+            Logger.getLogger(FileCompras.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+     public void ORDEMPAGAMENTO(String nameDb, String user) {
+        try {
+            //Format format = new Format();
+            String[] anoBd = nameDb.split("_");
+            if (nameDb.equals("csem_" + anoBd[1])) {
+                java.awt.Desktop.getDesktop().open(new File(path.getPastaCsemExportOrdemPagamento() + anoBd[1] + "\\" + user));
+            }
+            if (nameDb.equals("sunew_" + anoBd[1])) {
+                java.awt.Desktop.getDesktop().open(new File(path.getPastaSunewExportOrdemPagamento()+ anoBd[1] + "\\" + user));
+            }
+            if (nameDb.equals("sunewgeradores_" + anoBd[1])) {
+                java.awt.Desktop.getDesktop().open(new File(path.getPastaSunewGeradoresExportOrdemPagamento() + anoBd[1] + "\\" + user));
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(FileCompras.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -92,6 +92,24 @@ public class VerificaParametro {
             pasta.createFolderFollowUpSunewGeradores(user, nameDb);
         }
     }
+    
+     //EXPORT OP
+    public void VerficaNameDBCriaPastaRelatorioOP(String nivel, String nameDb, String user) throws IOException {
+        //Format format = new Format();
+        String[] anoBd = nameDb.split("_");
+        if (nameDb.equals("csem_" + anoBd[1])) {
+            CreateFolder pasta = new CreateFolder();
+            pasta.createFolderRelatorioOPCsem(user, nameDb);
+        }
+        if (nameDb.equals("sunew_" + anoBd[1])) {
+            CreateFolder pasta = new CreateFolder();
+            pasta.createFolderRelatorioOPSunew(user, nameDb);
+        }
+        if (nameDb.equals("sunewgeradores_" + anoBd[1])) {
+            CreateFolder pasta = new CreateFolder();
+            pasta.createFolderRelatorioOPSunewGeradores(user, nameDb);
+        }
+    }
 
     //RELATORIO RC
     public String[] VerficaNameDBgeraRelatorioRC(String nivel, String id, String nameDb) throws IOException, Exception {
@@ -276,6 +294,26 @@ public class VerificaParametro {
         if (nameDb.equals("sunewgeradores_" + anoBd[1])) {
             nameReport[0] = "relatorio/view/FollowUpCompraSunewGeradores.jasper";
             nameReport[1] = path.getPastaSunewGeradoresFollowUp();
+        }
+
+        return nameReport;
+    }
+    
+    public String[] VerficaNameDBgeraRelatorioExportOrdemPagamento(String nameDb) throws IOException, Exception {
+        String[] nameReport = new String[2];
+        //Format format = new Format();
+        String[] anoBd = nameDb.split("_");
+        if (nameDb.equals("csem_" + anoBd[1])) {
+            nameReport[0] = "relatorio/view/FollowUpCompraCsem.jasper";
+            nameReport[1] = path.getPastaCsemExportOrdemPagamento();
+        }
+        if (nameDb.equals("sunew_" + anoBd[1])) {
+            nameReport[0] = "relatorio/view/FollowUpCompraSunew.jasper";
+            nameReport[1] = path.getPastaSunewExportOrdemPagamento();
+        }
+        if (nameDb.equals("sunewgeradores_" + anoBd[1])) {
+            nameReport[0] = "relatorio/view/FollowUpCompraSunewGeradores.jasper";
+            nameReport[1] = path.getPastaSunewGeradoresExportOrdemPagamento();
         }
 
         return nameReport;

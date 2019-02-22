@@ -91,6 +91,31 @@ public class CreateFolder {
             diretorio.mkdirs();
         }
     }
+    
+    //CRIAR PASTA RELATORIO OP SE NÂO EXISTIR
+    public void createFolderRelatorioOPCsem(String user, String nameDb) throws IOException {
+        String[] anoBd = nameDb.split("_");
+        File diretorio = new File(path.getPastaCsemExportOrdemPagamento() + anoBd[1] + "\\" + user);
+        if (!diretorio.exists()) {
+            diretorio.mkdirs();
+        }
+    }
+    
+     public void createFolderRelatorioOPSunew(String user, String nameDb) throws IOException {
+        String[] anoBd = nameDb.split("_");
+        File diretorio = new File(path.getPastaSunewExportOrdemPagamento() + anoBd[1] + "\\" + user);
+        if (!diretorio.exists()) {
+            diretorio.mkdirs();
+        }
+    }
+
+    public void createFolderRelatorioOPSunewGeradores(String user, String nameDb) throws IOException {
+        String[] anoBd = nameDb.split("_");
+        File diretorio = new File(path.getPastaSunewGeradoresExportOrdemPagamento() + anoBd[1] + "\\" + user);
+        if (!diretorio.exists()) {
+            diretorio.mkdirs();
+        }
+    }
 
     //CRIAR PASTA FOLLOW UP SE NÂO EXISTIR
     public void createFolderFollowUpCsem(String user, String nameDb) throws IOException {

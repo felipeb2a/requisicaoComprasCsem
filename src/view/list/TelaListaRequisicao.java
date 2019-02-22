@@ -114,7 +114,7 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
                 Object linha[]
                         = {requisicoes.getId(), requisicoes.getStatusRequisicao().getStatusRequisicao(),
                             requisicoes.getDataCriacao(), requisicoes.getDataSolicitacao(), requisicoes.getUsuario().getLogin(),
-                            requisicoes.getProjetos().getProjeto(), requisicoes.getTipoRequisicao().getTipoRequisicao(), 
+                            requisicoes.getProjetos().getProjeto(), requisicoes.getTipoRequisicao().getTipoRequisicao(),
                             requisicoes.getEtapaRequisicao().getEtapaRequisicao()};
 
                 model.addRow(linha);
@@ -347,6 +347,7 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
         btBuscarFornecedor = new javax.swing.JMenuItem();
         jMenuSolicitacoesEnviadas1 = new javax.swing.JMenu();
         btRelacaoOp = new javax.swing.JMenuItem();
+        btRelatorioOp = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         btVoltar1 = new javax.swing.JMenuItem();
         btPastaFollowUp = new javax.swing.JMenuItem();
@@ -598,6 +599,16 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
             }
         });
         jMenuSolicitacoesEnviadas1.add(btRelacaoOp);
+
+        btRelatorioOp.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK));
+        btRelatorioOp.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btRelatorioOp.setText("Relatório OP");
+        btRelatorioOp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRelatorioOpActionPerformed(evt);
+            }
+        });
+        jMenuSolicitacoesEnviadas1.add(btRelatorioOp);
 
         menu.add(jMenuSolicitacoesEnviadas1);
 
@@ -1027,6 +1038,31 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tbRequisicaoMouseClicked
 
+    private void btRelatorioOpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelatorioOpActionPerformed
+        try {
+            //TELA RELATORIO OP
+            TelaRelatorioOrdemPagamento tela = new TelaRelatorioOrdemPagamento();
+            this.setVisible(false);
+            tela.ObterLogin(obterLogin);
+            tela.nameDb(nameDb);
+            tela.mostrarTela(mostrarTela);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaListaRequisicao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TelaListaRequisicao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            //LOG
+            LogArquivoTexto log = new LogArquivoTexto();
+            String classe = TelaListaRequisicao.class.getName();
+            String texto = classe + "\n" + "ERRO: " + ex;
+            try {
+                log.escreverGeral(texto, nameDb);
+            } catch (Exception ex1) {
+                Logger.getLogger(TelaListaRequisicao.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+    }//GEN-LAST:event_btRelatorioOpActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1089,6 +1125,7 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
     private javax.swing.JMenuItem btOC;
     private javax.swing.JMenuItem btPastaFollowUp;
     private javax.swing.JMenuItem btRelacaoOp;
+    private javax.swing.JMenuItem btRelatorioOp;
     private javax.swing.JMenuItem btRequisicoesArquivadas;
     private javax.swing.JMenuItem btRequisicoesArquivadas1;
     private javax.swing.JMenuItem btVisualizar;
