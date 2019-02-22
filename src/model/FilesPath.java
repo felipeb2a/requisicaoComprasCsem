@@ -7,9 +7,8 @@ import java.io.File;
  * @author felipe.ferreira
  */
 public class FilesPath {
-    
+
     //DEFINIR PASTAS PRINCIPAL
-    
     //RC
     private static String pastaRcCsem = "\\\\15.0.0.3\\Team\\01. CSEM Brasil\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\01. CONTROLE DE COMPRAS\\02. ORDENS DE COMPRAS\\";
     private static String pastaRcSunew = "\\\\15.0.0.3\\Team\\02. SUNEW\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\01. CONTROLE DE COMPRAS\\02. ORDENS DE COMPRAS\\";
@@ -39,7 +38,12 @@ public class FilesPath {
     private static String dadosCsem = "\\\\15.0.0.3\\Team\\01. CSEM Brasil\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\DADOS CADASTRAIS CSEM.PDF";
     private static String dadosSunew = "\\\\15.0.0.3\\Team\\02. SUNEW\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\Cadastro Padrão Sunew.pdf";
     private static String dadosSunewGeradores = "\\\\15.0.0.3\\Team\\06. SUNEW GERADORES\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\Cadastro Padrão Sunew Geradores.pdf";
-    
+
+    //EXPORT ORGEM PAGAMENTO EXCEL
+    private static String pastaCsemExportOrdemPagamento = "\\\\15.0.0.3\\Team\\01. CSEM Brasil\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\01. CONTROLE DE COMPRAS\\09. EXPORT ORDEM PAGAMENTO\\";
+    private static String pastaSunewExportOrdemPagamento = "\\\\15.0.0.3\\Team\\02. SUNEW\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\01. CONTROLE DE COMPRAS\\09. EXPORT ORDEM PAGAMENTO\\";
+    private static String pastaSunewGeradoresExportOrdemPagamento = "\\\\15.0.0.3\\Team\\06. SUNEW GERADORES\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\01. CONTROLE DE COMPRAS\\09. EXPORT ORDEM PAGAMENTO\\";
+
     //FOLLOW-UP
     private static String pastaCsemFollowUp = "\\\\15.0.0.3\\Team\\01. CSEM Brasil\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\01. CONTROLE DE COMPRAS\\04. FOLLOW UP\\";
     private static String pastaSunewFollowUp = "\\\\15.0.0.3\\Team\\02. SUNEW\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\01. CONTROLE DE COMPRAS\\03. FOLLOW UP\\";
@@ -49,14 +53,14 @@ public class FilesPath {
     private static String pastaCsemFollowUpRh = "\\\\15.0.0.3\\Team\\01. CSEM Brasil\\01. ADMINISTRATIVO-FINANCEIRO\\FINANCEIRO\\Funcionários\\RH\\02. FOLLOW-UP\\";
     private static String pastaSunewFollowUpRh = "\\\\15.0.0.3\\Team\\02. SUNEW\\01. ADMINISTRATIVO-FINANCEIRO\\RH\\02. FOLLOW-UP\\";
     private static String pastaSunewGeradoresFollowUpRh = "\\\\15.0.0.3\\Team\\06. SUNEW GERADORES\\01. ADMINISTRATIVO-FINANCEIRO\\RH\\02. FOLLOW-UP\\";
-    
-     //LOG
+
+    //LOG
     private static String pastaCsemLog = "\\\\15.0.0.3\\Team\\01. CSEM Brasil\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\01. CONTROLE DE COMPRAS\\07. LOGs\\";
     private static String pastaSunewLog = "\\\\15.0.0.3\\Team\\02. SUNEW\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\01. CONTROLE DE COMPRAS\\07. LOGs\\";
     private static String pastaSunewGeradoresLog = "\\\\15.0.0.3\\Team\\06. SUNEW GERADORES\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\01. CONTROLE DE COMPRAS\\07. LOGs\\";
-    
-/*###################################################################################################################################################################################*/
-    /*
+
+    /*###################################################################################################################################################################################*/
+ /*
     //DEFINIR PASTAS TESTE
     //RC
     private static String pastaRcCsem = "\\\\15.0.0.3\\Team\\01. CSEM Brasil\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\01. CONTROLE DE COMPRAS\\02. ORDENS DE COMPRAS\\01 - TESTE\\";
@@ -176,6 +180,18 @@ public class FilesPath {
         return dadosSunewGeradores;
     }
 
+    public static String getPastaCsemExportOrdemPagamento() {
+        return pastaCsemExportOrdemPagamento;
+    }
+
+    public static String getPastaSunewExportOrdemPagamento() {
+        return pastaSunewExportOrdemPagamento;
+    }
+
+    public static String getPastaSunewGeradoresExportOrdemPagamento() {
+        return pastaSunewGeradoresExportOrdemPagamento;
+    }
+
     public static String getPastaCsemFollowUp() {
         return pastaCsemFollowUp;
     }
@@ -226,7 +242,7 @@ public class FilesPath {
         //PERSISTE A LISTA E VERIFICA SE EXISTE A PASTA FOI RENOMEADA
         for (String s : nomes) {
             if (s.contains(id)) {
-                retorno = caminho + "\\"+ s;
+                retorno = caminho + "\\" + s;
             }
         }
         return retorno;
