@@ -163,7 +163,14 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
             RequisicoesDAO requisicaoDAO = new RequisicoesDAO();
             String usuario = (String) cbRequisitante.getSelectedItem();
             String status = (String) cbStatus.getSelectedItem();
-            List listaRequisicao = requisicaoDAO.FiltrarRequisicoesUserStatus(usuario, status, nameDb);
+            String codRequisicao = txtCodRequisicao.getText();
+            List listaRequisicao = new ArrayList();
+            if (txtCodRequisicao.getText().length() == 0) {
+                listaRequisicao = requisicaoDAO.FiltrarRequisicoesUserStatus(usuario, status, nameDb);
+            }
+            if (!(txtCodRequisicao.getText().length() == 0)) {
+                listaRequisicao = requisicaoDAO.FiltrarRequisicoesCodRequisicao(codRequisicao, nameDb);
+            }
             DefaultTableModel model = (DefaultTableModel) tbRequisicao.getModel();
             model.setNumRows(0);
 
@@ -398,9 +405,19 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
 
         cbRequisitante.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cbRequisitante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuario" }));
+        cbRequisitante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbRequisitanteActionPerformed(evt);
+            }
+        });
 
         cbStatus.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Status" }));
+        cbStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStatusActionPerformed(evt);
+            }
+        });
 
         btBuscar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btBuscar.setText("Filtrar");
@@ -413,6 +430,7 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
         lbCodRequisicao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lbCodRequisicao.setText("Cod. Requisicão:");
 
+        txtCodRequisicao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtCodRequisicao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodRequisicaoActionPerformed(evt);
@@ -909,13 +927,16 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
         String msgErro = "";
 
         //VERIFICA CAMPOS
-        if (cbRequisitante.getSelectedItem().equals("Usuario")) {
-            msgErro += "- Favor selecionar campo Usuário\n";
-            valida = false;
-        }
-        if (cbStatus.getSelectedItem().equals("Status")) {
-            msgErro += "- Favor selecionar campo Status\n";
-            valida = false;
+        if (txtCodRequisicao.getText().length() == 0) {
+            if (cbRequisitante.getSelectedItem().equals("Usuario")) {
+                msgErro += "- Favor selecionar campo Usuário\n";
+                valida = false;
+            }
+            if (cbStatus.getSelectedItem().equals("Status")) {
+                msgErro += "- Favor selecionar campo Status\n";
+                valida = false;
+            }
+            msgErro += "- Caso queira filtrar pelo Código da Requisição favor preencher campo Cód. Requisição\n";
         }
         if (valida) {
             Filtro();
@@ -1088,6 +1109,14 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
     private void txtCodRequisicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodRequisicaoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodRequisicaoActionPerformed
+
+    private void cbRequisitanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRequisitanteActionPerformed
+        txtCodRequisicao.setText("");
+    }//GEN-LAST:event_cbRequisitanteActionPerformed
+
+    private void cbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStatusActionPerformed
+        txtCodRequisicao.setText("");
+    }//GEN-LAST:event_cbStatusActionPerformed
 
     /**
      * @param args the command line arguments

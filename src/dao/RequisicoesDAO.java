@@ -77,7 +77,7 @@ public class RequisicoesDAO extends AcessDB {
         conexao.close();
         return requisicaoRetorno;
     }
-    
+
     public Requisicoes localizarRequisicoesArqv(Requisicoes requisicaoInformado, String nameDb) throws SQLException, ClassNotFoundException {
 
         List req = new ArrayList();
@@ -120,7 +120,7 @@ public class RequisicoesDAO extends AcessDB {
         // contruindo a consulta
         //String sql = "select r.CodRequisicao, r.DataSolicitacao, r.DataCriacao, p.CodProjeto, p.NomeProjeto, tr.CodTipoReq, tr.TipoRequisicao, sr.CodStatus, sr.Status, u.CodUsuario, u.Nome from Requisicoes r inner join Projetos p on p.CodProjeto = r.CodProjeto inner join TipoReq tr on tr.CodTipoReq = r.CodTipoReq inner join StatusRequisicao sr on sr.CodStatus = r.CodigoStatus inner join Usuario u on u.CodUsuario = r.CodUsuario where u.Nome = ? and r.CodArq = 1 and sr.Status <> 'Cancelada' order by CodRequisicao desc";
         String sql = "select r.CodRequisicao, r.DataSolicitacao, r.DataCriacao, p.CodProjeto, p.NomeProjeto, tr.CodTipoReq, tr.TipoRequisicao, sr.CodStatus, sr.Status, u.CodUsuario, u.Nome, e.EtapaRequisicao from Requisicoes r inner join EtapaRequisicao e on r.CodEtapaRequisicao = e.CodEtapaRequisicao inner join Projetos p on p.CodProjeto = r.CodProjeto inner join TipoReq tr on tr.CodTipoReq = r.CodTipoReq inner join StatusRequisicao sr on sr.CodStatus = r.CodigoStatus inner join Usuario u on u.CodUsuario = r.CodUsuario where u.Nome = ? and r.CodArq = 1 and sr.Status <> 'Cancelada' order by CodRequisicao desc";
-        
+
         // criando o objeto que vai executar a consulta no banco
         PreparedStatement stm = conexao.prepareStatement(sql);
 
@@ -136,7 +136,7 @@ public class RequisicoesDAO extends AcessDB {
             StatusRequisicao statusRequisicao = new StatusRequisicao();
             Usuario usuario = new Usuario();
             EtapaRequisicao etapa = new EtapaRequisicao();
-            
+
             requisicaoRetorno = new Requisicoes();
             requisicaoRetorno.setId(resultado.getInt("CodRequisicao"));
             //STATUS
@@ -153,18 +153,18 @@ public class RequisicoesDAO extends AcessDB {
             requisicaoRetorno.setProjetos(projetos);
             //TIPO REQ
             tipoRequisicao.setTipoRequisicao(resultado.getString("TipoRequisicao"));
-            requisicaoRetorno.setTipoRequisicao(tipoRequisicao);            
+            requisicaoRetorno.setTipoRequisicao(tipoRequisicao);
             //ETAPA REQ
             etapa.setEtapaRequisicao(resultado.getString("EtapaRequisicao"));
             requisicaoRetorno.setEtapaRequisicao(etapa);
-            
+
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
         conexao.close();
         return req;
     }
-    
+
     public List<Requisicoes> localizarRequisicoesArquivadaUser(String userInformado, String nameDb) throws SQLException, ClassNotFoundException {
 
         // lista de retorno
@@ -190,7 +190,7 @@ public class RequisicoesDAO extends AcessDB {
             TipoRequisicao tipoRequisicao = new TipoRequisicao();
             StatusRequisicao statusRequisicao = new StatusRequisicao();
             Usuario usuario = new Usuario();
-            
+
             requisicaoRetorno = new Requisicoes();
             requisicaoRetorno.setId(resultado.getInt("CodRequisicao"));
             //STATUS
@@ -208,14 +208,14 @@ public class RequisicoesDAO extends AcessDB {
             //TIPO REQ
             tipoRequisicao.setTipoRequisicao(resultado.getString("TipoRequisicao"));
             requisicaoRetorno.setTipoRequisicao(tipoRequisicao);
-            
+
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
         conexao.close();
         return req;
     }
-    
+
     public List<Requisicoes> localizarRequisicoesCanceladaUser(String userInformado, String nameDb) throws SQLException, ClassNotFoundException {
 
         // lista de retorno
@@ -243,7 +243,7 @@ public class RequisicoesDAO extends AcessDB {
             TipoRequisicao tipoRequisicao = new TipoRequisicao();
             StatusRequisicao statusRequisicao = new StatusRequisicao();
             Usuario usuario = new Usuario();
-            
+
             requisicaoRetorno = new Requisicoes();
             requisicaoRetorno.setId(resultado.getInt("CodRequisicao"));
             //STATUS
@@ -261,14 +261,14 @@ public class RequisicoesDAO extends AcessDB {
             //TIPO REQ
             tipoRequisicao.setTipoRequisicao(resultado.getString("TipoRequisicao"));
             requisicaoRetorno.setTipoRequisicao(tipoRequisicao);
-            
+
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
         conexao.close();
         return req;
     }
-    
+
     public List<Requisicoes> FiltrarRequisicoesUserStatus(String userInformado, String statusInformado, String nameDb) throws SQLException, ClassNotFoundException {
 
         // lista de retorno
@@ -283,8 +283,8 @@ public class RequisicoesDAO extends AcessDB {
         // criando o objeto que vai executar a consulta no banco
         PreparedStatement stm = conexao.prepareStatement(sql);
 
-        String userLike= "%"+userInformado+"%";
-        String statusLike= "%"+statusInformado+"%";
+        String userLike = "%" + userInformado + "%";
+        String statusLike = "%" + statusInformado + "%";
         stm.setString(1, userLike);
         stm.setString(2, statusLike);
         // recebendo o resultado da consulta
@@ -297,7 +297,7 @@ public class RequisicoesDAO extends AcessDB {
             TipoRequisicao tipoRequisicao = new TipoRequisicao();
             StatusRequisicao statusRequisicao = new StatusRequisicao();
             Usuario usuario = new Usuario();
-            
+
             requisicaoRetorno = new Requisicoes();
             requisicaoRetorno.setId(resultado.getInt("CodRequisicao"));
             //STATUS
@@ -315,25 +315,87 @@ public class RequisicoesDAO extends AcessDB {
             //TIPO REQ
             tipoRequisicao.setTipoRequisicao(resultado.getString("TipoRequisicao"));
             requisicaoRetorno.setTipoRequisicao(tipoRequisicao);
-            
+
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
         conexao.close();
         return req;
     }
-    
+
+    public List<Requisicoes> FiltrarRequisicoesCodRequisicao(String codRequisicao, String nameDb) throws SQLException, ClassNotFoundException {
+
+        // lista de retorno
+        List req = new ArrayList();
+
+        // conectando ao banco de dados
+        Connection conexao = conectar(nameDb);
+
+        // contruindo a consulta
+        String sql = "select r.CodRequisicao, r.DataSolicitacao, r.DataCriacao, "
+                + " p.CodProjeto, p.NomeProjeto, "
+                + " tr.CodTipoReq, tr.TipoRequisicao, "
+                + " sr.CodStatus, sr.Status, "
+                + " u.CodUsuario, u.Nome "
+                + " from Requisicoes r "
+                + " inner join Projetos p on p.CodProjeto = r.CodProjeto "
+                + " inner join TipoReq tr on tr.CodTipoReq = r.CodTipoReq "
+                + " inner join StatusRequisicao sr on sr.CodStatus = r.CodigoStatus "
+                + " inner join Usuario u on u.CodUsuario = r.CodUsuario "
+                + " where r.CodRequisicao = ? "
+                + " and r.CodArq = 1 order by CodRequisicao desc";
+
+        // criando o objeto que vai executar a consulta no banco
+        PreparedStatement stm = conexao.prepareStatement(sql);
+     
+        stm.setString(1, codRequisicao);
+        // recebendo o resultado da consulta
+        ResultSet resultado = stm.executeQuery();
+
+        // criando objeto de retorno
+        while (resultado.next()) {
+            Requisicoes requisicaoRetorno;
+            Projetos projetos = new Projetos();
+            TipoRequisicao tipoRequisicao = new TipoRequisicao();
+            StatusRequisicao statusRequisicao = new StatusRequisicao();
+            Usuario usuario = new Usuario();
+
+            requisicaoRetorno = new Requisicoes();
+            requisicaoRetorno.setId(resultado.getInt("CodRequisicao"));
+            //STATUS
+            statusRequisicao.setStatusRequisicao(resultado.getString("Status"));
+            requisicaoRetorno.setStatusRequisicao(statusRequisicao);
+            //DATAS
+            requisicaoRetorno.setDataCriacao(resultado.getDate("DataCriacao"));
+            requisicaoRetorno.setDataSolicitacao(resultado.getDate("DataSolicitacao"));
+            //REQUISITANTE
+            usuario.setLogin(resultado.getString("Nome"));
+            requisicaoRetorno.setUsuario(usuario);
+            //PROJETO
+            projetos.setProjeto(resultado.getString("NomeProjeto"));
+            requisicaoRetorno.setProjetos(projetos);
+            //TIPO REQ
+            tipoRequisicao.setTipoRequisicao(resultado.getString("TipoRequisicao"));
+            requisicaoRetorno.setTipoRequisicao(tipoRequisicao);
+
+            req.add(requisicaoRetorno);
+        }
+        // Encerrando a conexão.
+        conexao.close();
+        return req;
+    }
+
     public List<Requisicoes> FollowUpRequisicoesFiltro(String user, java.util.Date dataInicial, java.util.Date dataFinal, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
 
         //CONVERT DATA MYSQL
         Format convertData = new Format();
-        
+
         java.sql.Date dataInicialConvert;
         java.sql.Date dataFinalConvert;
 
         dataInicialConvert = convertData.convertDataSql(dataInicial);
         dataFinalConvert = convertData.convertDataSql(dataFinal);
-        
+
         // lista de retorno
         List req = new ArrayList();
 
@@ -356,13 +418,13 @@ public class RequisicoesDAO extends AcessDB {
 
         // criando objeto de retorno
         while (resultado.next()) {
-            Requisicoes requisicaoRetorno;            
+            Requisicoes requisicaoRetorno;
             Solicitante solicitante = new Solicitante();
             Projetos projetos = new Projetos();
             Item item = new Item();
             Fornecedor fornecedor = new Fornecedor();
             Usuario usuario = new Usuario();
-            
+
             requisicaoRetorno = new Requisicoes();
             requisicaoRetorno.setId(resultado.getInt("CodRequisicao"));
             //STATUS
@@ -375,7 +437,7 @@ public class RequisicoesDAO extends AcessDB {
             requisicaoRetorno.setDataEntrega(resultado.getDate("DataEntrega"));
             //PROJETO
             projetos.setProjeto(resultado.getString("NomeProjeto"));
-            requisicaoRetorno.setProjetos(projetos);            
+            requisicaoRetorno.setProjetos(projetos);
             //ITEM
             item.setNomeItem(resultado.getString("NomeItem"));
             requisicaoRetorno.setItem(item);
@@ -386,16 +448,16 @@ public class RequisicoesDAO extends AcessDB {
             //REQUISITANTE
             usuario.setLogin(resultado.getString("Nome"));
             requisicaoRetorno.setUsuario(usuario);
-            
+
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
         conexao.close();
         return req;
     }
-    
-    public List<Requisicoes> FollowUpRequisicoes(String user, String nameDb) throws SQLException, ClassNotFoundException{
-        
+
+    public List<Requisicoes> FollowUpRequisicoes(String user, String nameDb) throws SQLException, ClassNotFoundException {
+
         // lista de retorno
         List req = new ArrayList();
 
@@ -413,14 +475,14 @@ public class RequisicoesDAO extends AcessDB {
 
         // criando objeto de retorno
         while (resultado.next()) {
-            Requisicoes requisicaoRetorno;            
+            Requisicoes requisicaoRetorno;
             Solicitante solicitante = new Solicitante();
             Projetos projetos = new Projetos();
             Item item = new Item();
             Fornecedor fornecedor = new Fornecedor();
             Usuario usuario = new Usuario();
             EtapaRequisicao etapa = new EtapaRequisicao();
-            
+
             requisicaoRetorno = new Requisicoes();
             requisicaoRetorno.setId(resultado.getInt("CodRequisicao"));
             //STATUS
@@ -434,7 +496,7 @@ public class RequisicoesDAO extends AcessDB {
             requisicaoRetorno.setDataPrevisaoEntrega(resultado.getDate("DataPrevisaoEntrega"));
             //PROJETO
             projetos.setProjeto(resultado.getString("NomeProjeto"));
-            requisicaoRetorno.setProjetos(projetos);            
+            requisicaoRetorno.setProjetos(projetos);
             //ITEM
             item.setNomeItem(resultado.getString("NomeItem"));
             requisicaoRetorno.setItem(item);
@@ -449,22 +511,20 @@ public class RequisicoesDAO extends AcessDB {
             //ETAPA
             etapa.setEtapaRequisicao(resultado.getString("EtapaRequisicao"));
             requisicaoRetorno.setEtapaRequisicao(etapa);
-            
+
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
         conexao.close();
         return req;
     }
-    
-    public List<Requisicoes> localizarRequisicoesUserAprovadorTecnico(String aprovador,String nivel, String nameDb) throws SQLException, ClassNotFoundException {
+
+    public List<Requisicoes> localizarRequisicoesUserAprovadorTecnico(String aprovador, String nivel, String nameDb) throws SQLException, ClassNotFoundException {
 
         //UsuarioDAO usuarioDao = new UsuarioDAO();
         //Usuario user;
-            
         //user = usuarioDao.localizarNivelUsuario(userInformado, nameDb);
         //String nivel = user.getNivel().getNomeNivel();
-        
         // lista de retorno
         List req = new ArrayList();
 
@@ -489,7 +549,7 @@ public class RequisicoesDAO extends AcessDB {
             TipoRequisicao tipoRequisicao = new TipoRequisicao();
             StatusRequisicao statusRequisicao = new StatusRequisicao();
             Usuario usuario = new Usuario();
-            
+
             requisicaoRetorno = new Requisicoes();
             requisicaoRetorno.setId(resultado.getInt("CodRequisicao"));
             //STATUS
@@ -507,22 +567,20 @@ public class RequisicoesDAO extends AcessDB {
             //TIPO REQ
             tipoRequisicao.setTipoRequisicao(resultado.getString("TipoRequisicao"));
             requisicaoRetorno.setTipoRequisicao(tipoRequisicao);
-            
+
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
         conexao.close();
         return req;
     }
-    
+
     public List<Requisicoes> localizarRequisicoesUserAprovadorFinanceiro(String aprovador, String nivel, String nameDb) throws SQLException, ClassNotFoundException {
 
         //UsuarioDAO usuarioDao = new UsuarioDAO();
         //Usuario user;
-            
         //user = usuarioDao.localizarNivelUsuario(userInformado, nameDb);
         //String nivel = user.getNivel().getNomeNivel();
-        
         // lista de retorno
         List req = new ArrayList();
 
@@ -547,7 +605,7 @@ public class RequisicoesDAO extends AcessDB {
             TipoRequisicao tipoRequisicao = new TipoRequisicao();
             StatusRequisicao statusRequisicao = new StatusRequisicao();
             Usuario usuario = new Usuario();
-            
+
             requisicaoRetorno = new Requisicoes();
             requisicaoRetorno.setId(resultado.getInt("CodRequisicao"));
             //STATUS
@@ -565,7 +623,7 @@ public class RequisicoesDAO extends AcessDB {
             //TIPO REQ
             tipoRequisicao.setTipoRequisicao(resultado.getString("TipoRequisicao"));
             requisicaoRetorno.setTipoRequisicao(tipoRequisicao);
-            
+
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
@@ -614,7 +672,7 @@ public class RequisicoesDAO extends AcessDB {
         java.util.Date solicitacao = requisicao.getDataSolicitacao();
         java.util.Date criacao = requisicao.getDataCriacao();
         java.util.Date previsao = requisicao.getDataPrevisaoEntrega();
-        
+
         java.sql.Date solicitacaoConvert;
         java.sql.Date criacaoConvert;
         java.sql.Date previsaoConvert;
@@ -631,7 +689,7 @@ public class RequisicoesDAO extends AcessDB {
         //SEQUENCIA
         //<-----------------------------------
         int seq = obterProximoValorSequence(nameDb);
-        
+
         //alterando objeto
         requisicao.setId(seq);
 
@@ -663,20 +721,20 @@ public class RequisicoesDAO extends AcessDB {
         stmt.setInt(21, requisicao.getStatusArqRequisicao().getId());
         stmt.setInt(22, requisicao.getSolicitante().getId());
         stmt.setInt(23, requisicao.getEtapaRequisicao().getId());
-        
+
         stmt.execute();
         stmt.close();
     }
-    
+
     public void update(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException, IOException {
         //CONVERT DATA MYSQL
         Format convertData = new Format();
         java.util.Date previsao = requisicao.getDataPrevisaoEntrega();
-        
+
         java.sql.Date previsaoConvert;
 
         previsaoConvert = convertData.convertDataSql(previsao);
-        
+
         //REMOVE FORNECEDOR E ITEM
         FornecedorDAO fornecedorDao = new FornecedorDAO();
         ItemDAO itemDao = new ItemDAO();
@@ -686,13 +744,13 @@ public class RequisicoesDAO extends AcessDB {
         fornecedorDao.deleteFornecedorRequisicao(fornecedor, nameDb);
         item.setRequisicoes(requisicao);
         itemDao.deleteItemRequisicao(item, nameDb);
-        
+
         Connection conexao = conectar(nameDb);
 
         String sql = "update Requisicoes r set r.CodProjeto = ?, r.CodDest = ?, r.CodTipoReq = ?, r.CodMoeda = ?, r.TipoAprovador = ?, r.Justificativa = ?, r.Motivo = ?, r.DataPrevisaoEntrega = ?, r.CodEtapaRequisicao = ?, r.CodigoStatus = ? where r.CodRequisicao = ?";
 
         PreparedStatement stmt = conexao.prepareStatement(sql);
-        
+
         stmt.setInt(1, requisicao.getProjetos().getId());
         stmt.setInt(2, requisicao.getDestinacao().getId());
         stmt.setInt(3, requisicao.getTipoRequisicao().getId());
@@ -703,7 +761,7 @@ public class RequisicoesDAO extends AcessDB {
         stmt.setDate(8, previsaoConvert);
         stmt.setInt(9, requisicao.getEtapaRequisicao().getId());
         stmt.setInt(10, requisicao.getStatusRequisicao().getId());
-        stmt.setInt(11, requisicao.getId()); 
+        stmt.setInt(11, requisicao.getId());
 
         stmt.executeUpdate();
         stmt.close();
@@ -729,19 +787,18 @@ public class RequisicoesDAO extends AcessDB {
         ResultSet resultado = stm.executeQuery();
 
         while (resultado.next()) {
-            id = resultado.getInt("CodRequisicao");            
+            id = resultado.getInt("CodRequisicao");
             retorno = id + 1;
         }
         // Encerrando a conexão.
         conexao.close();
         return retorno;
     }
-    
+
     public Requisicoes localizarRequisicaoParaAprovar(Requisicoes requisicaoInformado, String nameDb) throws SQLException, ClassNotFoundException {
 
         // lista de retorno
         //List req = new ArrayList();
-
         // conectando ao banco de dados
         Connection conexao = conectar(nameDb);
 
@@ -756,10 +813,10 @@ public class RequisicoesDAO extends AcessDB {
         ResultSet resultado = stm.executeQuery();
 
         Requisicoes requisicaoRetorno = new Requisicoes();
-        
+
         // criando objeto de retorno
         while (resultado.next()) {
-            
+
             Destinacao destinacao = new Destinacao();
             Moedas moedas = new Moedas();
             Projetos projetos = new Projetos();
@@ -769,7 +826,7 @@ public class RequisicoesDAO extends AcessDB {
             Usuario usuario = new Usuario();
             Solicitante solicitante = new Solicitante();
             EtapaRequisicao etapa = new EtapaRequisicao();
-            
+
             requisicaoRetorno.setId(resultado.getInt("CodRequisicao"));
             requisicaoRetorno.setJustificativa(resultado.getString("Justificativa"));
             requisicaoRetorno.setMotivo(resultado.getString("Motivo"));
@@ -791,7 +848,7 @@ public class RequisicoesDAO extends AcessDB {
             requisicaoRetorno.setMoedas(moedas);
             //PROJETO
             projetos.setProjeto(resultado.getString("NomeProjeto"));
-            requisicaoRetorno.setProjetos(projetos);  
+            requisicaoRetorno.setProjetos(projetos);
             //TIPO REQ
             tipoRequisicao.setTipoRequisicao(resultado.getString("TipoRequisicao"));
             requisicaoRetorno.setTipoRequisicao(tipoRequisicao);
@@ -810,24 +867,24 @@ public class RequisicoesDAO extends AcessDB {
             //ETAPA REQUISICAO
             etapa.setEtapaRequisicao(resultado.getString("EtapaRequisicao"));
             requisicaoRetorno.setEtapaRequisicao(etapa);
-                        
+
         }
         // Encerrando a conexão.
         conexao.close();
         return requisicaoRetorno;
     }
-    
+
     public void aprovarRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
 
         //CONVERT DATA MYSQL
         Format convertData = new Format();
-        java.util.Date data = new java.util.Date();        
+        java.util.Date data = new java.util.Date();
         java.util.Date aprovacao = convertData.formatDataHoje(data);
 
         java.sql.Date aprovacaoConvert;
 
         aprovacaoConvert = convertData.convertDataSql(aprovacao);
-        
+
         // conectando ao banco de dados
         Connection conexao = conectar(nameDb);
 
@@ -836,7 +893,7 @@ public class RequisicoesDAO extends AcessDB {
 
         // criando o objeto que vai executar a consulta no banco
         PreparedStatement stm = conexao.prepareStatement(sql);
-        
+
         stm.setDate(1, aprovacaoConvert);
         //STATUS APROVADA COD 3
         stm.setInt(2, 3);
@@ -846,18 +903,18 @@ public class RequisicoesDAO extends AcessDB {
         stm.executeUpdate();
         stm.close();
     }
-    
+
     public void aprovarTecnicoRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
 
         //CONVERT DATA MYSQL
         Format convertData = new Format();
-        java.util.Date data = new java.util.Date();        
+        java.util.Date data = new java.util.Date();
         java.util.Date aprovacaoTecnico = convertData.formatDataHoje(data);
 
         java.sql.Date aprovacaoTecnicoConvert;
 
         aprovacaoTecnicoConvert = convertData.convertDataSql(aprovacaoTecnico);
-        
+
         // conectando ao banco de dados
         Connection conexao = conectar(nameDb);
 
@@ -877,9 +934,9 @@ public class RequisicoesDAO extends AcessDB {
         stm.executeUpdate();
         stm.close();
     }
-    
+
     public void recusarRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
-                
+
         // conectando ao banco de dados
         Connection conexao = conectar(nameDb);
 
@@ -888,7 +945,7 @@ public class RequisicoesDAO extends AcessDB {
 
         // criando o objeto que vai executar a consulta no banco
         PreparedStatement stm = conexao.prepareStatement(sql);
-               
+
         //STATUS RECUSADA COD 4
         stm.setInt(1, 4);
         stm.setString(2, requisicao.getAprovador());
@@ -898,9 +955,9 @@ public class RequisicoesDAO extends AcessDB {
         stm.executeUpdate();
         stm.close();
     }
-    
+
     public void arquivarRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
-                
+
         // conectando ao banco de dados
         Connection conexao = conectar(nameDb);
 
@@ -909,7 +966,7 @@ public class RequisicoesDAO extends AcessDB {
 
         // criando o objeto que vai executar a consulta no banco
         PreparedStatement stm = conexao.prepareStatement(sql);
-               
+
         //STATUS ARQUIVADA COD 8
         stm.setInt(1, 2);
         stm.setInt(2, 8);
@@ -918,9 +975,9 @@ public class RequisicoesDAO extends AcessDB {
         stm.executeUpdate();
         stm.close();
     }
-    
+
     public void desarquivarRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
-                
+
         // conectando ao banco de dados
         Connection conexao = conectar(nameDb);
 
@@ -929,7 +986,7 @@ public class RequisicoesDAO extends AcessDB {
 
         // criando o objeto que vai executar a consulta no banco
         PreparedStatement stm = conexao.prepareStatement(sql);
-               
+
         //STATUS APROVADA COD 3
         stm.setInt(1, 1);
         stm.setInt(2, 9);
@@ -938,9 +995,9 @@ public class RequisicoesDAO extends AcessDB {
         stm.executeUpdate();
         stm.close();
     }
-    
+
     public void cancelarRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
-                
+
         // conectando ao banco de dados
         Connection conexao = conectar(nameDb);
 
@@ -949,7 +1006,7 @@ public class RequisicoesDAO extends AcessDB {
 
         // criando o objeto que vai executar a consulta no banco
         PreparedStatement stm = conexao.prepareStatement(sql);
-               
+
         //STATUS CANCELADA COD 5
         stm.setInt(1, 5);
         stm.setInt(2, requisicao.getId());
@@ -957,24 +1014,24 @@ public class RequisicoesDAO extends AcessDB {
         stm.executeUpdate();
         stm.close();
     }
-    
+
     public void finalizarRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
-                
+
         // conectando ao banco de dados
         Connection conexao = conectar(nameDb);
 
         // contruindo a consulta
         String sql = "update Requisicoes r set r.DataEntrega = ?, r.CodigoStatus = ? where r.CodRequisicao = ?";
-        
+
         //CONVERT DATA MYSQL
         Format convertData = new Format();
-        java.util.Date entrega = requisicao.getDataEntrega();        
+        java.util.Date entrega = requisicao.getDataEntrega();
         java.sql.Date entregaConvert;
         entregaConvert = convertData.convertDataSql(entrega);
 
         // criando o objeto que vai executar a consulta no banco
         PreparedStatement stm = conexao.prepareStatement(sql);
-               
+
         //STATUS FINALIZADA COD 6
         stm.setDate(1, entregaConvert);
         stm.setInt(2, 6);
@@ -983,25 +1040,25 @@ public class RequisicoesDAO extends AcessDB {
         stm.executeUpdate();
         stm.close();
     }
-    
+
     public void updateRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
         //CONVERT DATA MYSQL
         Format convertData = new Format();
         java.util.Date previsao = requisicao.getDataPrevisaoEntrega();
-        
+
         java.sql.Date dataPrevisaoConvert;
-        
+
         dataPrevisaoConvert = convertData.convertDataSql(previsao);
-                
+
         // conectando ao banco de dados
         Connection conexao = conectar(nameDb);
 
         // contruindo a consulta
         String sql = "update Requisicoes r set r.Justificativa = ?, r.DataPrevisaoEntrega = ?, r.CodEtapaRequisicao = ? where r.CodRequisicao = ?";
-        
+
         // criando o objeto que vai executar a consulta no banco
         PreparedStatement stm = conexao.prepareStatement(sql);
-               
+
         //STATUS FINALIZADA COD 6
         stm.setString(1, requisicao.getJustificativa());
         stm.setDate(2, dataPrevisaoConvert);
@@ -1011,12 +1068,11 @@ public class RequisicoesDAO extends AcessDB {
         stm.executeUpdate();
         stm.close();
     }
-    
+
     public Requisicoes localizarRequisicaoEmail(int id, String nameDb) throws SQLException, ClassNotFoundException {
 
         // lista de retorno
         //List solicitacao = new ArrayList();
-
         // conectando ao banco de dados
         Connection conexao = conectar(nameDb);
 
@@ -1029,7 +1085,7 @@ public class RequisicoesDAO extends AcessDB {
         stm.setInt(1, id);
         // recebendo o resultado da consulta
         ResultSet resultado = stm.executeQuery();
-        
+
         Requisicoes requisicaoRetorno = new Requisicoes();
 
         // criando objeto de retorno
@@ -1038,18 +1094,17 @@ public class RequisicoesDAO extends AcessDB {
             //Solicitante solicitante = new Solicitante();            
             requisicaoRetorno = new Requisicoes();
             requisicaoRetorno.setDataCriacao(resultado.getDate("DataCriacao"));
-            usuario.setLogin(resultado.getString("Nome")); 
-            usuario.setEmail(resultado.getString("EmailFunc"));   
+            usuario.setLogin(resultado.getString("Nome"));
+            usuario.setEmail(resultado.getString("EmailFunc"));
             usuario.setEmailAprovadorTecnico(resultado.getString("EmailAprov"));
             requisicaoRetorno.setUsuario(usuario);
-            
-                        
+
         }
         // Encerrando a conexão.
         conexao.close();
         return requisicaoRetorno;
     }
-    
+
     public Requisicoes ObterEmail(Requisicoes requisicao, String dbName) throws SQLException, ClassNotFoundException {
 
         // lista de retorno
@@ -1080,7 +1135,7 @@ public class RequisicoesDAO extends AcessDB {
         conexao.close();
         return requisicaoRetorno;
     }
-    
+
     public String localizarNivel(Requisicoes requisicaoInformado, String nameDb) throws SQLException, ClassNotFoundException {
 
         // conectando ao banco de dados
@@ -1102,8 +1157,8 @@ public class RequisicoesDAO extends AcessDB {
         Usuario usuario = new Usuario();
         Niveis nivel = new Niveis();
         String nivelRetorno = null;
-        
-        while (resultado.next()) {            
+
+        while (resultado.next()) {
             nivel.setNomeNivel(resultado.getString("NomeNivel"));
             usuario.setNivel(nivel);
             requisicaoRetorno.setUsuario(usuario);
