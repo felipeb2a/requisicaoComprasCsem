@@ -694,6 +694,7 @@ public class TelaRequisicaoCompra extends javax.swing.JFrame {
         btAtualizar = new javax.swing.JMenuItem();
         btAbrirPasta = new javax.swing.JMenuItem();
         btGerarRC = new javax.swing.JMenuItem();
+        btRetornarRequisicao = new javax.swing.JMenuItem();
         MenuOrdemCompra = new javax.swing.JMenu();
         btGerarOC = new javax.swing.JMenuItem();
         MenuInfo = new javax.swing.JMenu();
@@ -1400,6 +1401,15 @@ public class TelaRequisicaoCompra extends javax.swing.JFrame {
             }
         });
         MenuRequisicao.add(btGerarRC);
+
+        btRetornarRequisicao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btRetornarRequisicao.setText("Retornar RC");
+        btRetornarRequisicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRetornarRequisicaoActionPerformed(evt);
+            }
+        });
+        MenuRequisicao.add(btRetornarRequisicao);
 
         menu.add(MenuRequisicao);
 
@@ -2668,12 +2678,12 @@ public class TelaRequisicaoCompra extends javax.swing.JFrame {
             valida = false;
         }
         //if (month != solicMonth) {
-            //msgErro += "- Favor preencher o mês corretamente no campo Data da Solicitação\n";
-            //valida = false;
+        //msgErro += "- Favor preencher o mês corretamente no campo Data da Solicitação\n";
+        //valida = false;
         //}
         //if (year != solicYear) {
-            //msgErro += "- Favor preencher o ano corretamente no campo Data da Solicitação\n";
-            //valida = false;
+        //msgErro += "- Favor preencher o ano corretamente no campo Data da Solicitação\n";
+        //valida = false;
         //}
         if (cbProjeto.getSelectedItem().equals("Selecione")) {
             msgErro += "- Favor selecionar Projeto\n";
@@ -3252,7 +3262,7 @@ public class TelaRequisicaoCompra extends javax.swing.JFrame {
                 report.geraRelatorioRC(requisicao, nameDb);
             }
             //VOLTAR
-            btVoltarActionPerformed(evt);
+//            btVoltarActionPerformed(evt);
         } catch (SQLException ex) {
             Logger.getLogger(TelaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -3271,6 +3281,48 @@ public class TelaRequisicaoCompra extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btGerarRCActionPerformed
+
+    private void btRetornarRequisicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRetornarRequisicaoActionPerformed
+        boolean valida = false;
+        String msgErro = "";
+
+        System.out.println(txtStatus.getText());
+        if (txtStatus.getText().equals("Enviada") || txtStatus.getText().equals("Finalizada")) {
+            valida = true;
+        }else{
+            valida = false;
+            msgErro += "- Só é possível retornar requisição Enviada ou Finalizada!";
+        }
+
+        if (valida) {
+            Requisicoes requisicoes = new Requisicoes();
+            StatusRequisicao statusRequisicao = new StatusRequisicao();
+            RequisicoesDAO requisicoesDAO = new RequisicoesDAO();
+            requisicoes.setId(Integer.valueOf(txtCodRequisicao.getText()));
+            if (txtStatus.getText().equals("Enviada")) {
+                statusRequisicao.setId(StatusRequisicao.StatusRequisicaoEnum.Recusada.getCodigoStatusRequisicao());
+                requisicoes.setStatusRequisicao(statusRequisicao);
+            }
+            if (txtStatus.getText().equals("Finalizada")) {
+                statusRequisicao.setId(StatusRequisicao.StatusRequisicaoEnum.Aprovada.getCodigoStatusRequisicao());
+                requisicoes.setStatusRequisicao(statusRequisicao);
+            }
+
+            try {
+                requisicoesDAO.retornaRequisicao(requisicoes, nameDb);
+                JOptionPane.showMessageDialog(this, "Requisição retornada com sucesso!");
+                btVoltarActionPerformed(evt);
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaRequisicaoCompra.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TelaRequisicaoCompra.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(TelaRequisicaoCompra.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, msgErro);
+        }
+    }//GEN-LAST:event_btRetornarRequisicaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3365,6 +3417,7 @@ public class TelaRequisicaoCompra extends javax.swing.JFrame {
     private javax.swing.JMenuItem btRecusar;
     private javax.swing.JButton btRemoverLinhaFornecedor;
     private javax.swing.JButton btRemoverLinhaItem;
+    private javax.swing.JMenuItem btRetornarRequisicao;
     private javax.swing.JMenuItem btVoltar;
     private javax.swing.JMenuItem btVoltar1;
     private javax.swing.JComboBox<String> cbDestinacao;

@@ -1040,6 +1040,25 @@ public class RequisicoesDAO extends AcessDB {
         stm.executeUpdate();
         stm.close();
     }
+    
+    public void retornaRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
+
+        // conectando ao banco de dados
+        Connection conexao = conectar(nameDb);
+
+        // contruindo a consulta
+        String sql = "update Requisicoes r set r.CodigoStatus = ? where r.CodRequisicao = ?";
+
+        // criando o objeto que vai executar a consulta no banco
+        PreparedStatement stm = conexao.prepareStatement(sql);
+
+        //STATUS FINALIZADA COD 6
+        stm.setInt(1, requisicao.getStatusRequisicao().getId());
+        stm.setInt(2, requisicao.getId());
+        // recebendo o resultado da consulta
+        stm.executeUpdate();
+        stm.close();
+    }
 
     public void updateRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
         //CONVERT DATA MYSQL

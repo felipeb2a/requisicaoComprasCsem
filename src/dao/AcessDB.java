@@ -11,7 +11,8 @@ public class AcessDB {
         Class.forName //MYSQL
                 ("com.mysql.jdbc.Driver");
         
-        //PRINCIPAL         
+        //PRINCIPAL       
+        /*
         String endereco = "15.0.0.9";        
         String database = nameDb;
         //MYSQL 8.0 REQUER SSL E TIMEZONE
@@ -23,7 +24,7 @@ public class AcessDB {
 
         return DriverManager.getConnection(url, usuario, senha);        
 /*######################################################################################*/
-        /*
+        
         //TESTE        
         //String endereco = "15.0.9.184";        
         String endereco = "15.0.0.8";
