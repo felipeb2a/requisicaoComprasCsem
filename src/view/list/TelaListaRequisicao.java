@@ -329,6 +329,8 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
         cbRequisitante = new javax.swing.JComboBox<>();
         cbStatus = new javax.swing.JComboBox<>();
         btBuscar = new javax.swing.JButton();
+        lbCodRequisicao = new javax.swing.JLabel();
+        txtCodRequisicao = new javax.swing.JTextField();
         menu = new javax.swing.JMenuBar();
         jMenuEmpresa = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -408,6 +410,15 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
             }
         });
 
+        lbCodRequisicao.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbCodRequisicao.setText("Cod. Requisicão:");
+
+        txtCodRequisicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodRequisicaoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -422,8 +433,12 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbCodRequisicao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCodRequisicao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(lbUsuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -436,26 +451,33 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btBuscar)
-                    .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbRequisitante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbTitulo)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lbUsuario)
-                        .addComponent(lbLogin)
-                        .addComponent(lbNivel)))
-                .addGap(7, 7, 7)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbCodRequisicao)
+                            .addComponent(cbRequisitante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodRequisicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btBuscar))
+                        .addGap(7, 7, 7)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbUsuario)
+                            .addComponent(lbLogin)
+                            .addComponent(lbNivel))
+                        .addGap(0, 557, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lbTitulo)
+                        .addGap(0, 545, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lbLogin, lbNivel, lbUsuario});
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btBuscar, cbRequisitante, cbStatus, lbTitulo});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btBuscar, cbRequisitante, cbStatus, lbCodRequisicao, lbTitulo, txtCodRequisicao});
 
         menu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
@@ -1063,6 +1085,10 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btRelatorioOpActionPerformed
 
+    private void txtCodRequisicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodRequisicaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodRequisicaoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1147,11 +1173,13 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbCodRequisicao;
     private javax.swing.JLabel lbLogin;
     private javax.swing.JLabel lbNivel;
     private javax.swing.JLabel lbTitulo;
     private javax.swing.JLabel lbUsuario;
     private javax.swing.JMenuBar menu;
     private javax.swing.JTable tbRequisicao;
+    private javax.swing.JTextField txtCodRequisicao;
     // End of variables declaration//GEN-END:variables
 }
