@@ -16,7 +16,8 @@ public class Item {
     private double valorTotal;
     private Requisicoes requisicoes;
     private Solicitacoes solicitacoes;
-    
+    private ProdutoERP produtoERP;
+
     public Requisicoes getRequisicoes() {
         return requisicoes;
     }
@@ -96,5 +97,13 @@ public class Item {
     public void setSolicitacoes(Solicitacoes solicitacoes) {
         this.solicitacoes = solicitacoes;
     }
-    
+
+    public ProdutoERP getProdutoERP() {
+        return produtoERP;
+    }
+
+    public void setProdutoERP(ProdutoERP produtoERP) {
+        this.produtoERP = produtoERP;
+    }
+
 }

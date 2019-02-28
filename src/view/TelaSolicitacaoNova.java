@@ -13,6 +13,7 @@ import dao.StatusRequisicaoDAO;
 import dao.TipoFreteDAO;
 import dao.TipoRequisicaoDAO;
 import dao.UsuarioDAO;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -30,6 +31,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import model.CreateFolder;
@@ -39,9 +41,11 @@ import model.Format;
 import model.Fornecedor;
 import model.Icone;
 import model.Item;
+import model.Log;
 import model.LogArquivoTexto;
 import model.Moedas;
 import model.Niveis;
+import model.ProdutoERP;
 import model.Projetos;
 import model.Requisicoes;
 import model.SendMail;
@@ -69,6 +73,7 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
     private Usuario obterLogin;
     private String nameDb;
     private String Status = "Nova";
+    private Logger logger = null;
 
     public TelaSolicitacaoNova() {
         initComponents();
@@ -76,6 +81,20 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
         MaximizeTela();
         txtDataEntrega.setEnabled(false);
         btFinaliza.setEnabled(false);
+    }
+    
+    //LOGGER
+    public Logger Definirlogger() {
+        Log log = new Log();
+        try {
+            logger = log.pathLog(TelaSolicitacaoNova.class.getName(), nameDb);
+        } catch (SecurityException ex1) {
+            Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (Exception ex1) {
+            Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+        
+        return logger;
     }
 
     //MOSTRAR TELA    
@@ -1149,6 +1168,7 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void btEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnviarActionPerformed
+
         boolean valida = true;
         String msgErro = "";
 
@@ -1234,7 +1254,7 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
             msgErro += "- Favor adicionar Fornecedores\n";
             valida = false;
         }
-        
+
         //CONTATOR PARA VERIFICAR VALOR FINAL
         int count = 0;
         if (tbFornecedor.getRowCount() > 0) {
@@ -1330,12 +1350,12 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
                 valida = false;
             }
         }
-        
+
         if (tbItens.getRowCount() == 0) {
             msgErro += "- Favor adicionar Itens\n";
             valida = false;
         }
-        
+
         if (tbItens.getRowCount() > 0) {
             for (int i = 0; i < tbItens.getRowCount(); i++) {
                 int numItem = i + 1;
@@ -1375,8 +1395,14 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
 
             }
         }
+
         //CAMPOS VALIDADOS
         if (valida) {
+
+            //LOG           
+            logger = Definirlogger();
+            
+            //PROGRESS
             //MODEL
             Requisicoes requisicao = new Requisicoes();
             Destinacao destinacao = new Destinacao();
@@ -1390,6 +1416,7 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
             Solicitante solicitante = new Solicitante();
             Fornecedor fornecedor = new Fornecedor();
             Item item = new Item();
+            ProdutoERP produtoERP = new ProdutoERP();
             EtapaRequisicao etapaRequisicao = new EtapaRequisicao();
 
             //DAO
@@ -1554,6 +1581,7 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
                     item.setDescricaoTecnica(descricaoTecnicaTb);
                     item.setInformacoesAdicionais(informacoesAdicionaisTb);
                     item.setRequisicoes(requisicao);
+//                    item.setProdutoERP(produtoERP);
 
                     itemDao.salvar(item, nameDb);
                 }
@@ -1589,23 +1617,20 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
                 btVoltarActionPerformed(evt);
 
             } catch (SQLException ex) {
-                Logger.getLogger(TelaRequisicaoNova.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
+                logger.log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaRequisicaoNova.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
+                logger.log(Level.SEVERE, null, ex);
             } catch (ParseException ex) {
-                Logger.getLogger(TelaRequisicaoNova.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
+                logger.log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
-                Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
+                logger.log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
-                //LOG
-                LogArquivoTexto log = new LogArquivoTexto();
-                String classe = TelaInfomacoesFinanceiras.class.getName();
-                String texto = classe + "\n" + "ERRO: " + ex;
-                try {
-                    log.escreverGeral(texto, nameDb);
-                } catch (Exception ex1) {
-                    Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-                }
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
+                logger.log(Level.SEVERE, null, ex);
             }
 
         } else {

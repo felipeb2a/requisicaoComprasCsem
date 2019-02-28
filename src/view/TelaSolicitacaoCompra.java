@@ -594,6 +594,7 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         txtMotivo = new javax.swing.JTextArea();
         lbCodigoRequisicao8 = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
         menu = new javax.swing.JMenuBar();
         jMenuEmpresa = new javax.swing.JMenu();
         MenuFile = new javax.swing.JMenu();
@@ -1311,7 +1312,9 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
                         .addComponent(lbTitulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCodSolicTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(166, 166, 166)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbUsuario)
                         .addGap(6, 6, 6)
                         .addComponent(lbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1396,14 +1399,16 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbUsuario)
                     .addComponent(lbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtCodSolicTitulo, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lbTitulo)))
+                        .addComponent(lbTitulo))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbUsuario)))
                 .addGap(5, 5, 5)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1488,7 +1493,7 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lbTitulo, txtCodSolicTitulo});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jProgressBar1, lbTitulo, txtCodSolicTitulo});
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btFinalizar, cbMoeda, cbTipoAprovador, lbCodigoRequisicao1, lbCodigoRequisicao2, lbCodigoRequisicao3, lbCodigoRequisicao8, lbTipoFrete1, txtDataEntrega});
 
@@ -2002,14 +2007,15 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 //LOG
                 LogArquivoTexto log = new LogArquivoTexto();
-                String classe = TelaInfomacoesFinanceiras.class.getName();
-                String texto = classe + "\n" + "ERRO: " + ex;
+                String classe = TelaSolicitacaoCompra.class.getName();
+                String texto = classe + "\n" + " ERRO: " + ex;
                 try {
                     log.escreverGeral(texto, nameDb);
                 } catch (Exception ex1) {
-                    Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+                    Logger.getLogger(TelaSolicitacaoCompra.class.getName()).log(Level.SEVERE, null, ex1);
                 }
             }
 
@@ -2447,6 +2453,7 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
