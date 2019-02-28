@@ -82,7 +82,7 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
         txtDataEntrega.setEnabled(false);
         btFinaliza.setEnabled(false);
     }
-    
+
     //LOGGER
     public Logger Definirlogger() {
         Log log = new Log();
@@ -93,7 +93,7 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
         } catch (Exception ex1) {
             Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex1);
         }
-        
+
         return logger;
     }
 
@@ -187,6 +187,7 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
 
     //CARREGAR SOLICITACAO P/ APROVACAO
     public void carregarSolicitacao(Solicitacoes solicitacao) throws SQLException, ClassNotFoundException, ParseException {
+        logger = Definirlogger();
         try {
             ListarCombobox();
             DefineData();
@@ -259,20 +260,24 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
                 modelItem.addRow(linha);
             }
         } catch (Exception ex) {
+            //LOG            
+            logger.log(Level.SEVERE, null, ex);
             //LOG
-            LogArquivoTexto log = new LogArquivoTexto();
-            String classe = TelaInfomacoesFinanceiras.class.getName();
-            String texto = classe + "\n" + "ERRO: " + ex;
-            try {
-                log.escreverGeral(texto, nameDb);
-            } catch (Exception ex1) {
-                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-            }
+//            LogArquivoTexto log = new LogArquivoTexto();
+//            String classe = TelaInfomacoesFinanceiras.class.getName();
+//            String texto = classe + "\n" + "ERRO: " + ex;
+//            try {
+//                log.escreverGeral(texto, nameDb);
+//            } catch (Exception ex1) {
+//                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//            }
         }
     }
 
     //LISTAR COMBOBOX
     public void ListarCombobox() throws SQLException, ClassNotFoundException {
+
+        logger = Definirlogger();
         try {
             //DAO
             TipoRequisicaoDAO tipoReqDao = new TipoRequisicaoDAO();
@@ -379,27 +384,27 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
         } catch (SQLException ex) {
 
             if (ex.getMessage().contains(new String("The Network Adapter could not establish the connection"))) {
-
+                logger.log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this, "Não foi possivel Conectar Com o Banco de Dados!");
 
             }
 
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
-
+            logger.log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "Erro de Desconhecido!");
-
-            //ex.printStackTrace();
         } catch (Exception ex) {
+            //LOG            
+            logger.log(Level.SEVERE, null, ex);
             //LOG
-            LogArquivoTexto log = new LogArquivoTexto();
-            String classe = TelaInfomacoesFinanceiras.class.getName();
-            String texto = classe + "\n" + "ERRO: " + ex;
-            try {
-                log.escreverGeral(texto, nameDb);
-            } catch (Exception ex1) {
-                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-            }
+//            LogArquivoTexto log = new LogArquivoTexto();
+//            String classe = TelaInfomacoesFinanceiras.class.getName();
+//            String texto = classe + "\n" + "ERRO: " + ex;
+//            try {
+//                log.escreverGeral(texto, nameDb);
+//            } catch (Exception ex1) {
+//                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//            }
         }
     }
 
@@ -1143,27 +1148,29 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        logger = Definirlogger();
         try {
             TelaLogin tela = new TelaLogin();
             this.setVisible(false);
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
         } catch (SQLException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        logger = Definirlogger();
         try {
             TelaSelecioneAno tela = new TelaSelecioneAno();
             this.setVisible(false);
             tela.mostrarTela(mostrarTela);
         } catch (SQLException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -1401,7 +1408,7 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
 
             //LOG           
             logger = Definirlogger();
-            
+
             //PROGRESS
             //MODEL
             Requisicoes requisicao = new Requisicoes();
@@ -1617,20 +1624,20 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
                 btVoltarActionPerformed(evt);
 
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (ParseException ex) {
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             }
 
         } else {
@@ -1639,6 +1646,7 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
     }//GEN-LAST:event_btEnviarActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        logger = Definirlogger();
         try {
             //TELA REQ
             TelaListaSolicitacoes tela = new TelaListaSolicitacoes();
@@ -1647,14 +1655,13 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
             tela.nameDb(nameDb);
             tela.Relatorio();
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btVoltarActionPerformed
 
     private void btArquivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btArquivarActionPerformed
+        logger = Definirlogger();
         Object[] options = {"Confirmar", "Cancelar"};
         int opcao = JOptionPane.showOptionDialog(null, "CLIQUE CONFIRMAR PARA ARQUIVAR A SOLICITACAO! " + "\n", "A SOLICITAÇÃO SERÁ ARQUIVADA!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
         if (opcao == 0) {
@@ -1665,21 +1672,26 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
                 solicitacoesDao.arquivarSolicitacao(solicitacao, nameDb);
                 btVoltarActionPerformed(evt);
             } catch (SQLException ex) {
-                Logger.getLogger(TelaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (ParseException ex) {
-                Logger.getLogger(TelaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (Exception ex) {
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 //LOG
-                LogArquivoTexto log = new LogArquivoTexto();
-                String classe = TelaInfomacoesFinanceiras.class.getName();
-                String texto = classe + "\n" + "ERRO: " + ex;
-                try {
-                    log.escreverGeral(texto, nameDb);
-                } catch (Exception ex1) {
-                    Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-                }
+//                LogArquivoTexto log = new LogArquivoTexto();
+//                String classe = TelaInfomacoesFinanceiras.class.getName();
+//                String texto = classe + "\n" + "ERRO: " + ex;
+//                try {
+//                    log.escreverGeral(texto, nameDb);
+//                } catch (Exception ex1) {
+//                    Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//                }
             }
             JOptionPane.showMessageDialog(this, "Solicitação arquivada com sucesso!");
         } else {
@@ -1688,6 +1700,7 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
     }//GEN-LAST:event_btArquivarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+        logger = Definirlogger();
         Object[] options = {"Confirmar", "Cancelar"};
         int opcao = JOptionPane.showOptionDialog(null, "CLIQUE CONFIRMAR PARA CANCELADA A SOLICITACAO! " + "\n", "A SOLICITAÇÃO SERÁ CANCELADA!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
         if (opcao == 0) {
@@ -1698,21 +1711,26 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
                 solicitacoesDao.cancelarSolicitacao(solicitacao, nameDb);
                 btVoltarActionPerformed(evt);
             } catch (SQLException ex) {
-                Logger.getLogger(TelaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (ParseException ex) {
-                Logger.getLogger(TelaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (Exception ex) {
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 //LOG
-                LogArquivoTexto log = new LogArquivoTexto();
-                String classe = TelaInfomacoesFinanceiras.class.getName();
-                String texto = classe + "\n" + "ERRO: " + ex;
-                try {
-                    log.escreverGeral(texto, nameDb);
-                } catch (Exception ex1) {
-                    Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-                }
+//                LogArquivoTexto log = new LogArquivoTexto();
+//                String classe = TelaInfomacoesFinanceiras.class.getName();
+//                String texto = classe + "\n" + "ERRO: " + ex;
+//                try {
+//                    log.escreverGeral(texto, nameDb);
+//                } catch (Exception ex1) {
+//                    Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//                }
             }
             JOptionPane.showMessageDialog(this, "Solicitação cancelada com sucesso!");
         } else {
@@ -1721,6 +1739,7 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btRecusarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRecusarActionPerformed
+        logger = Definirlogger();
         Object[] options = {"Confirmar", "Cancelar"};
         int opcao = JOptionPane.showOptionDialog(null, "CLIQUE CONFIRMAR PARA RECUSAR A SOLICITACAO! " + "\n", "A SOLICITAÇÃO SERÁ RECUSADA!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
         if (opcao == 0) {
@@ -1735,21 +1754,26 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
                 mail.sendMailSolicitacaoRecusada(id, nameDb);
                 btVoltarActionPerformed(evt);
             } catch (SQLException ex) {
-                Logger.getLogger(TelaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (ParseException ex) {
-                Logger.getLogger(TelaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (Exception ex) {
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 //LOG
-                LogArquivoTexto log = new LogArquivoTexto();
-                String classe = TelaInfomacoesFinanceiras.class.getName();
-                String texto = classe + "\n" + "ERRO: " + ex;
-                try {
-                    log.escreverGeral(texto, nameDb);
-                } catch (Exception ex1) {
-                    Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-                }
+//                LogArquivoTexto log = new LogArquivoTexto();
+//                String classe = TelaInfomacoesFinanceiras.class.getName();
+//                String texto = classe + "\n" + "ERRO: " + ex;
+//                try {
+//                    log.escreverGeral(texto, nameDb);
+//                } catch (Exception ex1) {
+//                    Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//                }
             }
             JOptionPane.showMessageDialog(this, "Solicitação recusada com sucesso!");
         } else {
@@ -1758,6 +1782,7 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
     }//GEN-LAST:event_btRecusarActionPerformed
 
     private void btRecusar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRecusar1ActionPerformed
+        logger = Definirlogger();
         boolean valida = true;
         String msgErro = "";
         String name = (String) cbRequisitante.getSelectedItem();
@@ -1782,21 +1807,26 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
                     solicitacoesDao.alterarRequisitanteSolicitacao(solicitacao, nameDb);
                     btVoltarActionPerformed(evt);
                 } catch (SQLException ex) {
-                    Logger.getLogger(TelaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(TelaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 } catch (ParseException ex) {
-                    Logger.getLogger(TelaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 } catch (Exception ex) {
+                    logger.log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                     //LOG
-                    LogArquivoTexto log = new LogArquivoTexto();
-                    String classe = TelaInfomacoesFinanceiras.class.getName();
-                    String texto = classe + "\n" + "ERRO: " + ex;
-                    try {
-                        log.escreverGeral(texto, nameDb);
-                    } catch (Exception ex1) {
-                        Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-                    }
+//                    LogArquivoTexto log = new LogArquivoTexto();
+//                    String classe = TelaInfomacoesFinanceiras.class.getName();
+//                    String texto = classe + "\n" + "ERRO: " + ex;
+//                    try {
+//                        log.escreverGeral(texto, nameDb);
+//                    } catch (Exception ex1) {
+//                        Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//                    }
                 }
                 JOptionPane.showMessageDialog(this, "Solicitação encaminhada P/ " + name + " com sucesso!");
             } else {
@@ -1806,6 +1836,7 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
     }//GEN-LAST:event_btRecusar1ActionPerformed
 
     private void btAlterarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarSenhaActionPerformed
+        logger = Definirlogger();
         try {
             //TELA INF FINC
             TelaAlterarSenha tela = new TelaAlterarSenha();
@@ -1814,9 +1845,11 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
         } catch (SQLException ex) {
-            Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_btAlterarSenhaActionPerformed
 
