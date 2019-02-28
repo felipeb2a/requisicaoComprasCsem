@@ -10,7 +10,7 @@ public class AcessDB {
     protected Connection conectar(String nameDb) throws ClassNotFoundException, SQLException {
         Class.forName //MYSQL
                 ("com.mysql.jdbc.Driver");
-        
+        /*
         //PRINCIPAL       
         
         String endereco = "15.0.0.9";        
@@ -24,7 +24,7 @@ public class AcessDB {
 
         return DriverManager.getConnection(url, usuario, senha);        
 /*######################################################################################*/
-        /*
+        
         //TESTE        
         //String endereco = "15.0.9.184";        
         String endereco = "15.0.0.8";
