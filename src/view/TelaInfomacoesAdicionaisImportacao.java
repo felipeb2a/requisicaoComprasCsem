@@ -1,32 +1,53 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Log;
 
 /**
  *
  * @author felipe.ferreira
  */
 public class TelaInfomacoesAdicionaisImportacao extends javax.swing.JFrame {
+
     //VARIAVEIS GLOBAIS
     private ArrayList mostrarTela = new ArrayList();
-    
+    private String nameDb;
+    private Logger logger = null;
+
     public TelaInfomacoesAdicionaisImportacao() {
         initComponents();
         bloquearCodReq();
-    }    
-    //MOSTRAR TELA    
-    public void mostrarTela (ArrayList Tela){
-        
-        this.setVisible(true);
-        
-        this.mostrarTela = Tela;        
     }
-    
+
+    //LOGGER
+    public Logger Definirlogger() {
+        Log log = new Log();
+        try {
+            logger = log.pathLog(TelaInfomacoesAdicionaisImportacao.class.getName(), nameDb);
+        } catch (SecurityException ex1) {
+            Logger.getLogger(TelaInfomacoesAdicionaisImportacao.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (Exception ex1) {
+            Logger.getLogger(TelaInfomacoesAdicionaisImportacao.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+
+        return logger;
+    }
+
+    //MOSTRAR TELA    
+    public void mostrarTela(ArrayList Tela) {
+
+        this.setVisible(true);
+
+        this.mostrarTela = Tela;
+    }
+
     //BLOQUEAR COD REQ
-    public void bloquearCodReq(){
+    public void bloquearCodReq() {
         txtCodRequisicao.setEnabled(false);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
