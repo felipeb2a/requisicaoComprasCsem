@@ -1,0 +1,43 @@
+ //VARIAVEIS GLOBAL
+ private Logger logger = null;
+ 
+ //LOGGER
+    public Logger Definirlogger() {
+        Log log = new Log();
+        try {
+            logger = log.pathLog(TelaSolicitacaoNova.class.getName(), nameDb);
+        } catch (SecurityException ex1) {
+            Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (Exception ex1) {
+            Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+
+        return logger;
+    }
+	
+	
+logger = Definirlogger();
+*------------------	
+ProdutoERP produtoERP = new ProdutoERP();
+
+
+//LOG           
+logger = Definirlogger();
+logger.log(Level.SEVERE, null, ex);
+JOptionPane.showMessageDialog(this, "ERRO: " + ex);
+
+
+
+
+
+
+
+    public void MaximizeTela() {
+        this.setExtendedState(MAXIMIZED_BOTH);
+    }
+	
+	
+	PACOTES PARA ALTERAR AINDA
+	view.changes
+	view.initial
+	view.list
