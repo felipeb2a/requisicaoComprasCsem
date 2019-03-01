@@ -2023,6 +2023,7 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
                     item.setDescricaoTecnica(descricaoTecnicaTb);
                     item.setInformacoesAdicionais(informacoesAdicionaisTb);
                     item.setRequisicoes(requisicao);
+                    item.setProdutoERP(produtoERP);
 
                     itemDao.salvar(item, nameDb);
                 }
