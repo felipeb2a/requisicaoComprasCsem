@@ -124,9 +124,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
             try {
                 Usuario usuario = dao.localizarUsuario(usuarioInformado, nameDb);
-
-                //LOG
-                LogArquivoTexto log = new LogArquivoTexto();
+                
                 String userLogin = (String) cbLogin.getSelectedItem();
                 String user = "Usuário logado: " + userLogin;
 
@@ -137,8 +135,7 @@ public class TelaLogin extends javax.swing.JFrame {
                     txtPasswod.setText("");
                 } else if (usuario.getNivel().getNomeNivel().equals(nivel[0])) {
                     JOptionPane.showMessageDialog(this, "Bem Vindo(a) " + usuario.getLogin());
-                    //LOG
-                    log.escrever(userLogin, user, nameDb);
+                    
                     //TELA ADM
                     TelaAdministrador tela = new TelaAdministrador();
                     this.setVisible(false);
@@ -146,8 +143,7 @@ public class TelaLogin extends javax.swing.JFrame {
                     tela.mostrarTela(mostrarTela);
                 } else if (usuario.getNivel().getNomeNivel().equals(nivel[1])) {
                     JOptionPane.showMessageDialog(this, "Bem Vindo(a) " + usuario.getLogin());
-                    //LOG
-                    log.escrever(userLogin, user, nameDb);
+                    
                     //TELA APRV ADM
                     TelaListaRequisicaoAprovacao tela = new TelaListaRequisicaoAprovacao();
                     this.setVisible(false);
@@ -157,8 +153,7 @@ public class TelaLogin extends javax.swing.JFrame {
                     tela.Relatorio();
                 } else if (usuario.getNivel().getNomeNivel().equals(nivel[2])) {
                     JOptionPane.showMessageDialog(this, "Bem Vindo(a) " + usuario.getLogin());
-                    //LOG
-                    log.escrever(userLogin, user, nameDb);
+                    
                     //TELA APROV TEC
                     TelaListaRequisicaoAprovacao tela = new TelaListaRequisicaoAprovacao();
                     this.setVisible(false);
@@ -168,8 +163,7 @@ public class TelaLogin extends javax.swing.JFrame {
                     tela.Relatorio();
                 } else {
                     JOptionPane.showMessageDialog(this, "Bem Vindo(a) " + usuario.getLogin());
-                    //LOG
-                    log.escrever(userLogin, user, nameDb);
+                    
                     //TELA SELECIONE LISTA
                     TelaSelecioneLista tela = new TelaSelecioneLista();
                     this.setVisible(false);
