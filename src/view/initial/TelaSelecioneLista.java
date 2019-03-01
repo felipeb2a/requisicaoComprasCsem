@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Icone;
+import model.Log;
 import model.LogArquivoTexto;
 import model.Usuario;
 import view.TelaInfomacoesFinanceiras;
@@ -27,9 +28,24 @@ public class TelaSelecioneLista extends javax.swing.JFrame {
     private ArrayList mostrarTela = new ArrayList();
     private Usuario obterLogin;
     private String nameDb;
+    private Logger logger = null;
 
     public TelaSelecioneLista() {
         initComponents();
+    }
+
+    //LOGGER
+    public Logger Definirlogger() {
+        Log log = new Log();
+        try {
+            logger = log.pathLog(TelaSelecioneLista.class.getName(), nameDb);
+        } catch (SecurityException ex1) {
+            Logger.getLogger(TelaSelecioneLista.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (Exception ex1) {
+            Logger.getLogger(TelaSelecioneLista.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+
+        return logger;
     }
 
     //MOSTRAR TELA    
@@ -79,20 +95,19 @@ public class TelaSelecioneLista extends javax.swing.JFrame {
             tela.nameDb(nameDb);
             tela.Relatorio();
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaSelecioneLista.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaSelecioneLista.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             //LOG
-            LogArquivoTexto log = new LogArquivoTexto();
-            String classe = TelaInfomacoesFinanceiras.class.getName();
-            String texto = classe + "\n" + "ERRO: " + ex;
-            try {
-                log.escreverGeral(texto, nameDb);
-            } catch (Exception ex1) {
-                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-            }
+//            LogArquivoTexto log = new LogArquivoTexto();
+//            String classe = TelaInfomacoesFinanceiras.class.getName();
+//            String texto = classe + "\n" + "ERRO: " + ex;
+//            try {
+//                log.escreverGeral(texto, nameDb);
+//            } catch (Exception ex1) {
+//                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//            }
         }
     }
 
@@ -105,20 +120,19 @@ public class TelaSelecioneLista extends javax.swing.JFrame {
             tela.ObterLogin(obterLogin);
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaSelecioneLista.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaSelecioneLista.class.getName()).log(Level.SEVERE, null, ex);
-        }  catch (Exception ex) {
+        } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             //LOG
-            LogArquivoTexto log = new LogArquivoTexto();
-            String classe = TelaInfomacoesFinanceiras.class.getName();
-            String texto = classe + "\n" + "ERRO: " + ex;
-            try {
-                log.escreverGeral(texto, nameDb);
-            } catch (Exception ex1) {
-                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-            }
+//            LogArquivoTexto log = new LogArquivoTexto();
+//            String classe = TelaInfomacoesFinanceiras.class.getName();
+//            String texto = classe + "\n" + "ERRO: " + ex;
+//            try {
+//                log.escreverGeral(texto, nameDb);
+//            } catch (Exception ex1) {
+//                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//            }
         }
     }
 
