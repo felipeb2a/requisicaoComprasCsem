@@ -35,7 +35,7 @@ public class TelaProjetos extends javax.swing.JFrame {
 
 //LOGGER
     public Logger Definirlogger() {
-        Logs log = new Log();
+        Log log = new Log();
         try {
             logger = log.pathLog(TelaSolicitacaoNova.class.getName(), nameDb);
         } catch (SecurityException ex1) {
