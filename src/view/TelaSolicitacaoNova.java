@@ -1211,14 +1211,14 @@ public class TelaSolicitacaoNova extends javax.swing.JFrame {
             msgErro += "- Favor preencher campo Data da Solicitação\n";
             valida = false;
         }
-        /*if (month != solicMonth) {
-            msgErro += "- Favor preencher o mês corretamente no campo Data da Solicitação\n";
-            valida = false;
-        }*/
-        if (year != solicYear) {
-            msgErro += "- Favor preencher o ano corretamente no campo Data da Solicitação\n";
-            valida = false;
-        }
+//        if (month != solicMonth) {
+//            msgErro += "- Favor preencher o mês corretamente no campo Data da Solicitação\n";
+//            valida = false;
+//        }
+//        if (year != solicYear) {
+//            msgErro += "- Favor preencher o ano corretamente no campo Data da Solicitação\n";
+//            valida = false;
+//        }
         if (cbProjeto.getSelectedItem().equals("Selecione")) {
             msgErro += "- Favor selecionar Projeto\n";
             valida = false;
