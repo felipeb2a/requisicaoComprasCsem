@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Criptografia;
 import model.Icone;
+import model.Log;
 import model.LogArquivoTexto;
 import model.Niveis;
 import model.Usuario;
@@ -32,10 +33,25 @@ public class TelaRequisitantes extends javax.swing.JFrame {
     //VARIAVEIS GLOBAIS
     private ArrayList mostrarTela = new ArrayList();
     private String nameDb;
+    private Logger logger = null;
 
     public TelaRequisitantes() throws SQLException, ClassNotFoundException, ClassNotFoundException {
         initComponents();
 //        MaximizeTela();
+    }
+
+    //LOGGER
+    public Logger Definirlogger() {
+        Log log = new Log();
+        try {
+            logger = log.pathLog(TelaSolicitacaoNova.class.getName(), nameDb);
+        } catch (SecurityException ex1) {
+            Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (Exception ex1) {
+            Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+
+        return logger;
     }
 
     //MOSTRAR TELA    
@@ -45,18 +61,17 @@ public class TelaRequisitantes extends javax.swing.JFrame {
 
         this.mostrarTela = Tela;
     }
-    
-        public void MaximizeTela() {
+
+    public void MaximizeTela() {
         this.setExtendedState(MAXIMIZED_BOTH);
     }
-    
+
     //ALTERAR ICONE JAVA
     Icone icon = new Icone();
-    
-   
-    public void icone(){        
-        URL url = icon.getIcone(nameDb);    
-        Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);    
+
+    public void icone() {
+        URL url = icon.getIcone(nameDb);
+        Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(iconeTitulo);
     }
 
@@ -70,6 +85,8 @@ public class TelaRequisitantes extends javax.swing.JFrame {
 
     //LISTAR NIVEIS COMBOBOX
     public void ListarNiveis() throws SQLException, ClassNotFoundException {
+        logger = Definirlogger();
+
         try {
             NiveisDAO dao = new NiveisDAO();
             Niveis niveis;
@@ -87,26 +104,31 @@ public class TelaRequisitantes extends javax.swing.JFrame {
 
             if (ex.getMessage().contains(new String("The Network Adapter could not establish the connection"))) {
 
-                JOptionPane.showMessageDialog(this, "Não foi possivel Conectar Com o Banco de Dados!");
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
 
             }
 
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
 
-            JOptionPane.showMessageDialog(this, "Erro de Desconhecido!");
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
 
             //ex.printStackTrace();
         } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
+
             //LOG
-            LogArquivoTexto log = new LogArquivoTexto();
-            String classe = TelaInfomacoesFinanceiras.class.getName();
-            String texto = classe + "\n" + "ERRO: " + ex;
-            try {
-                log.escreverGeral(texto, nameDb);
-            } catch (Exception ex1) {
-                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-            }
+//            LogArquivoTexto log = new LogArquivoTexto();
+//            String classe = TelaInfomacoesFinanceiras.class.getName();
+//            String texto = classe + "\n" + "ERRO: " + ex;
+//            try {
+//                log.escreverGeral(texto, nameDb);
+//            } catch (Exception ex1) {
+//                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//            }
         }
     }
 
@@ -345,6 +367,8 @@ public class TelaRequisitantes extends javax.swing.JFrame {
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
+        logger = Definirlogger();
+
         boolean valida = true;
         String msgErro = "";
 
@@ -404,57 +428,28 @@ public class TelaRequisitantes extends javax.swing.JFrame {
                         dao.salvar(usuario, nameDb);
                         btLimparActionPerformed(evt);
 
-                    } catch (SQLException ex) {
-
-                        if (ex.getMessage().contains(new String("The Network Adapter could not establish the connection"))) {
-
-                            JOptionPane.showMessageDialog(this, "Não foi possivel Conectar Com o Banco de Dados!");
-
-                        } else if (ex.getMessage().contains(new String("ORA-00001"))) {
-
-                            JOptionPane.showMessageDialog(this, "Este Nome de usuário já está sendo utilizado, tente cadastrar com outro Nome!");
-
-                        } else if (ex.getMessage().contains(new String("ORA-00933"))) {
-
-                            JOptionPane.showMessageDialog(this, "Este registro não consta em nosso Banco de Dados!");
-
-                        } else if (ex.getMessage().contains(new String("Duplicate entry"))) {
-
-                            JOptionPane.showMessageDialog(this, "Este Nome de usuário já está sendo utilizado, tente cadastrar com outro Nome!");
-
-                        } else {
-
-                            JOptionPane.showMessageDialog(this, "Erro Desconhecido!");
-
-                            ex.printStackTrace();
-                        }
-
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(TelaRequisitantes.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (Exception ex) {
+                        logger.log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                     }
                     JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso");
                 } else {
                     JOptionPane.showMessageDialog(this, "Altere os dados com erros para finalizar o cadastro!");
                 }
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(TelaRequisitantes.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(TelaRequisitantes.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(TelaRequisitantes.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaRequisitantes.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
-            //LOG
-            LogArquivoTexto log = new LogArquivoTexto();
-            String classe = TelaInfomacoesFinanceiras.class.getName();
-            String texto = classe + "\n" + "ERRO: " + ex;
-            try {
-                log.escreverGeral(texto, nameDb);
-            } catch (Exception ex1) {
-                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
+
+                //LOG
+//                LogArquivoTexto log = new LogArquivoTexto();
+//                String classe = TelaInfomacoesFinanceiras.class.getName();
+//                String texto = classe + "\n" + "ERRO: " + ex;
+//                try {
+//                    log.escreverGeral(texto, nameDb);
+//                } catch (Exception ex1) {
+//                    Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//                }
             }
-        }
         } else {
             JOptionPane.showMessageDialog(this, msgErro);
         }
@@ -466,41 +461,43 @@ public class TelaRequisitantes extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        logger = Definirlogger();
+
         try {
             TelaLogin tela = new TelaLogin();
             this.setVisible(false);
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        logger = Definirlogger();
+
         try {
             TelaSelecioneAno tela = new TelaSelecioneAno();
             this.setVisible(false);
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void btVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltar1ActionPerformed
+        logger = Definirlogger();
         try {
             //TELA ADM
             TelaListaRequisitantes tela = new TelaListaRequisitantes();
             this.setVisible(false);
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaRequisitantes.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaRequisitantes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_btVoltar1ActionPerformed
 
