@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Format;
 import model.Icone;
+import model.Log;
 import model.LogArquivoTexto;
 import model.Moeda;
 import model.OrdemPagamento;
@@ -44,6 +45,7 @@ public class TelaOrdemPagamento extends javax.swing.JFrame {
     //private String Status = "Nova";
     private String nameDb;
     private Integer numParcela;
+    private Logger logger = null;
 
     public TelaOrdemPagamento() {
         initComponents();
@@ -51,6 +53,20 @@ public class TelaOrdemPagamento extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         MaximizeTela();
         btAlterar.setEnabled(false);
+    }
+
+    //LOGGER
+    public Logger Definirlogger() {
+        Log log = new Log();
+        try {
+            logger = log.pathLog(TelaOrdemPagamento.class.getName(), nameDb);
+        } catch (SecurityException ex1) {
+            Logger.getLogger(TelaOrdemPagamento.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (Exception ex1) {
+            Logger.getLogger(TelaOrdemPagamento.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+
+        return logger;
     }
 
     //MOSTRAR TELA    
@@ -139,30 +155,19 @@ public class TelaOrdemPagamento extends javax.swing.JFrame {
                 cbTipoCobranca.addItem(nome);
             }
 
-        } catch (SQLException ex) {
-
-            if (ex.getMessage().contains(new String("The Network Adapter could not establish the connection"))) {
-
-                JOptionPane.showMessageDialog(this, "Não foi possivel Conectar Com o Banco de Dados!");
-
-            }
-
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-
-            JOptionPane.showMessageDialog(this, "Erro de Desconhecido!");
-
-            //ex.printStackTrace();
         } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             //LOG
-            LogArquivoTexto log = new LogArquivoTexto();
-            String classe = TelaInfomacoesFinanceiras.class.getName();
-            String texto = classe + "\n" + "ERRO: " + ex;
-            try {
-                log.escreverGeral(texto, nameDb);
-            } catch (Exception ex1) {
-                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-            }
+//            LogArquivoTexto log = new LogArquivoTexto();
+//            String classe = TelaInfomacoesFinanceiras.class.getName();
+//            String texto = classe + "\n" + "ERRO: " + ex;
+//            try {
+//                log.escreverGeral(texto, nameDb);
+//            } catch (Exception ex1) {
+//                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//            }
         }
     }
 
@@ -189,30 +194,20 @@ public class TelaOrdemPagamento extends javax.swing.JFrame {
                 cbOrdemPagamento.addItem(nome);
             }
 
-        } catch (SQLException ex) {
-
-            if (ex.getMessage().contains(new String("The Network Adapter could not establish the connection"))) {
-
-                JOptionPane.showMessageDialog(this, "Não foi possivel Conectar Com o Banco de Dados!");
-
-            }
-
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-
-            JOptionPane.showMessageDialog(this, "Erro de Desconhecido!");
-
-            //ex.printStackTrace();
         } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
+
             //LOG
-            LogArquivoTexto log = new LogArquivoTexto();
-            String classe = TelaInfomacoesFinanceiras.class.getName();
-            String texto = classe + "\n" + "ERRO: " + ex;
-            try {
-                log.escreverGeral(texto, nameDb);
-            } catch (Exception ex1) {
-                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-            }
+//            LogArquivoTexto log = new LogArquivoTexto();
+//            String classe = TelaInfomacoesFinanceiras.class.getName();
+//            String texto = classe + "\n" + "ERRO: " + ex;
+//            try {
+//                log.escreverGeral(texto, nameDb);
+//            } catch (Exception ex1) {
+//                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//            }
         }
     }
 
@@ -307,20 +302,20 @@ public class TelaOrdemPagamento extends javax.swing.JFrame {
             } else {
                 txtComentário.setText("");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
+
             //LOG
-            LogArquivoTexto log = new LogArquivoTexto();
-            String classe = TelaInfomacoesFinanceiras.class.getName();
-            String texto = classe + "\n" + "ERRO: " + ex;
-            try {
-                log.escreverGeral(texto, nameDb);
-            } catch (Exception ex1) {
-                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-            }
+//            LogArquivoTexto log = new LogArquivoTexto();
+//            String classe = TelaInfomacoesFinanceiras.class.getName();
+//            String texto = classe + "\n" + "ERRO: " + ex;
+//            try {
+//                log.escreverGeral(texto, nameDb);
+//            } catch (Exception ex1) {
+//                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//            }
         }
     }
 
@@ -661,15 +656,18 @@ public class TelaOrdemPagamento extends javax.swing.JFrame {
             VerificaParametro pasta = new VerificaParametro();
             pasta.VerficaNameDBAbrirPasta(nivel, id, nameDb);
         } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             //LOG
-            LogArquivoTexto log = new LogArquivoTexto();
-            String classe = TelaInfomacoesFinanceiras.class.getName();
-            String texto = classe + "\n" + "ERRO: " + ex;
-            try {
-                log.escreverGeral(texto, nameDb);
-            } catch (Exception ex1) {
-                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-            }
+//            LogArquivoTexto log = new LogArquivoTexto();
+//            String classe = TelaInfomacoesFinanceiras.class.getName();
+//            String texto = classe + "\n" + "ERRO: " + ex;
+//            try {
+//                log.escreverGeral(texto, nameDb);
+//            } catch (Exception ex1) {
+//                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//            }
         }
     }//GEN-LAST:event_btAbrirOrdemPagamentoActionPerformed
 
@@ -728,7 +726,9 @@ public class TelaOrdemPagamento extends javax.swing.JFrame {
         try {
             dataHoje = sdf.parse(dataFormat);
         } catch (ParseException ex) {
-            Logger.getLogger(TelaRequisicaoNova.class.getName()).log(Level.SEVERE, null, ex);
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
         if (cbTipoCobranca.getSelectedItem().equals("Selecione")) {
             msgErro += "- Favor preencher campo Tipo Cobrança\n";
@@ -776,24 +776,19 @@ public class TelaOrdemPagamento extends javax.swing.JFrame {
                 ordemPagamentoDao.salvar(ordemPagamento, nameDb);
                 Report report = new Report();
                 report.geraRelatorioOP(ordemPagamento, nameDb);
-            } catch (SQLException ex) {
-                Logger.getLogger(TelaOrdemPagamento.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaOrdemPagamento.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(TelaOrdemPagamento.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
-                Logger.getLogger(TelaOrdemPagamento.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
+                logger = Definirlogger();
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 //LOG
-                LogArquivoTexto log = new LogArquivoTexto();
-                String classe = TelaInfomacoesFinanceiras.class.getName();
-                String texto = classe + "\n" + "ERRO: " + ex;
-                try {
-                    log.escreverGeral(texto, nameDb);
-                } catch (Exception ex1) {
-                    Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-                }
+//                LogArquivoTexto log = new LogArquivoTexto();
+//                String classe = TelaInfomacoesFinanceiras.class.getName();
+//                String texto = classe + "\n" + "ERRO: " + ex;
+//                try {
+//                    log.escreverGeral(texto, nameDb);
+//                } catch (Exception ex1) {
+//                    Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//                }
             }
             btCancelarActionPerformed(evt);
         } else {
@@ -897,25 +892,22 @@ public class TelaOrdemPagamento extends javax.swing.JFrame {
                 report.geraRelatorioOP(ordemPagamento, nameDb);
                 //System.out.println("ID ORDEM " + ordemPagamento.getId() + "ID REQUISICAO" + ordemPagamento.getRequisicoes().getId());
             } catch (java.io.FileNotFoundException ex) {
-                JOptionPane.showMessageDialog(this, "O arquivo está aberto");
-            } catch (SQLException ex) {
-                Logger.getLogger(TelaOrdemPagamento.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaOrdemPagamento.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(TelaOrdemPagamento.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
-                Logger.getLogger(TelaOrdemPagamento.class.getName()).log(Level.SEVERE, null, ex);
+                logger = Definirlogger();
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "O arquivo está aberto: " + ex);
             } catch (Exception ex) {
+                logger = Definirlogger();
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 //LOG
-                LogArquivoTexto log = new LogArquivoTexto();
-                String classe = TelaInfomacoesFinanceiras.class.getName();
-                String texto = classe + "\n" + "ERRO: " + ex;
-                try {
-                    log.escreverGeral(texto, nameDb);
-                } catch (Exception ex1) {
-                    Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-                }
+//                LogArquivoTexto log = new LogArquivoTexto();
+//                String classe = TelaInfomacoesFinanceiras.class.getName();
+//                String texto = classe + "\n" + "ERRO: " + ex;
+//                try {
+//                    log.escreverGeral(texto, nameDb);
+//                } catch (Exception ex1) {
+//                    Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//                }
             }
 
             btCancelarActionPerformed(evt);
@@ -925,7 +917,7 @@ public class TelaOrdemPagamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btAlterarActionPerformed
 
     private void cbOrdemPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOrdemPagamentoActionPerformed
-               
+
         if (cbOrdemPagamento.getSelectedItem().equals("Selecione")) {
             try {
                 Limpar();
@@ -967,10 +959,10 @@ public class TelaOrdemPagamento extends javax.swing.JFrame {
                 txtPrevisaoEmbarque.setDate(ordemPagamento.getPrevisaoEmbarque());
                 txtComentário.setText(ordemPagamento.getComentario());
 
-            } catch (SQLException ex) {
-                Logger.getLogger(TelaOrdemPagamento.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaOrdemPagamento.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                logger = Definirlogger();
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             }
         }
     }//GEN-LAST:event_cbOrdemPagamentoActionPerformed
@@ -981,7 +973,7 @@ public class TelaOrdemPagamento extends javax.swing.JFrame {
     }//GEN-LAST:event_cbOrdemPagamentoMouseEntered
 
     private void cbOrdemPagamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbOrdemPagamentoMouseClicked
-        
+
     }//GEN-LAST:event_cbOrdemPagamentoMouseClicked
 
     /**
