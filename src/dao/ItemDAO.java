@@ -139,7 +139,6 @@ public class ItemDAO extends AcessDB {
         stmt.setDouble(7, item.getValorUnitario());
         stmt.setDouble(8, item.getValorTotal());
         stmt.setInt(9, item.getRequisicoes().getId());
-        System.out.println( item.getProdutoERP().getId());
         stmt.setObject(10, item.getProdutoERP().getId());
         stmt.execute();
         stmt.close();
