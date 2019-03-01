@@ -86,11 +86,11 @@ public class TelaRequisicaoNova extends javax.swing.JFrame {
     public Logger Definirlogger() {
         Log log = new Log();
         try {
-            logger = log.pathLog(TelaSolicitacaoNova.class.getName(), nameDb);
+            logger = log.pathLog(TelaRequisicaoNova.class.getName(), nameDb);
         } catch (SecurityException ex1) {
-            Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex1);
+            Logger.getLogger(TelaRequisicaoNova.class.getName()).log(Level.SEVERE, null, ex1);
         } catch (Exception ex1) {
-            Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex1);
+            Logger.getLogger(TelaRequisicaoNova.class.getName()).log(Level.SEVERE, null, ex1);
         }
 
         return logger;

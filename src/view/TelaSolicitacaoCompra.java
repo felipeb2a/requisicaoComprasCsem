@@ -81,11 +81,11 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
     public Logger Definirlogger() {
         Log log = new Log();
         try {
-            logger = log.pathLog(TelaSolicitacaoNova.class.getName(), nameDb);
+            logger = log.pathLog(TelaSolicitacaoCompra.class.getName(), nameDb);
         } catch (SecurityException ex1) {
-            Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex1);
+            Logger.getLogger(TelaSolicitacaoCompra.class.getName()).log(Level.SEVERE, null, ex1);
         } catch (Exception ex1) {
-            Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex1);
+            Logger.getLogger(TelaSolicitacaoCompra.class.getName()).log(Level.SEVERE, null, ex1);
         }
 
         return logger;
