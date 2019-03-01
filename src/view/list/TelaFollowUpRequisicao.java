@@ -28,6 +28,7 @@ import javax.swing.table.TableRowSorter;
 import model.FileCompras;
 import model.Format;
 import model.Icone;
+import model.Log;
 import model.LogArquivoTexto;
 import model.Report;
 import model.ReportExcel;
@@ -53,11 +54,26 @@ public class TelaFollowUpRequisicao extends javax.swing.JFrame {
     private ArrayList mostrarTela = new ArrayList();
     private Usuario obterLogin;
     private String nameDb;
+    private Logger logger = null;
 
     public TelaFollowUpRequisicao() {
         initComponents();
         AlteraFontTable();
         MaximizeTela();
+    }
+
+    //LOGGER
+    public Logger Definirlogger() {
+        Log log = new Log();
+        try {
+            logger = log.pathLog(TelaFollowUpRequisicao.class.getName(), nameDb);
+        } catch (SecurityException ex1) {
+            Logger.getLogger(TelaFollowUpRequisicao.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (Exception ex1) {
+            Logger.getLogger(TelaFollowUpRequisicao.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+
+        return logger;
     }
 
     //MOSTRAR TELA    
@@ -143,39 +159,19 @@ public class TelaFollowUpRequisicao extends javax.swing.JFrame {
                 model.addRow(linha);
             }
 
-        } catch (SQLException ex) {
-
-            if (ex.getMessage().contains(new String("The Network Adapter could not establish the connection"))) {
-
-                JOptionPane.showMessageDialog(this, "Não foi possivel Conectar Com o Banco de Dados!");
-
-            } else {
-
-                JOptionPane.showMessageDialog(this, "Erro Desconhecido!");
-
-                ex.printStackTrace();
-            }
-
-        } catch (ClassNotFoundException ex) {
-
-            JOptionPane.showMessageDialog(this, "Erro de Desconhecido!");
-
-            ex.printStackTrace();
-        } catch (NullPointerException ex) {
-
-            JOptionPane.showMessageDialog(this, "Null Pointer!");
-
-            ex.printStackTrace();
         } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             //LOG
-            LogArquivoTexto log = new LogArquivoTexto();
-            String classe = TelaInfomacoesFinanceiras.class.getName();
-            String texto = classe + "\n" + "ERRO: " + ex;
-            try {
-                log.escreverGeral(texto, nameDb);
-            } catch (Exception ex1) {
-                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-            }
+//            LogArquivoTexto log = new LogArquivoTexto();
+//            String classe = TelaInfomacoesFinanceiras.class.getName();
+//            String texto = classe + "\n" + "ERRO: " + ex;
+//            try {
+//                log.escreverGeral(texto, nameDb);
+//            } catch (Exception ex1) {
+//                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//            }
         }
     }
 
@@ -482,10 +478,10 @@ public class TelaFollowUpRequisicao extends javax.swing.JFrame {
             this.setVisible(false);
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -494,10 +490,10 @@ public class TelaFollowUpRequisicao extends javax.swing.JFrame {
             TelaSelecioneAno tela = new TelaSelecioneAno();
             this.setVisible(false);
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -509,10 +505,10 @@ public class TelaFollowUpRequisicao extends javax.swing.JFrame {
             tela.ObterLogin(obterLogin);
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaListaRequisicaoArquivada.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaListaRequisicaoArquivada.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_btVoltarActionPerformed
 
@@ -530,10 +526,10 @@ public class TelaFollowUpRequisicao extends javax.swing.JFrame {
             tela.ObterLogin(obterLogin);
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaFollowUpRequisicao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaFollowUpRequisicao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_btAlterarSenhaActionPerformed
 
@@ -580,21 +576,24 @@ public class TelaFollowUpRequisicao extends javax.swing.JFrame {
                 //Report report = new Report();
                 //report.geraRelatorioFollowUp(user, dataInicial, dataFinal, nameDb);
                 ReportExcel reportExcel = new ReportExcel();
-                reportExcel.gerarFollowUpExcel(user, dataInicial, dataFinal, tipo,nameDb);
+                reportExcel.gerarFollowUpExcel(user, dataInicial, dataFinal, tipo, nameDb);
                 //VOLTAR
                 JOptionPane.showMessageDialog(this, "Relatório gerado com Sucesso!");
                 btVoltarActionPerformed(evt);
             } catch (Exception ex) {
+                logger = Definirlogger();
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 //LOG
-                LogArquivoTexto log = new LogArquivoTexto();
-                String classe = TelaFollowUpRequisicao.class.getName();
-                String texto = classe + "\n" + "ERRO: " + ex;
-                try {
-                    log.escreverGeral(texto, nameDb);
-                    JOptionPane.showMessageDialog(this, "- Erro: " + texto);
-                } catch (Exception ex1) {
-                    Logger.getLogger(TelaFollowUpRequisicao.class.getName()).log(Level.SEVERE, null, ex1);
-                }
+//                LogArquivoTexto log = new LogArquivoTexto();
+//                String classe = TelaFollowUpRequisicao.class.getName();
+//                String texto = classe + "\n" + "ERRO: " + ex;
+//                try {
+//                    log.escreverGeral(texto, nameDb);
+//                    JOptionPane.showMessageDialog(this, "- Erro: " + texto);
+//                } catch (Exception ex1) {
+//                    Logger.getLogger(TelaFollowUpRequisicao.class.getName()).log(Level.SEVERE, null, ex1);
+//                }
             }
         } else {
             JOptionPane.showMessageDialog(this, msgErro);
