@@ -85,8 +85,7 @@ public class TelaRequisitantes extends javax.swing.JFrame {
 
     //LISTAR NIVEIS COMBOBOX
     public void ListarNiveis() throws SQLException, ClassNotFoundException {
-        logger = Definirlogger();
-
+        
         try {
             NiveisDAO dao = new NiveisDAO();
             Niveis niveis;
@@ -100,23 +99,8 @@ public class TelaRequisitantes extends javax.swing.JFrame {
                 //INSERIR NOME
                 cbNivel.addItem(nome);
             }
-        } catch (SQLException ex) {
-
-            if (ex.getMessage().contains(new String("The Network Adapter could not establish the connection"))) {
-
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-
-            }
-
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-
-            logger.log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-
-            //ex.printStackTrace();
         } catch (Exception ex) {
+            logger = Definirlogger();
             logger.log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "ERRO: " + ex);
 
@@ -367,8 +351,7 @@ public class TelaRequisitantes extends javax.swing.JFrame {
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
-        logger = Definirlogger();
-
+        
         boolean valida = true;
         String msgErro = "";
 
@@ -437,6 +420,7 @@ public class TelaRequisitantes extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Altere os dados com erros para finalizar o cadastro!");
                 }
             } catch (Exception ex) {
+                logger = Definirlogger();
                 logger.log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this, "ERRO: " + ex);
 
@@ -461,34 +445,34 @@ public class TelaRequisitantes extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        logger = Definirlogger();
-
+        
         try {
             TelaLogin tela = new TelaLogin();
             this.setVisible(false);
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
         } catch (Exception ex) {
+            logger = Definirlogger();
             logger.log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        logger = Definirlogger();
-
+        
         try {
             TelaSelecioneAno tela = new TelaSelecioneAno();
             this.setVisible(false);
             tela.mostrarTela(mostrarTela);
         } catch (Exception ex) {
+            logger = Definirlogger();
             logger.log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void btVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltar1ActionPerformed
-        logger = Definirlogger();
+        
         try {
             //TELA ADM
             TelaListaRequisitantes tela = new TelaListaRequisitantes();
@@ -496,6 +480,7 @@ public class TelaRequisitantes extends javax.swing.JFrame {
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
         } catch (Exception ex) {
+            logger = Definirlogger();
             logger.log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }

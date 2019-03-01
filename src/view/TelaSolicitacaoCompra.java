@@ -168,7 +168,6 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
     //CARREGAR SOLICITACAO P/ APROVACAO
     public void carregarSolicitacao(Solicitacoes solicitacao) throws SQLException, ClassNotFoundException {
 
-        logger = Definirlogger();
         try {
             ListarCombobox();
             //StatusRequisicao status = new StatusRequisicao();
@@ -252,6 +251,7 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
                 modelItem.addRow(linha);
             }
         } catch (Exception ex) {
+            logger = Definirlogger();
             logger.log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "ERRO: " + ex);
 
@@ -270,7 +270,6 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
     //LISTAR COMBOBOX
     public void ListarCombobox() throws SQLException, ClassNotFoundException {
 
-        logger = Definirlogger();
         try {
             //DAO
             TipoRequisicaoDAO tipoReqDao = new TipoRequisicaoDAO();
@@ -348,23 +347,8 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
                 cbMoeda.addItem(nome);
             }
 
-        } catch (SQLException ex) {
-
-            if (ex.getMessage().contains(new String("The Network Adapter could not establish the connection"))) {
-
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-
-            }
-
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-
-            logger.log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-
-            //ex.printStackTrace();
         } catch (Exception ex) {
+            logger = Definirlogger();
             logger.log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             //LOG
@@ -1577,39 +1561,34 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        logger = Definirlogger();
 
         try {
             TelaLogin tela = new TelaLogin();
             this.setVisible(false);
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            logger.log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-        } catch (ClassNotFoundException ex) {
-            logger.log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         } catch (Exception ex) {
+            logger = Definirlogger();
             logger.log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        logger = Definirlogger();
+
         try {
             TelaSelecioneAno tela = new TelaSelecioneAno();
             this.setVisible(false);
             tela.mostrarTela(mostrarTela);
         } catch (Exception ex) {
+            logger = Definirlogger();
             logger.log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
-        logger = Definirlogger();
+
         try {
             //TELA REQ
             TelaListaSolicitacoes tela = new TelaListaSolicitacoes();
@@ -1619,14 +1598,13 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
             tela.Relatorio();
             tela.mostrarTela(mostrarTela);
         } catch (Exception ex) {
+            logger = Definirlogger();
             logger.log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_btVoltarActionPerformed
 
     private void btEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnviarActionPerformed
-
-        logger = Definirlogger();
 
         boolean valida = true;
         String msgErro = "";
@@ -1852,8 +1830,6 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
         }
         //CAMPOS VALIDADOS
         if (valida) {
-            //LOG           
-            logger = Definirlogger();
 
             //MODEL
             Requisicoes requisicao = new Requisicoes();
@@ -2041,19 +2017,8 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
                 //VOLTAR
                 btVoltarActionPerformed(evt);
 
-            } catch (SQLException ex) {
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-            } catch (ClassNotFoundException ex) {
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-            } catch (ParseException ex) {
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-            } catch (IOException ex) {
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (Exception ex) {
+                logger = Definirlogger();
                 logger.log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 //LOG
@@ -2073,7 +2038,6 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_btEnviarActionPerformed
 
     private void btArquivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btArquivarActionPerformed
-        logger = Definirlogger();
 
         Object[] options = {"Confirmar", "Cancelar"};
         int opcao = JOptionPane.showOptionDialog(null, "CLIQUE CONFIRMAR PARA ARQUIVAR A SOLICITACAO! " + "\n", "A SOLICITAÇÃO SERÁ ARQUIVADA!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
@@ -2084,16 +2048,8 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
             try {
                 solicitacoesDao.arquivarSolicitacao(solicitacao, nameDb);
                 btVoltarActionPerformed(evt);
-            } catch (SQLException ex) {
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-            } catch (ClassNotFoundException ex) {
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-            } catch (ParseException ex) {
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (Exception ex) {
+                logger = Definirlogger();
                 logger.log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this, "ERRO: " + ex);
 
@@ -2114,7 +2070,6 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_btArquivarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        logger = Definirlogger();
 
         Object[] options = {"Confirmar", "Cancelar"};
         int opcao = JOptionPane.showOptionDialog(null, "CLIQUE CONFIRMAR PARA CANCELAR A SOLICITACAO! " + "\n", "A SOLICITAÇÃO SERÁ CANCELADA!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
@@ -2125,16 +2080,8 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
             try {
                 solicitacoesDao.cancelarSolicitacao(solicitacao, nameDb);
                 btVoltarActionPerformed(evt);
-            } catch (SQLException ex) {
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-            } catch (ClassNotFoundException ex) {
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-            } catch (ParseException ex) {
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (Exception ex) {
+                logger = Definirlogger();
                 logger.log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this, "ERRO: " + ex);
 
@@ -2160,7 +2107,6 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        logger = Definirlogger();
 
         try {
             TelaLogin tela = new TelaLogin();
@@ -2168,6 +2114,7 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
         } catch (Exception ex) {
+            logger = Definirlogger();
             logger.log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
@@ -2175,20 +2122,20 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
 
-        logger = Definirlogger();
+        
         try {
             TelaSelecioneAno tela = new TelaSelecioneAno();
             this.setVisible(false);
             tela.mostrarTela(mostrarTela);
         } catch (Exception ex) {
+            logger = Definirlogger();
             logger.log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void btAprovaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAprovaActionPerformed
-        logger = Definirlogger();
-
+        
         RequisicoesDAO requisicaoDao = new RequisicoesDAO();
         Requisicoes requisicao = new Requisicoes();
         requisicao.setId(Integer.parseInt(txtCodRequisicao.getText()));
@@ -2201,23 +2148,15 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
 
             //VOLTAR
             btVoltarActionPerformed(evt);
-        } catch (SQLException ex) {
-            logger.log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-        } catch (ClassNotFoundException ex) {
-            logger.log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-        } catch (ParseException ex) {
-            logger.log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         } catch (Exception ex) {
+            logger = Definirlogger();
             logger.log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_btAprovaActionPerformed
 
     private void btRecusarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRecusarActionPerformed
-        logger = Definirlogger();
+        
         RequisicoesDAO requisicaoDao = new RequisicoesDAO();
         Requisicoes requisicao = new Requisicoes();
         requisicao.setId(Integer.parseInt(txtCodRequisicao.getText()));
@@ -2226,13 +2165,14 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
             requisicaoDao.recusarRequisicao(requisicao, nameDb);
             btVoltarActionPerformed(evt);
         } catch (Exception ex) {
+            logger = Definirlogger();
             logger.log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_btRecusarActionPerformed
 
     private void btVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltar1ActionPerformed
-        logger = Definirlogger();
+        
         try {
             //TELA REQ
             TelaListaRequisicaoAprovacao tela = new TelaListaRequisicaoAprovacao();
@@ -2241,15 +2181,14 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
         } catch (Exception ex) {
+            logger = Definirlogger();
             logger.log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_btVoltar1ActionPerformed
 
     private void btFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFinalizarActionPerformed
-
-        logger = Definirlogger();
-
+        
         boolean valida = true;
         String msgErro = "";
 
@@ -2276,16 +2215,8 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
                     requisicaoDao.finalizarRequisicao(requisicao, nameDb);
                     JOptionPane.showMessageDialog(this, "Requisição finalizada com sucesso!");
                     btVoltarActionPerformed(evt);
-                } catch (SQLException ex) {
-                    logger.log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-                } catch (ClassNotFoundException ex) {
-                    logger.log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-                } catch (ParseException ex) {
-                    logger.log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 } catch (Exception ex) {
+                    logger = Definirlogger();
                     logger.log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(this, "ERRO: " + ex);
 
@@ -2309,8 +2240,7 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_btFinalizarActionPerformed
 
     private void btDesarquivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDesarquivarActionPerformed
-        logger = Definirlogger();
-
+        
         Object[] options = {"Confirmar", "Cancelar"};
         int opcao = JOptionPane.showOptionDialog(null, "CLIQUE CONFIRMAR PARA DESARQUIVAR! " + "\n", "A SOLICITAÇÃO SERÁ DESARQUIVADA!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
         if (opcao == 0) {
@@ -2321,16 +2251,8 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
                 solicitacoesDao.desarquivarSolicitacao(solicitacao, nameDb);
                 JOptionPane.showMessageDialog(this, "Solicitação desarquivada com sucesso!");
                 btVoltarActionPerformed(evt);
-            } catch (SQLException ex) {
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-            } catch (ClassNotFoundException ex) {
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-            } catch (ParseException ex) {
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (Exception ex) {
+                logger = Definirlogger();
                 logger.log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this, "ERRO: " + ex);
 
@@ -2351,8 +2273,7 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_btDesarquivarActionPerformed
 
     private void btAlterarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarSenhaActionPerformed
-        logger = Definirlogger();
-
+        
         try {
             //TELA INF FINC
             TelaAlterarSenha tela = new TelaAlterarSenha();
@@ -2361,14 +2282,14 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
         } catch (Exception ex) {
+            logger = Definirlogger();
             logger.log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_btAlterarSenhaActionPerformed
 
     private void btDesCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDesCancelarActionPerformed
-        logger = Definirlogger();
-
+        
         Object[] options = {"Confirmar", "Descancelar"};
         int opcao = JOptionPane.showOptionDialog(null, "CLIQUE CONFIRMAR PARA DEFINIR SOLICITACAO COM STATUS NOVA! " + "\n", "A SOLICITAÇÃO SERÁ CANCELADA!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
         if (opcao == 0) {
@@ -2378,16 +2299,8 @@ public class TelaSolicitacaoCompra extends javax.swing.JFrame {
             try {
                 solicitacoesDao.desCancelarSolicitacao(solicitacao, nameDb);
                 btVoltarActionPerformed(evt);
-            } catch (SQLException ex) {
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-            } catch (ClassNotFoundException ex) {
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
-            } catch (ParseException ex) {
-                logger.log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             } catch (Exception ex) {
+                logger = Definirlogger();
                 logger.log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this, "ERRO: " + ex);
 

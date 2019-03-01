@@ -38,6 +38,7 @@ import model.Format;
 import model.Fornecedor;
 import model.Icone;
 import model.Item;
+import model.Log;
 import model.LogArquivoTexto;
 import model.Moedas;
 import model.Niveis;
@@ -68,6 +69,7 @@ public class TelaRequisicaoNova extends javax.swing.JFrame {
     private Usuario obterLogin;
     private String Status = "Nova";
     private String nameDb;
+    private Logger logger = null;
 
     public TelaRequisicaoNova() throws ParseException, SQLException, ClassNotFoundException {
         initComponents();
@@ -77,6 +79,20 @@ public class TelaRequisicaoNova extends javax.swing.JFrame {
         txtDataEntrega.setEnabled(false);
         btFinalizar.setEnabled(false);
 
+    }
+
+    //LOGGER
+    public Logger Definirlogger() {
+        Log log = new Log();
+        try {
+            logger = log.pathLog(TelaSolicitacaoNova.class.getName(), nameDb);
+        } catch (SecurityException ex1) {
+            Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (Exception ex1) {
+            Logger.getLogger(TelaSolicitacaoNova.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+
+        return logger;
     }
 
     //MOSTRAR TELA    
@@ -129,8 +145,8 @@ public class TelaRequisicaoNova extends javax.swing.JFrame {
         JTableHeader cabecalhoItens = tbItens.getTableHeader();
         cabecalhoItens.setFont(new Font("Tahoma", Font.BOLD, 18));
     }
-    
-    public void MaximizeTela(){
+
+    public void MaximizeTela() {
         this.setExtendedState(MAXIMIZED_BOTH);
     }
 
@@ -155,6 +171,8 @@ public class TelaRequisicaoNova extends javax.swing.JFrame {
 
     //LISTAR COMBOBOX
     public void ListarCombobox() throws SQLException, ClassNotFoundException {
+        logger = Definirlogger();
+
         try {
             //DAO
             TipoRequisicaoDAO tipoReqDao = new TipoRequisicaoDAO();
@@ -261,30 +279,19 @@ public class TelaRequisicaoNova extends javax.swing.JFrame {
                 cbVinculacao.addItem(Integer.toString(nome));
             }
              */
-        } catch (SQLException ex) {
-
-            if (ex.getMessage().contains(new String("The Network Adapter could not establish the connection"))) {
-
-                JOptionPane.showMessageDialog(this, "Não foi possivel Conectar Com o Banco de Dados!");
-
-            }
-
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-
-            JOptionPane.showMessageDialog(this, "Erro de Desconhecido!");
-
-            //ex.printStackTrace();
         } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
+
             //LOG
-            LogArquivoTexto log = new LogArquivoTexto();
-            String classe = TelaInfomacoesFinanceiras.class.getName();
-            String texto = classe + "\n" + "ERRO: " + ex;
-            try {
-                log.escreverGeral(texto, nameDb);
-            } catch (Exception ex1) {
-                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-            }
+//            LogArquivoTexto log = new LogArquivoTexto();
+//            String classe = TelaInfomacoesFinanceiras.class.getName();
+//            String texto = classe + "\n" + "ERRO: " + ex;
+//            try {
+//                log.escreverGeral(texto, nameDb);
+//            } catch (Exception ex1) {
+//                Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//            }
         }
     }
 
@@ -312,8 +319,10 @@ public class TelaRequisicaoNova extends javax.swing.JFrame {
 
     //CARREGAR REQUISICAO
     public void carregarRequisicaoApartir(Requisicoes requisicao) throws SQLException, ClassNotFoundException {
+        logger = Definirlogger();
+        
         try {
-            
+
             ListarCombobox();
             //StatusRequisicao status = new StatusRequisicao();
             //status.setStatusRequisicao(Status);
@@ -346,7 +355,7 @@ public class TelaRequisicaoNova extends javax.swing.JFrame {
             listaItem = itemDao.localizarItemRequisicao(item, nameDb);
             //BUSCAR REQ
             requisicao = requisicaoDao.localizarRequisicaoParaAprovar(requisicao, nameDb);
-            
+
             //ATRIBUIR VALORES REQUISICAO
             //txtStatus.setText(requisicao.getStatusRequisicao().getStatusRequisicao());
             //txtCodReqTitulo.setText(Integer.toString(requisicao.getId()));
@@ -372,20 +381,19 @@ public class TelaRequisicaoNova extends javax.swing.JFrame {
                 cbTipoAprovador.setSelectedItem("Tecnico");
             }
             txtJustificativa.setText(requisicao.getJustificativa());
-            
-            
+
             //ATRIBUIR VALORES A TABLE FORNECEDOR
             for (Iterator it = listaFornecedor.iterator(); it.hasNext();) {
 
                 fornecedor = (Fornecedor) it.next();
                 Object linha[]
                         = {fornecedor.getNomeFornecedor(), fornecedor.getTelefone(), fornecedor.getEmail(), fornecedor.getContato(),
-                            fornecedor.getInfoAdicionais(), fornecedor.getTempoProducao(), fornecedor.getLogistica(), 
+                            fornecedor.getInfoAdicionais(), fornecedor.getTempoProducao(), fornecedor.getLogistica(),
                             fornecedor.getValorInicial(), fornecedor.getValorFinal(), fornecedor.getEscolha()};
 
                 modelFornecedor.addRow(linha);
             }
-            
+
             //ATRIBUIR VALORES A TABLE ITEM
             for (Iterator it = listaItem.iterator(); it.hasNext();) {
 
@@ -396,8 +404,7 @@ public class TelaRequisicaoNova extends javax.swing.JFrame {
 
                 modelItem.addRow(linha);
             }
-            
-            
+
         } catch (Exception ex) {
             //LOG
             LogArquivoTexto log = new LogArquivoTexto();
@@ -1414,7 +1421,7 @@ public class TelaRequisicaoNova extends javax.swing.JFrame {
                 //VERIFICA
                 VerificaParametro verifica = new VerificaParametro();
                 verifica.VerficaNameDBCriaPastaRC(nameDb, requisicao);
-                JOptionPane.showMessageDialog(this, "Requisição "+requisicao.getId()+" Enviada com sucesso!");
+                JOptionPane.showMessageDialog(this, "Requisição " + requisicao.getId() + " Enviada com sucesso!");
 
                 //SEND EMAIL APROVADOR TECNICO
                 if (requisicao.getTipoAprovador().equals("Aprovador Tecnico")) {
@@ -1440,7 +1447,7 @@ public class TelaRequisicaoNova extends javax.swing.JFrame {
                 //LOG
                 LogArquivoTexto log = new LogArquivoTexto();
                 String classe = TelaRequisicaoNova.class.getName();
-                String texto = usuario.getLogin()+" " + classe + "\n " + "ERRO: " + ex;
+                String texto = usuario.getLogin() + " " + classe + "\n " + "ERRO: " + ex;
                 try {
                     log.escreverGeral(texto, nameDb);
                 } catch (Exception ex1) {
