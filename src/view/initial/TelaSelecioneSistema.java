@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.Log;
 
 /**
  *
@@ -14,9 +16,24 @@ public class TelaSelecioneSistema extends javax.swing.JFrame {
     //VARIAVEIS GLOBAIS
     private ArrayList mostrarTela = new ArrayList();
     private int armazenaAno;
+    private Logger logger = null;
 
     public TelaSelecioneSistema() throws SQLException, ClassNotFoundException {
         initComponents();
+    }
+
+    //LOGGER
+    public Logger Definirlogger() {
+        Log log = new Log();
+        try {
+            logger = log.pathLog(TelaSelecioneSistema.class.getName(), "geral");
+        } catch (SecurityException ex1) {
+            Logger.getLogger(TelaSelecioneSistema.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (Exception ex1) {
+            Logger.getLogger(TelaSelecioneSistema.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+
+        return logger;
     }
 
     //MOSTRAR TELA    
@@ -145,11 +162,12 @@ public class TelaSelecioneSistema extends javax.swing.JFrame {
             this.setVisible(false);
             tela.mostrarTela(mostrarTela);
             tela.nameDb(dbSunewGeradores);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaSelecioneSistema.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaSelecioneSistema.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
+
     }//GEN-LAST:event_btSunewGeradoresActionPerformed
 
     private void btCsemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCsemActionPerformed
@@ -161,10 +179,10 @@ public class TelaSelecioneSistema extends javax.swing.JFrame {
             this.setVisible(false);
             tela.mostrarTela(mostrarTela);
             tela.nameDb(dbCsem);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaSelecioneSistema.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaSelecioneSistema.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_btCsemActionPerformed
 
@@ -177,10 +195,10 @@ public class TelaSelecioneSistema extends javax.swing.JFrame {
             this.setVisible(false);
             tela.mostrarTela(mostrarTela);
             tela.nameDb(dbSunew);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaSelecioneSistema.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaSelecioneSistema.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_btSunewActionPerformed
 
