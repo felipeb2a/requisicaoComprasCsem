@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Icone;
+import model.Log;
 
 /**
  *
@@ -20,8 +22,24 @@ public class TelaAdministrador extends javax.swing.JFrame {
     //VARIAVEIS GLOBAIS
     private ArrayList mostrarTela = new ArrayList();
     private String nameDb;
+    private Logger logger = null;
+
     public TelaAdministrador() {
         initComponents();
+    }
+    //LOGGER
+
+    public Logger Definirlogger() {
+        Log log = new Log();
+        try {
+            logger = log.pathLog(TelaAdministrador.class.getName(), nameDb);
+        } catch (SecurityException ex1) {
+            Logger.getLogger(TelaAdministrador.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (Exception ex1) {
+            Logger.getLogger(TelaAdministrador.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+
+        return logger;
     }
 
     //MOSTRAR TELA    
@@ -31,14 +49,13 @@ public class TelaAdministrador extends javax.swing.JFrame {
 
         this.mostrarTela = Tela;
     }
-    
+
     //ALTERAR ICONE JAVA
     Icone icon = new Icone();
-    
-   
-    public void icone(){        
-        URL url = icon.getIcone(nameDb);    
-        Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);    
+
+    public void icone() {
+        URL url = icon.getIcone(nameDb);
+        Image iconeTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(iconeTitulo);
     }
 
@@ -241,10 +258,10 @@ public class TelaAdministrador extends javax.swing.JFrame {
             this.setVisible(false);
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -255,10 +272,10 @@ public class TelaAdministrador extends javax.swing.JFrame {
             this.setVisible(false);
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -273,10 +290,10 @@ public class TelaAdministrador extends javax.swing.JFrame {
             this.setVisible(false);
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -285,10 +302,10 @@ public class TelaAdministrador extends javax.swing.JFrame {
             TelaSelecioneAno tela = new TelaSelecioneAno();
             this.setVisible(false);
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 

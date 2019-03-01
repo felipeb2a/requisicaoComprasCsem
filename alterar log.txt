@@ -38,6 +38,5 @@ JOptionPane.showMessageDialog(this, "ERRO: " + ex);
 	
 	
 	PACOTES PARA ALTERAR AINDA
-	view.changes
 	view.initial
 	view.list
