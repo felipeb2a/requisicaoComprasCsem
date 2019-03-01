@@ -29,7 +29,8 @@ JOptionPane.showMessageDialog(this, "ERRO: " + ex);
 
 
 
-
+CRIAR PASTA GERAL PARA O LOG
+utilizar a palavra geral como validador
 
 
     public void MaximizeTela() {

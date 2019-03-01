@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Log;
 
 /**
  *
@@ -15,9 +16,24 @@ public class TelaSelecioneAno extends javax.swing.JFrame {
 
     //VARIAVEIS GLOBAIS
     private ArrayList mostrarTela = new ArrayList();
+    private Logger logger = null;
 
     public TelaSelecioneAno() throws SQLException, ClassNotFoundException {
         initComponents();
+    }
+
+    //LOGGER
+    public Logger Definirlogger() {
+        Log log = new Log();
+        try {
+            logger = log.pathLog(TelaSelecioneAno.class.getName(), "geral");
+        } catch (SecurityException ex1) {
+            Logger.getLogger(TelaSelecioneAno.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (Exception ex1) {
+            Logger.getLogger(TelaSelecioneAno.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+
+        return logger;
     }
 
     //MOSTRAR TELA    
@@ -43,10 +59,10 @@ public class TelaSelecioneAno extends javax.swing.JFrame {
                 this.setVisible(false);
                 tela.armazenaAno(ano);
                 tela.mostrarTela(mostrarTela);
-            } catch (SQLException ex) {
-                Logger.getLogger(TelaSelecioneAno.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaSelecioneAno.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                logger = Definirlogger();
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             }
 
         } else {
