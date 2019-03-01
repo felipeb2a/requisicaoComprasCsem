@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Criptografia;
 import model.Icone;
+import model.Log;
 import model.LogArquivoTexto;
 import model.Usuario;
 import view.TelaInfomacoesFinanceiras;
@@ -32,10 +33,25 @@ public class TelaAlterarSenha extends javax.swing.JFrame {
     private ArrayList mostrarTela = new ArrayList();
     private Usuario obterLogin;
     private String nameDb;
+    private Logger logger = null;
 
     public TelaAlterarSenha() {
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+    }
+
+    //LOGGER
+    public Logger Definirlogger() {
+        Log log = new Log();
+        try {
+            logger = log.pathLog(TelaAlterarSenha.class.getName(), nameDb);
+        } catch (SecurityException ex1) {
+            Logger.getLogger(TelaAlterarSenha.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (Exception ex1) {
+            Logger.getLogger(TelaAlterarSenha.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+
+        return logger;
     }
 
     //ALTERAR ICONE JAVA
@@ -123,35 +139,24 @@ public class TelaAlterarSenha extends javax.swing.JFrame {
                     //TELA REQ
                     this.dispose();
                 }
-            } catch (SQLException ex) {
-
-                if (ex.getMessage().contains(new String("The Network Adapter could not establish the connection"))) {
-
-                    JOptionPane.showMessageDialog(this, "Não foi possivel Conectar Com o Banco de Dados!");
-                }
-
-            } catch (ClassNotFoundException ex) {
-
-                JOptionPane.showMessageDialog(this, "Erro de Desconhecido!");
             } catch (NullPointerException exN) {
 
                 JOptionPane.showMessageDialog(this, "As senhas não coincidem!");
                 txtPassword.setText("");
                 txtPasswordNovo.setText("");
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(TelaAlterarSenha.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(TelaAlterarSenha.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
+                logger = Definirlogger();
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
                 //LOG
-                LogArquivoTexto log = new LogArquivoTexto();
-                String classe = TelaInfomacoesFinanceiras.class.getName();
-                String texto = classe + "\n" + "ERRO: " + ex;
-                try {
-                    log.escreverGeral(texto, nameDb);
-                } catch (Exception ex1) {
-                    Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
-                }
+//                LogArquivoTexto log = new LogArquivoTexto();
+//                String classe = TelaInfomacoesFinanceiras.class.getName();
+//                String texto = classe + "\n" + "ERRO: " + ex;
+//                try {
+//                    log.escreverGeral(texto, nameDb);
+//                } catch (Exception ex1) {
+//                    Logger.getLogger(TelaInfomacoesFinanceiras.class.getName()).log(Level.SEVERE, null, ex1);
+//                }
             }
 
         } else {
