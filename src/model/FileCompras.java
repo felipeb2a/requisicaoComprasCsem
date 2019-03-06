@@ -10,10 +10,25 @@ import java.util.logging.Logger;
  * @author felipe.ferreira
  */
 public class FileCompras {
-    
+
     //DEFINE PASTAS E ARQUIVOS
     FilesPath path = new FilesPath();
-    
+    private Logger logger = null;
+
+    //LOGGER
+    public Logger Definirlogger(String nameDb) {
+        Log log = new Log();
+        try {
+            logger = log.pathLog(FileCompras.class.getName(), nameDb);
+        } catch (SecurityException ex1) {
+            Logger.getLogger(FileCompras.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (Exception ex1) {
+            Logger.getLogger(FileCompras.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+
+        return logger;
+    }
+
     public void OC(String nameDb, String nivel) {
 
         try {
@@ -40,8 +55,9 @@ public class FileCompras {
                     java.awt.Desktop.getDesktop().open(new File(path.getPastaRcSunewGeradores() + anoBd[1]));
                 }
             }
-        } catch (IOException ex) {
-            Logger.getLogger(FileCompras.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger(nameDb);
+            logger.log(Level.SEVERE, null, ex);
         }
     }
 
@@ -58,9 +74,9 @@ public class FileCompras {
             if (nameDb.equals("sunewgeradores_" + anoBd[1])) {
                 java.awt.Desktop.getDesktop().open(new File(path.getAtivosSunewGeradores()));
             }
-        } catch (IOException ex) {
-            Logger.getLogger(FileCompras.class
-                    .getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger(nameDb);
+            logger.log(Level.SEVERE, null, ex);
         }
     }
 
@@ -77,9 +93,9 @@ public class FileCompras {
             if (nameDb.equals("sunewgeradores_" + anoBd[1])) {
                 java.awt.Desktop.getDesktop().open(new File(path.getDadosSunewGeradores()));
             }
-        } catch (IOException ex) {
-            Logger.getLogger(FileCompras.class
-                    .getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger(nameDb);
+            logger.log(Level.SEVERE, null, ex);
         }
     }
 
@@ -96,13 +112,13 @@ public class FileCompras {
             if (nameDb.equals("sunewgeradores_" + anoBd[1])) {
                 java.awt.Desktop.getDesktop().open(new File(path.getPastaSunewGeradoresFollowUp() + anoBd[1] + "\\" + user));
             }
-        } catch (IOException ex) {
-            Logger.getLogger(FileCompras.class
-                    .getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger(nameDb);
+            logger.log(Level.SEVERE, null, ex);
         }
     }
-    
-     public void ORDEMPAGAMENTO(String nameDb, String user) {
+
+    public void ORDEMPAGAMENTO(String nameDb, String user) {
         try {
             //Format format = new Format();
             String[] anoBd = nameDb.split("_");
@@ -110,14 +126,14 @@ public class FileCompras {
                 java.awt.Desktop.getDesktop().open(new File(path.getPastaCsemExportOrdemPagamento() + anoBd[1] + "\\" + user));
             }
             if (nameDb.equals("sunew_" + anoBd[1])) {
-                java.awt.Desktop.getDesktop().open(new File(path.getPastaSunewExportOrdemPagamento()+ anoBd[1] + "\\" + user));
+                java.awt.Desktop.getDesktop().open(new File(path.getPastaSunewExportOrdemPagamento() + anoBd[1] + "\\" + user));
             }
             if (nameDb.equals("sunewgeradores_" + anoBd[1])) {
                 java.awt.Desktop.getDesktop().open(new File(path.getPastaSunewGeradoresExportOrdemPagamento() + anoBd[1] + "\\" + user));
             }
-        } catch (IOException ex) {
-            Logger.getLogger(FileCompras.class
-                    .getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger(nameDb);
+            logger.log(Level.SEVERE, null, ex);
         }
     }
 }
