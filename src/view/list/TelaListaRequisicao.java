@@ -313,7 +313,7 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
         btAlterarSenha = new javax.swing.JMenuItem();
         jMenuRequisicaoCriar = new javax.swing.JMenu();
         btCriar = new javax.swing.JMenuItem();
-        btRequisicoesArquivadas1 = new javax.swing.JMenuItem();
+        btCriarApartirDesta = new javax.swing.JMenuItem();
         btCriar1 = new javax.swing.JMenuItem();
         btRequisicoesArquivadas = new javax.swing.JMenuItem();
         btVisualizar = new javax.swing.JMenuItem();
@@ -448,14 +448,13 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
                         .addGap(0, 0, 0)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbUsuario)
-                            .addComponent(lbLogin)
-                            .addComponent(lbNivel))
-                        .addGap(0, 557, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lbTitulo)
-                        .addGap(0, 545, Short.MAX_VALUE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lbUsuario)
+                                .addComponent(lbLogin)
+                                .addComponent(lbNivel))
+                            .addComponent(lbTitulo))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -526,15 +525,15 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
         });
         jMenuRequisicaoCriar.add(btCriar);
 
-        btRequisicoesArquivadas1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_MASK));
-        btRequisicoesArquivadas1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btRequisicoesArquivadas1.setText("Criar a partir desta");
-        btRequisicoesArquivadas1.addActionListener(new java.awt.event.ActionListener() {
+        btCriarApartirDesta.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_MASK));
+        btCriarApartirDesta.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btCriarApartirDesta.setText("Criar a partir desta");
+        btCriarApartirDesta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btRequisicoesArquivadas1ActionPerformed(evt);
+                btCriarApartirDestaActionPerformed(evt);
             }
         });
-        jMenuRequisicaoCriar.add(btRequisicoesArquivadas1);
+        jMenuRequisicaoCriar.add(btCriarApartirDesta);
 
         btCriar1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.ALT_MASK));
         btCriar1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -909,7 +908,7 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btBuscarActionPerformed
 
-    private void btRequisicoesArquivadas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRequisicoesArquivadas1ActionPerformed
+    private void btCriarApartirDestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCriarApartirDestaActionPerformed
         if (tbRequisicao.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(this, "Favor selecionar uma Requisição");
         } else {
@@ -942,7 +941,7 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
 //                }
             }
         }
-    }//GEN-LAST:event_btRequisicoesArquivadas1ActionPerformed
+    }//GEN-LAST:event_btCriarApartirDestaActionPerformed
 
     private void btCriar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCriar1ActionPerformed
         try {
@@ -1134,13 +1133,13 @@ public class TelaListaRequisicao extends javax.swing.JFrame {
     private javax.swing.JMenuItem btBuscarItem;
     private javax.swing.JMenuItem btCriar;
     private javax.swing.JMenuItem btCriar1;
+    private javax.swing.JMenuItem btCriarApartirDesta;
     private javax.swing.JMenuItem btDados;
     private javax.swing.JMenuItem btOC;
     private javax.swing.JMenuItem btPastaFollowUp;
     private javax.swing.JMenuItem btRelacaoOp;
     private javax.swing.JMenuItem btRelatorioOp;
     private javax.swing.JMenuItem btRequisicoesArquivadas;
-    private javax.swing.JMenuItem btRequisicoesArquivadas1;
     private javax.swing.JMenuItem btVisualizar;
     private javax.swing.JMenuItem btVoltar;
     private javax.swing.JMenuItem btVoltar1;
