@@ -9,7 +9,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 public class AcessDB {
 
     protected Connection conectar(String nameDb) throws ClassNotFoundException, SQLException {
-        /*
+        
         //PRINCIPAL POOL CONECTIONs      
         //PROPRIEDADES DE CONEXAO DO BANCO       
         String endereco = "15.0.0.9";
@@ -71,7 +71,7 @@ public class AcessDB {
         //System.out.println(url);
         return DriverManager.getConnection(url, usuario, senha);
         /*######################################################################################*/
-        
+        /*
         //TESTE POOL CONECTIONs      
         //PROPRIEDADES DE CONEXAO DO BANCO
         //String endereco = "15.0.9.184";        
