@@ -38,6 +38,8 @@ public class MoedasDAO extends AcessDB {
             moedasRetorno.setId(resultado.getInt("CodMoeda"));            
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return moedasRetorno;
     }
@@ -70,6 +72,8 @@ public class MoedasDAO extends AcessDB {
             moedas.add(moedasRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return moedas;
     }

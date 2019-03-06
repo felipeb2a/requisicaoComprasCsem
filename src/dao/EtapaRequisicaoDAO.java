@@ -40,6 +40,8 @@ public class EtapaRequisicaoDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return etapaRequisicaoRetorno;
     }
 
@@ -71,6 +73,8 @@ public class EtapaRequisicaoDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return statusRequisicao;
     }
 }

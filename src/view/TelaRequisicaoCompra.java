@@ -3049,9 +3049,9 @@ public class TelaRequisicaoCompra extends javax.swing.JFrame {
                         requisicao.setUsuario(usuario);
                         mail.sendMailRequisicaoTecnico(requisicao, nameDb);
                     }
-
+                    JOptionPane.showMessageDialog(this, "Requisição atualizada com sucesso!");
                     //VOLTAR
-                    btVoltarActionPerformed(evt);
+//                    btVoltarActionPerformed(evt);
                 } catch (Exception ex) {
                     logger = Definirlogger();
                     logger.log(Level.SEVERE, null, ex);
@@ -3239,6 +3239,7 @@ public class TelaRequisicaoCompra extends javax.swing.JFrame {
                 Report report = new Report();
                 report.geraRelatorioRC(requisicao, nameDb);
             }
+            JOptionPane.showMessageDialog(this, "RC Gerada com sucesso!");
             //VOLTAR
 //            btVoltarActionPerformed(evt);
         } catch (Exception ex) {

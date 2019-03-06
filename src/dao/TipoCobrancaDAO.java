@@ -38,6 +38,8 @@ public class TipoCobrancaDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return tipoCobranca;
     }
 
@@ -66,6 +68,8 @@ public class TipoCobrancaDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return tipoCobrancaRetorno;
     }
 }

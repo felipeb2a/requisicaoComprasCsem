@@ -46,6 +46,8 @@ public class ItemDAO extends AcessDB {
             itemRetorno.setId(resultado.getInt("CodItem"));
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return itemRetorno;
     }
@@ -86,6 +88,8 @@ public class ItemDAO extends AcessDB {
             item.add(itemRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return item;
     }
@@ -142,6 +146,7 @@ public class ItemDAO extends AcessDB {
         stmt.setObject(10, item.getProdutoERP().getId());
         stmt.execute();
         stmt.close();
+        conexao.close();
     }
 
     public List<Item> localizarItemRequisicao(Item itemInformado, String nameDb) throws SQLException, ClassNotFoundException {
@@ -176,6 +181,8 @@ public class ItemDAO extends AcessDB {
             item.add(itemRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return item;
     }
@@ -213,6 +220,8 @@ public class ItemDAO extends AcessDB {
             item.add(itemRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return item;
     }
@@ -246,6 +255,8 @@ public class ItemDAO extends AcessDB {
             item.add(itemRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return item;
     }
@@ -277,6 +288,8 @@ public class ItemDAO extends AcessDB {
             item.add(itemRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return item;
     }
@@ -297,6 +310,7 @@ public class ItemDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
     
     public void deleteItemRequisicao(Item item, String nameDb) throws SQLException, ClassNotFoundException {
@@ -315,5 +329,6 @@ public class ItemDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
 }

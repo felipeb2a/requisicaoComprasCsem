@@ -41,6 +41,8 @@ public class TipoRequisicaoDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return tipoRequisicaoRetorno;
     }
 
@@ -72,6 +74,8 @@ public class TipoRequisicaoDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return tipoRequisicao;
     }
 }

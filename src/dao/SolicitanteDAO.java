@@ -40,6 +40,8 @@ public class SolicitanteDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return solicitanteRetorno;
     }
 
@@ -71,6 +73,8 @@ public class SolicitanteDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return solicitante;
     }
     
@@ -119,5 +123,6 @@ public class SolicitanteDAO extends AcessDB {
             stmt.setString(2, solicitante.getNomeSolicitante());
             stmt.execute();            
             stmt.close();
+            conexao.close();
     }
 }

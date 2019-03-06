@@ -42,6 +42,8 @@ public class ProjetosDAO extends AcessDB {
             projetoRetorno.setId(resultado.getInt("CodProjeto"));
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return projetoRetorno;
     }
@@ -63,6 +65,7 @@ public class ProjetosDAO extends AcessDB {
         stm.executeUpdate();
 
         // Encerrando a conexão.
+        stm.close();
         conexao.close();
     }
 
@@ -93,6 +96,8 @@ public class ProjetosDAO extends AcessDB {
             projeto.add(projetoRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return projeto;
     }
@@ -118,6 +123,7 @@ public class ProjetosDAO extends AcessDB {
 
         stmt.execute();
         stmt.close();
+        conexao.close();
     }
 
     //OBTER SEQUENCIA MYSQL
@@ -144,6 +150,8 @@ public class ProjetosDAO extends AcessDB {
             retorno = id + 1;
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return retorno;
     }
@@ -172,6 +180,8 @@ public class ProjetosDAO extends AcessDB {
             projetoRetorno.setId(resultado.getInt("CodProjeto"));
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return projetoRetorno;
     }
@@ -191,5 +201,6 @@ public class ProjetosDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
 }

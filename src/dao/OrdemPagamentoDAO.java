@@ -52,6 +52,8 @@ public class OrdemPagamentoDAO extends AcessDB {
 
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return ordemPagamentoRetorno;
     }
@@ -91,6 +93,8 @@ public class OrdemPagamentoDAO extends AcessDB {
             ordemPagamento.add(ordemPagamentoRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return ordemPagamento;
     }
@@ -129,6 +133,8 @@ public class OrdemPagamentoDAO extends AcessDB {
 
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return ordemPagamentoRetorno;
     }
@@ -160,6 +166,8 @@ public class OrdemPagamentoDAO extends AcessDB {
             ordemPagamento.add(ordemPagamentoRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return ordemPagamento;
     }
@@ -236,6 +244,8 @@ public class OrdemPagamentoDAO extends AcessDB {
             retorno = id + 1;
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return retorno;
     }
@@ -272,6 +282,8 @@ public class OrdemPagamentoDAO extends AcessDB {
             ordemPagamento.add(ordemPagamentoRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return ordemPagamento;
     }
@@ -309,6 +321,8 @@ public class OrdemPagamentoDAO extends AcessDB {
             ordemPagamento.add(ordemPagamentoRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return ordemPagamento;
     }
@@ -346,6 +360,8 @@ public class OrdemPagamentoDAO extends AcessDB {
 
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return ordemPagamentoRetorno;
     }
@@ -394,6 +410,7 @@ public class OrdemPagamentoDAO extends AcessDB {
         // recebendo o resultado da consulta
         stmt.executeUpdate();
         stmt.close();
+        conexao.close();
     }
 
 }

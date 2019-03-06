@@ -56,6 +56,8 @@ public class UsuarioDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return usuarioRetorno;
     }
 
@@ -106,6 +108,8 @@ public class UsuarioDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return user;
     }
     
@@ -136,6 +140,8 @@ public class UsuarioDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return user;
     }
     
@@ -167,6 +173,8 @@ public class UsuarioDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return usuarioRetorno;
     }
 
@@ -194,6 +202,7 @@ public class UsuarioDAO extends AcessDB {
 
         stmt.execute();
         stmt.close();
+        conexao.close();
     }
 
     //OBTER SEQUENCIA MYSQL
@@ -221,6 +230,8 @@ public class UsuarioDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return retorno;
     }
 
@@ -258,6 +269,8 @@ public class UsuarioDAO extends AcessDB {
 
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return user;
     }
 
@@ -292,6 +305,8 @@ public class UsuarioDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return usuarioRetorno;
     }
 
@@ -313,6 +328,7 @@ public class UsuarioDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
     
     public void alterarSenha(Usuario usuario, String nameDb) throws SQLException, ClassNotFoundException {
@@ -330,6 +346,7 @@ public class UsuarioDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
 
     public Usuario localizarIdUsuario(Usuario usuarioInformado, String nameDb) throws SQLException, ClassNotFoundException {
@@ -357,6 +374,8 @@ public class UsuarioDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return usuarioRetorno;
     }
 
@@ -387,6 +406,8 @@ public class UsuarioDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return usuarioRetorno;
     }
 }

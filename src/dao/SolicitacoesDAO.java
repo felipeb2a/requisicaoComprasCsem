@@ -70,6 +70,8 @@ public class SolicitacoesDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return solicitacao;
     }
     
@@ -126,6 +128,8 @@ public class SolicitacoesDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return solicitacaoRetorno;
     }
     
@@ -183,6 +187,8 @@ public class SolicitacoesDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return solicitacaoRetorno;
     }
     
@@ -222,6 +228,8 @@ public class SolicitacoesDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return solicitacaoRetorno;
     }
     
@@ -275,6 +283,8 @@ public class SolicitacoesDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return solicitacao;
     }
     
@@ -328,6 +338,8 @@ public class SolicitacoesDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return solicitacao;
     }
     
@@ -379,6 +391,8 @@ public class SolicitacoesDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return solicitacao;
     }
     
@@ -430,6 +444,8 @@ public class SolicitacoesDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return solicitacao;
     }
     
@@ -482,6 +498,8 @@ public class SolicitacoesDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return solicitacao;
     }
     
@@ -533,6 +551,8 @@ public class SolicitacoesDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return solicitacao;
     }
     
@@ -553,6 +573,7 @@ public class SolicitacoesDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
     
     public void arquivarSolicitacao(Solicitacoes solicitacao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
@@ -572,6 +593,7 @@ public class SolicitacoesDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
     
     public void desarquivarSolicitacao(Solicitacoes solicitacao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
@@ -591,6 +613,7 @@ public class SolicitacoesDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
     
     public void cancelarSolicitacao(Solicitacoes solicitacao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
@@ -610,6 +633,7 @@ public class SolicitacoesDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
     
     public void desCancelarSolicitacao(Solicitacoes solicitacao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
@@ -629,6 +653,7 @@ public class SolicitacoesDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
     
     public void alterarRequisitanteSolicitacao(Solicitacoes solicitacao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
@@ -648,6 +673,7 @@ public class SolicitacoesDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
     
     public void recusarSolicitacao(Solicitacoes solicitacao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
@@ -668,5 +694,6 @@ public class SolicitacoesDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
 }

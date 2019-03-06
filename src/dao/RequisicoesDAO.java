@@ -74,7 +74,10 @@ public class RequisicoesDAO extends AcessDB {
 
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
+        
         return requisicaoRetorno;
     }
 
@@ -105,6 +108,8 @@ public class RequisicoesDAO extends AcessDB {
             requisicaoRetorno.setStatusArqRequisicao(arq);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return requisicaoRetorno;
     }
@@ -161,6 +166,8 @@ public class RequisicoesDAO extends AcessDB {
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return req;
     }
@@ -212,6 +219,8 @@ public class RequisicoesDAO extends AcessDB {
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return req;
     }
@@ -265,6 +274,8 @@ public class RequisicoesDAO extends AcessDB {
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return req;
     }
@@ -319,6 +330,8 @@ public class RequisicoesDAO extends AcessDB {
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return req;
     }
@@ -381,6 +394,8 @@ public class RequisicoesDAO extends AcessDB {
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return req;
     }
@@ -452,6 +467,8 @@ public class RequisicoesDAO extends AcessDB {
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return req;
     }
@@ -515,6 +532,8 @@ public class RequisicoesDAO extends AcessDB {
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return req;
     }
@@ -571,6 +590,8 @@ public class RequisicoesDAO extends AcessDB {
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return req;
     }
@@ -627,6 +648,8 @@ public class RequisicoesDAO extends AcessDB {
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return req;
     }
@@ -657,6 +680,8 @@ public class RequisicoesDAO extends AcessDB {
             req.add(requisicaoRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return req;
     }
@@ -724,6 +749,7 @@ public class RequisicoesDAO extends AcessDB {
 
         stmt.execute();
         stmt.close();
+        conexao.close();
     }
 
     public void update(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException, IOException {
@@ -765,6 +791,7 @@ public class RequisicoesDAO extends AcessDB {
 
         stmt.executeUpdate();
         stmt.close();
+        conexao.close();
     }
 
     //OBTER SEQUENCIA MYSQL
@@ -792,6 +819,8 @@ public class RequisicoesDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return retorno;
     }
 
@@ -870,6 +899,8 @@ public class RequisicoesDAO extends AcessDB {
 
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return requisicaoRetorno;
     }
@@ -902,6 +933,7 @@ public class RequisicoesDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
 
     public void aprovarTecnicoRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
@@ -933,6 +965,7 @@ public class RequisicoesDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
 
     public void recusarRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
@@ -954,6 +987,7 @@ public class RequisicoesDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
 
     public void arquivarRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
@@ -974,6 +1008,7 @@ public class RequisicoesDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
 
     public void desarquivarRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
@@ -994,6 +1029,7 @@ public class RequisicoesDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
 
     public void cancelarRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
@@ -1013,6 +1049,7 @@ public class RequisicoesDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
 
     public void finalizarRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
@@ -1039,6 +1076,7 @@ public class RequisicoesDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
     
     public void retornaRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
@@ -1058,6 +1096,7 @@ public class RequisicoesDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
 
     public void updateRequisicao(Requisicoes requisicao, String nameDb) throws SQLException, ClassNotFoundException, ParseException {
@@ -1086,6 +1125,7 @@ public class RequisicoesDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
 
     public Requisicoes localizarRequisicaoEmail(int id, String nameDb) throws SQLException, ClassNotFoundException {
@@ -1120,6 +1160,8 @@ public class RequisicoesDAO extends AcessDB {
 
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return requisicaoRetorno;
     }
@@ -1151,6 +1193,8 @@ public class RequisicoesDAO extends AcessDB {
             requisicaoRetorno.setUsuario(usuario);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return requisicaoRetorno;
     }
@@ -1185,6 +1229,8 @@ public class RequisicoesDAO extends AcessDB {
 
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return nivelRetorno;
     }

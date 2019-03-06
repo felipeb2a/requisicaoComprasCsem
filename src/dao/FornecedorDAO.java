@@ -58,6 +58,8 @@ public class FornecedorDAO extends AcessDB {
             fornecedorRetorno.setId(resultado.getInt("CodFornecedor"));
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return fornecedorRetorno;
     }
@@ -97,6 +99,8 @@ public class FornecedorDAO extends AcessDB {
             fornecedor.add(fornecedorRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return fornecedor;
     }
@@ -130,6 +134,8 @@ public class FornecedorDAO extends AcessDB {
             fornecedor.add(fornecedorRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return fornecedor;
     }
@@ -161,6 +167,8 @@ public class FornecedorDAO extends AcessDB {
             fornecedor.add(fornecedorRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return fornecedor;
     }
@@ -197,6 +205,8 @@ public class FornecedorDAO extends AcessDB {
             fornecedor.add(fornecedorRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return fornecedor;
     }
@@ -244,6 +254,8 @@ public class FornecedorDAO extends AcessDB {
             fornecedor.add(fornecedorRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return fornecedor;
     }
@@ -307,6 +319,7 @@ public class FornecedorDAO extends AcessDB {
         stmt.setInt(17, fornecedor.getRequisicao().getId());
         stmt.execute();
         stmt.close();
+        conexao.close();
     }
 
     public void salvarInformacoesFinanceiras(Fornecedor fornecedor, String nameDb) throws SQLException, ClassNotFoundException {
@@ -331,6 +344,7 @@ public class FornecedorDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
     
     public void updateTempoProducaoLogistica(Fornecedor fornecedor, String nameDb) throws SQLException, ClassNotFoundException {
@@ -351,6 +365,7 @@ public class FornecedorDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
 
     public Fornecedor localizarFornecedorInfAdicionais(Fornecedor fornecedorInformado, String nameDb) throws SQLException, ClassNotFoundException {
@@ -381,6 +396,8 @@ public class FornecedorDAO extends AcessDB {
             fornecedorRetorno.setConta(resultado.getString("Conta"));
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return fornecedorRetorno;
     }
@@ -412,9 +429,11 @@ public class FornecedorDAO extends AcessDB {
             fornecedorRetorno.setAgencia(resultado.getString("Agencia"));
             fornecedorRetorno.setConta(resultado.getString("Conta"));
             
-            System.out.println(fornecedorRetorno.getNomeFornecedor());
+//            System.out.println(fornecedorRetorno.getNomeFornecedor());
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return fornecedorRetorno;
     }
@@ -435,6 +454,7 @@ public class FornecedorDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
     
     public void deleteFornecedorRequisicao(Fornecedor fornecedor, String nameDb) throws SQLException, ClassNotFoundException {
@@ -452,5 +472,6 @@ public class FornecedorDAO extends AcessDB {
         // recebendo o resultado da consulta
         stm.executeUpdate();
         stm.close();
+        conexao.close();
     }
 }

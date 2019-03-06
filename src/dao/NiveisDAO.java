@@ -38,6 +38,8 @@ public class NiveisDAO extends AcessDB {
             nivel.add(niveisRetorno);
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return nivel;
     }
@@ -66,6 +68,8 @@ public class NiveisDAO extends AcessDB {
             niveisRetorno.setId(resultado.getInt("CodNivel"));
         }
         // Encerrando a conexão.
+        resultado.close();
+        stm.close();
         conexao.close();
         return niveisRetorno;
     }

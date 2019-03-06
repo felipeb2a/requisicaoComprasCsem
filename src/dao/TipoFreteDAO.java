@@ -40,6 +40,8 @@ public class TipoFreteDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return tipoFreteRetorno;
     }
 
@@ -71,6 +73,8 @@ public class TipoFreteDAO extends AcessDB {
         }
         // Encerrando a conexão.
         conexao.close();
+        resultado.close();
+        stm.close();
         return tipoFrete;
     }
 }
