@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import model.Icone;
+import model.Log;
 import model.Requisicoes;
 import model.Usuario;
 import view.TelaRequisicaoAprovacao;
@@ -34,11 +35,26 @@ public class TelaListaRequisicaoAprovacao extends javax.swing.JFrame {
     private ArrayList mostrarTela = new ArrayList();
     private Usuario obterLogin;
     private String nameDb;
+    private Logger logger = null;
 
     public TelaListaRequisicaoAprovacao() {
         initComponents();
         AlteraFontTable();
         MaximizeTela();
+    }
+    //LOGGER
+
+    public Logger Definirlogger() {
+        Log log = new Log();
+        try {
+            logger = log.pathLog(TelaListaRequisicaoAprovacao.class.getName(), nameDb);
+        } catch (SecurityException ex1) {
+            Logger.getLogger(TelaListaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex1);
+        } catch (Exception ex1) {
+            Logger.getLogger(TelaListaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+
+        return logger;
     }
 
     //MOSTRAR TELA    
@@ -95,7 +111,7 @@ public class TelaListaRequisicaoAprovacao extends javax.swing.JFrame {
             //String usuario = lbLogin.getText();
             String nivel = lbNivel.getText();
             String login = lbLogin.getText();
-            
+
             if (nivel.equals("Aprovador Financeiro")) {
                 List listaRequisicao = requisicaoDAO.localizarRequisicoesUserAprovadorFinanceiro(login, nivel, nameDb);
                 DefaultTableModel model = (DefaultTableModel) tbRequisicao.getModel();
@@ -112,7 +128,7 @@ public class TelaListaRequisicaoAprovacao extends javax.swing.JFrame {
                     model.addRow(linha);
                 }
             } else {
-                List listaRequisicao = requisicaoDAO.localizarRequisicoesUserAprovadorTecnico(login,nivel, nameDb);
+                List listaRequisicao = requisicaoDAO.localizarRequisicoesUserAprovadorTecnico(login, nivel, nameDb);
                 DefaultTableModel model = (DefaultTableModel) tbRequisicao.getModel();
                 model.setNumRows(0);
 
@@ -128,29 +144,11 @@ public class TelaListaRequisicaoAprovacao extends javax.swing.JFrame {
                 }
             }
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
 
-            if (ex.getMessage().contains(new String("The Network Adapter could not establish the connection"))) {
-
-                JOptionPane.showMessageDialog(this, "Não foi possivel Conectar Com o Banco de Dados!");
-
-            } else {
-
-                JOptionPane.showMessageDialog(this, "Erro Desconhecido!");
-
-                ex.printStackTrace();
-            }
-
-        } catch (ClassNotFoundException ex) {
-
-            JOptionPane.showMessageDialog(this, "Erro de Desconhecido!");
-
-            ex.printStackTrace();
-        } catch (NullPointerException ex) {
-
-            JOptionPane.showMessageDialog(this, "Null Pointer!");
-
-            ex.printStackTrace();
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }
 
@@ -173,10 +171,10 @@ public class TelaListaRequisicaoAprovacao extends javax.swing.JFrame {
                 tela.nameDb(nameDb);
                 tela.carregarRequisicao(requisicao);
                 this.setVisible(false);
-            } catch (SQLException ex) {
-                Logger.getLogger(TelaListaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TelaListaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                logger = Definirlogger();
+                logger.log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "ERRO: " + ex);
             }
 
         }
@@ -374,10 +372,10 @@ public class TelaListaRequisicaoAprovacao extends javax.swing.JFrame {
             this.setVisible(false);
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -386,10 +384,10 @@ public class TelaListaRequisicaoAprovacao extends javax.swing.JFrame {
             TelaSelecioneAno tela = new TelaSelecioneAno();
             this.setVisible(false);
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -405,10 +403,10 @@ public class TelaListaRequisicaoAprovacao extends javax.swing.JFrame {
             tela.ObterLogin(obterLogin);
             tela.nameDb(nameDb);
             tela.mostrarTela(mostrarTela);
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaListaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TelaListaRequisicaoAprovacao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
     }//GEN-LAST:event_btAlterarSenhaActionPerformed
 
