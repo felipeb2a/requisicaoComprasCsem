@@ -30,6 +30,7 @@ import model.Usuario;
 import view.TelaInfomacoesFinanceiras;
 import view.TelaRequisicaoCompra;
 import view.TelaRequisicaoNova;
+import view.TelaRequisicaoNova;
 import view.initial.TelaAlterarSenha;
 import view.initial.TelaLogin;
 import view.initial.TelaSelecioneAno;
