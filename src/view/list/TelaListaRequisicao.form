@@ -437,17 +437,16 @@
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" pref="528" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lbUsuario" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbLogin" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbNivel" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                  <Component id="lbUsuario" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbLogin" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbNivel" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="lbTitulo" linkSize="6" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="0" pref="557" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lbTitulo" linkSize="6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="545" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
