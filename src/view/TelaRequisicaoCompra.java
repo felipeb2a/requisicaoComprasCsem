@@ -55,6 +55,7 @@ import model.TipoFrete;
 import model.TipoRequisicao;
 import model.Usuario;
 import model.VerificaParametro;
+import util.BarraDeProgresso;
 import view.initial.TelaAlterarSenha;
 import view.initial.TelaLogin;
 import view.initial.TelaSelecioneAno;
@@ -2010,6 +2011,7 @@ public class TelaRequisicaoCompra extends javax.swing.JFrame {
         }
         //CAMPOS VALIDADOS
         if (valida) {
+
             //MODEL
             Requisicoes requisicao = new Requisicoes();
             Destinacao destinacao = new Destinacao();
@@ -2041,6 +2043,7 @@ public class TelaRequisicaoCompra extends javax.swing.JFrame {
             ItemDAO itemDao = new ItemDAO();
             EtapaRequisicaoDAO etapaRequisicaoDao = new EtapaRequisicaoDAO();
 
+            
             try {
                 //DATA REQUISICAO                
                 requisicao.setDataCriacao(txtDataRequisicao.getDate());
@@ -2124,7 +2127,7 @@ public class TelaRequisicaoCompra extends javax.swing.JFrame {
                     requisicao.setTipoAprovador("Aprovador Tecnico");
                     requisicao.setAprovadorTecnico((String) cbTipoAprovador.getSelectedItem());
                 }
-                
+
                 //JUSTIFICATIVA
                 requisicao.setJustificativa(txtJustificativa.getText());
                 //MOTIVO
