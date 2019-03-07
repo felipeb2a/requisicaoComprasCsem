@@ -2124,7 +2124,7 @@ public class TelaRequisicaoCompra extends javax.swing.JFrame {
                     requisicao.setTipoAprovador("Aprovador Tecnico");
                     requisicao.setAprovadorTecnico((String) cbTipoAprovador.getSelectedItem());
                 }
-
+                
                 //JUSTIFICATIVA
                 requisicao.setJustificativa(txtJustificativa.getText());
                 //MOTIVO

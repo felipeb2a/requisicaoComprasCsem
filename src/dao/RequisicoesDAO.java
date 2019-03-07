@@ -773,7 +773,7 @@ public class RequisicoesDAO extends AcessDB {
 
         Connection conexao = conectar(nameDb);
 
-        String sql = "update Requisicoes r set r.CodProjeto = ?, r.CodDest = ?, r.CodTipoReq = ?, r.CodMoeda = ?, r.TipoAprovador = ?, r.Justificativa = ?, r.Motivo = ?, r.DataPrevisaoEntrega = ?, r.CodEtapaRequisicao = ?, r.CodigoStatus = ? where r.CodRequisicao = ?";
+        String sql = "update Requisicoes r set r.CodProjeto = ?, r.CodDest = ?, r.CodTipoReq = ?, r.CodMoeda = ?, r.TipoAprovador = ?, r.Aprovador = ? ,r.AprovadorTecnico = ? , r.Justificativa = ?, r.Motivo = ?, r.DataPrevisaoEntrega = ?, r.CodEtapaRequisicao = ?, r.CodigoStatus = ? where r.CodRequisicao = ?";
 
         PreparedStatement stmt = conexao.prepareStatement(sql);
 
@@ -782,12 +782,14 @@ public class RequisicoesDAO extends AcessDB {
         stmt.setInt(3, requisicao.getTipoRequisicao().getId());
         stmt.setInt(4, requisicao.getMoedas().getId());
         stmt.setString(5, requisicao.getTipoAprovador());
-        stmt.setString(6, requisicao.getJustificativa());
-        stmt.setString(7, requisicao.getMotivo());
-        stmt.setDate(8, previsaoConvert);
-        stmt.setInt(9, requisicao.getEtapaRequisicao().getId());
-        stmt.setInt(10, requisicao.getStatusRequisicao().getId());
-        stmt.setInt(11, requisicao.getId());
+        stmt.setString(6, requisicao.getAprovador());
+        stmt.setString(7, requisicao.getAprovadorTecnico());
+        stmt.setString(8, requisicao.getJustificativa());
+        stmt.setString(9, requisicao.getMotivo());
+        stmt.setDate(10, previsaoConvert);
+        stmt.setInt(11, requisicao.getEtapaRequisicao().getId());
+        stmt.setInt(12, requisicao.getStatusRequisicao().getId());
+        stmt.setInt(13, requisicao.getId());
 
         stmt.executeUpdate();
         stmt.close();
