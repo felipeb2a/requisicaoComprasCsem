@@ -54,12 +54,13 @@ public class ReportOrdemPagamentoExcel extends AcessDB {
                 //GROUP BY
                 sql = "SELECT r.CodRequisicao as Codigo_OP, p.NomeProjeto as Projeto, f.NomeFornecedor "
                         + " as Fornecedor, o.DataOP, (SELECT max(o.DataVencimento)) as DataVencimento, "
-                        + " (SELECT max(o.Parcela)) as Parcelas, o.ValorPagar as ValorParcela, "
+                        + " (SELECT max(o.Parcela)) as Parcelas, m.Abrev as Moeda, o.ValorPagar as ValorParcela, "
                         + " sum(o.ValorPagar) as Total_Pago, f.ValorFinal as Total, (select f.ValorFinal) - (select sum(o.ValorPagar)) as Falta_Pagar "
                         + " FROM OrdemPagto o "
                         + " inner join Requisicoes r on r.CodRequisicao = o.CodRequisicao "
                         + " inner join Projetos p on p.CodProjeto = r.CodProjeto "
                         + " inner join Fornecedores f on f.CodRequisicao = r.CodRequisicao "
+                        + " inner join Moedas m on m.CodMoeda = r.CodMoeda "
                         + " WHERE f.Escolha = 1 "
                         + " group by o.CodRequisicao "
                         + " order by p.NomeProjeto";
@@ -68,12 +69,13 @@ public class ReportOrdemPagamentoExcel extends AcessDB {
                 //GROUP BY
                 sql = "SELECT r.CodRequisicao as Codigo_OP, p.NomeProjeto as Projeto, f.NomeFornecedor "
                         + " as Fornecedor, o.DataOP, (SELECT max(o.DataVencimento)) as DataVencimento, "
-                        + " (SELECT max(o.Parcela)) as Parcelas, o.ValorPagar as ValorParcela, "
+                        + " (SELECT max(o.Parcela)) as Parcelas, m.Abrev as Moeda, o.ValorPagar as ValorParcela, "
                         + " sum(o.ValorPagar) as Total_Pago, f.ValorFinal as Total, (select f.ValorFinal) - (select sum(o.ValorPagar)) as Falta_Pagar "
                         + " FROM OrdemPagto o "
                         + " inner join Requisicoes r on r.CodRequisicao = o.CodRequisicao "
                         + " inner join Projetos p on p.CodProjeto = r.CodProjeto "
                         + " inner join Fornecedores f on f.CodRequisicao = r.CodRequisicao "
+                        + " inner join Moedas m on m.CodMoeda = r.CodMoeda "
                         + " WHERE f.Escolha = 1 and p.NomeProjeto = ? "
                         + " group by o.CodRequisicao "
                         + " order by o.CodRequisicao";
@@ -96,10 +98,11 @@ public class ReportOrdemPagamentoExcel extends AcessDB {
             rowhead.createCell(3).setCellValue("Data OP");
             rowhead.createCell(4).setCellValue("Data Vencimento");
             rowhead.createCell(5).setCellValue("Parcelas");
-            rowhead.createCell(6).setCellValue("Valor Parcela");
-            rowhead.createCell(7).setCellValue("Total Pago");
-            rowhead.createCell(8).setCellValue("Total");
-            rowhead.createCell(9).setCellValue("Falta Pagar");
+             rowhead.createCell(6).setCellValue("Moeda");
+            rowhead.createCell(7).setCellValue("Valor Parcela");           
+            rowhead.createCell(8).setCellValue("Total Pago");
+            rowhead.createCell(9).setCellValue("Total");
+            rowhead.createCell(10).setCellValue("Falta Pagar");
 
             int cont = 1;
             while (resultado.next()) {
@@ -135,11 +138,12 @@ public class ReportOrdemPagamentoExcel extends AcessDB {
                 row.createCell(3).setCellValue(dataOP);
                 row.createCell(4).setCellValue(dataVencimento);
                 row.createCell(5).setCellValue(resultado.getString("Parcelas"));
+                row.createCell(6).setCellValue(resultado.getString("Moeda"));
                 
-                row.createCell(6).setCellValue(new DecimalFormat("###,###.###").format(valorParcela));
-                row.createCell(7).setCellValue(new DecimalFormat("###,###.###").format(totalPago));
-                row.createCell(8).setCellValue(new DecimalFormat("###,###.###").format(total));
-                row.createCell(9).setCellValue(new DecimalFormat("###,###.###").format(faltaPagar));
+                row.createCell(7).setCellValue(new DecimalFormat("###,###.###").format(valorParcela));
+                row.createCell(8).setCellValue(new DecimalFormat("###,###.###").format(totalPago));
+                row.createCell(9).setCellValue(new DecimalFormat("###,###.###").format(total));
+                row.createCell(10).setCellValue(new DecimalFormat("###,###.###").format(faltaPagar));
                 
 //                row.createCell(6).setCellValue(resultado.getString("ValorParcela"));
 //                row.createCell(7).setCellValue(resultado.getString("Total_Pago"));
