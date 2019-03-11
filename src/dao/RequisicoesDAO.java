@@ -756,10 +756,17 @@ public class RequisicoesDAO extends AcessDB {
         //CONVERT DATA MYSQL
         Format convertData = new Format();
         java.util.Date previsao = requisicao.getDataPrevisaoEntrega();
-
+        java.util.Date entrega = requisicao.getDataEntrega();
+        
         java.sql.Date previsaoConvert;
-
+        java.sql.Date entregaConvert;
+        
         previsaoConvert = convertData.convertDataSql(previsao);
+        if(entrega != null){
+        entregaConvert = convertData.convertDataSql(entrega);
+        }else{
+            entregaConvert = null;
+        }
 
         //REMOVE FORNECEDOR E ITEM
         FornecedorDAO fornecedorDao = new FornecedorDAO();
@@ -773,23 +780,24 @@ public class RequisicoesDAO extends AcessDB {
 
         Connection conexao = conectar(nameDb);
 
-        String sql = "update Requisicoes r set r.CodProjeto = ?, r.CodDest = ?, r.CodTipoReq = ?, r.CodMoeda = ?, r.TipoAprovador = ?, r.Aprovador = ? ,r.AprovadorTecnico = ? , r.Justificativa = ?, r.Motivo = ?, r.DataPrevisaoEntrega = ?, r.CodEtapaRequisicao = ?, r.CodigoStatus = ? where r.CodRequisicao = ?";
+        String sql = "update Requisicoes r set r.CodProjeto = ?, r.DataEntrega = ?, r.CodDest = ?, r.CodTipoReq = ?, r.CodMoeda = ?, r.TipoAprovador = ?, r.Aprovador = ? ,r.AprovadorTecnico = ? , r.Justificativa = ?, r.Motivo = ?, r.DataPrevisaoEntrega = ?, r.CodEtapaRequisicao = ?, r.CodigoStatus = ? where r.CodRequisicao = ?";
 
         PreparedStatement stmt = conexao.prepareStatement(sql);
 
         stmt.setInt(1, requisicao.getProjetos().getId());
-        stmt.setInt(2, requisicao.getDestinacao().getId());
-        stmt.setInt(3, requisicao.getTipoRequisicao().getId());
-        stmt.setInt(4, requisicao.getMoedas().getId());
-        stmt.setString(5, requisicao.getTipoAprovador());
-        stmt.setString(6, requisicao.getAprovador());
-        stmt.setString(7, requisicao.getAprovadorTecnico());
-        stmt.setString(8, requisicao.getJustificativa());
-        stmt.setString(9, requisicao.getMotivo());
-        stmt.setDate(10, previsaoConvert);
-        stmt.setInt(11, requisicao.getEtapaRequisicao().getId());
-        stmt.setInt(12, requisicao.getStatusRequisicao().getId());
-        stmt.setInt(13, requisicao.getId());
+        stmt.setObject(2, entregaConvert);
+        stmt.setInt(3, requisicao.getDestinacao().getId());
+        stmt.setInt(4, requisicao.getTipoRequisicao().getId());
+        stmt.setInt(5, requisicao.getMoedas().getId());
+        stmt.setString(6, requisicao.getTipoAprovador());
+        stmt.setString(7, requisicao.getAprovador());
+        stmt.setString(8, requisicao.getAprovadorTecnico());
+        stmt.setString(9, requisicao.getJustificativa());
+        stmt.setString(10, requisicao.getMotivo());
+        stmt.setDate(11, previsaoConvert);
+        stmt.setInt(12, requisicao.getEtapaRequisicao().getId());
+        stmt.setInt(13, requisicao.getStatusRequisicao().getId());
+        stmt.setInt(14, requisicao.getId());
 
         stmt.executeUpdate();
         stmt.close();

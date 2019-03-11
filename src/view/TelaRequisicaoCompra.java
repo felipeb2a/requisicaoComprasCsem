@@ -2043,7 +2043,6 @@ public class TelaRequisicaoCompra extends javax.swing.JFrame {
             ItemDAO itemDao = new ItemDAO();
             EtapaRequisicaoDAO etapaRequisicaoDao = new EtapaRequisicaoDAO();
 
-            
             try {
                 //DATA REQUISICAO                
                 requisicao.setDataCriacao(txtDataRequisicao.getDate());
@@ -2644,7 +2643,9 @@ public class TelaRequisicaoCompra extends javax.swing.JFrame {
         try {
             dataHoje = sdf.parse(dataFormat);
         } catch (ParseException ex) {
-            Logger.getLogger(TelaRequisicaoNova.class.getName()).log(Level.SEVERE, null, ex);
+            logger = Definirlogger();
+            logger.log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "ERRO: " + ex);
         }
 
         //VERIFICA CAMPOS
@@ -2911,6 +2912,10 @@ public class TelaRequisicaoCompra extends javax.swing.JFrame {
                     //DATA PREVISAO ENTREGA
                     //requisicao.setDataPrevisaoEntrega(txtDataPrevisao.getDate());               
                     //PEGAR VALORES PRODUCAO E LOGISTICA
+                    
+                    //DATA DA ENTREGA
+                    requisicao.setDataEntrega(txtDataEntrega.getDate());
+
                     int diasTempoProduc = 0;
                     int diasLogistica = 0;
                     for (int i = 0; i < tbFornecedor.getRowCount(); i++) {
