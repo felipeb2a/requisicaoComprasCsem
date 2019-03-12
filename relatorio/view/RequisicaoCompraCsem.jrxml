@@ -243,10 +243,10 @@
 		<![CDATA[select r.CodRequisicao, r.DataSolicitacao, r.DataCriacao, r.DataAprov, r.DataAprovTecnico, r.Justificativa, r.Aprovador, r.AprovadorTecnico, p.NomeProjeto, tr.TipoRequisicao, u.Nome, s.NomeSolicitante from Requisicoes r inner join Projetos p on p.CodProjeto = r.CodProjeto inner join TipoReq tr on tr.CodTipoReq = r.CodTipoReq inner join Usuario u on u.CodUsuario = r.CodUsuario inner join Solicitante s on s.CodSolicitante = r.CodSolicitante]]>
 	</queryString>
 	<field name="CodRequisicao" class="java.lang.Integer"/>
-	<field name="DataSolicitacao" class="java.sql.Timestamp"/>
-	<field name="DataCriacao" class="java.sql.Timestamp"/>
-	<field name="DataAprov" class="java.sql.Timestamp"/>
-	<field name="DataAprovTecnico" class="java.sql.Timestamp"/>
+	<field name="DataSolicitacao" class="java.sql.Date"/>
+	<field name="DataCriacao" class="java.sql.Date"/>
+	<field name="DataAprov" class="java.sql.Date"/>
+	<field name="DataAprovTecnico" class="java.sql.Date"/>
 	<field name="Justificativa" class="java.lang.String"/>
 	<field name="Aprovador" class="java.lang.String"/>
 	<field name="AprovadorTecnico" class="java.lang.String"/>
