@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c5d15fcb-22a9-453d-b154-05422875edce">
-	<property name="ireport.zoom" value="2.3579476910000055"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="1421"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -263,36 +263,36 @@
 				<textFieldExpression><![CDATA["Ordem de compra - "+$F{CodRequisicao}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement uuid="a8d58b49-02d8-43c6-ab42-4923894ce973" x="10" y="8" width="167" height="83"/>
-				<imageExpression><![CDATA["relatorio\\images\\logo_sunew_geradores.png"]]></imageExpression>
+				<reportElement uuid="7dc49c99-8ee5-4d87-8773-cf43d818b530" x="10" y="8" width="167" height="83"/>
+				<imageExpression><![CDATA["relatorio\\images\\logo-teste.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>
 	<detail>
-		<band height="441" splitType="Stretch">
+		<band height="469" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="5" width="301" height="20"/>
+				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="24" width="307" height="20"/>
 				<textElement verticalAlignment="Top">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[SUNEW COMERCIO GERADORES E SERVICOS S/A]]></text>
+				<text><![CDATA[SUNEW FILMES FOTOVOLTAICOS IMPRESSOS S.A]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="8a4f4a5a-f98b-4345-a7fe-fb0c0c09c422" x="28" y="149" width="504" height="20"/>
+				<reportElement uuid="8a4f4a5a-f98b-4345-a7fe-fb0c0c09c422" x="28" y="168" width="504" height="20"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fornecedores]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="8a4f4a5a-f98b-4345-a7fe-fb0c0c09c422" x="28" y="281" width="504" height="20"/>
+				<reportElement uuid="8a4f4a5a-f98b-4345-a7fe-fb0c0c09c422" x="28" y="300" width="504" height="20"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Itens]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement uuid="faeabf6e-57c2-42d7-8a69-a61b971da9a5" key="table 7" style="table 7" x="28" y="169" width="504" height="100">
+				<reportElement uuid="faeabf6e-57c2-42d7-8a69-a61b971da9a5" key="table 7" style="table 7" x="28" y="188" width="504" height="100">
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
@@ -412,28 +412,28 @@
 				</jr:table>
 			</componentElement>
 			<staticText>
-				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="65" width="301" height="20"/>
+				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="84" width="307" height="20"/>
 				<textElement verticalAlignment="Top">
 					<font size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Avenida José Cândido da Silveira, 2000 - Horto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="85" width="301" height="20"/>
+				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="104" width="307" height="20"/>
 				<textElement verticalAlignment="Top">
 					<font size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Belo Horizonte - Minas Gerais - 31.035-536]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="105" width="301" height="20"/>
+				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="124" width="307" height="20"/>
 				<textElement verticalAlignment="Top">
 					<font size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Telefone:(31) 3326 1600]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement uuid="930c624c-380b-49e1-bb3d-cff9add49364" key="table 8" style="table 8" x="28" y="299" width="504" height="130">
+				<reportElement uuid="930c624c-380b-49e1-bb3d-cff9add49364" key="table 8" style="table 8" stretchType="RelativeToBandHeight" x="28" y="318" width="504" height="130">
 					<property name="com.jaspersoft.studio.table.style.column_header" value="table 8_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="table 8_TD"/>
 				</reportElement>
@@ -552,87 +552,80 @@
 				</jr:table>
 			</componentElement>
 			<staticText>
-				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="25" width="301" height="20"/>
+				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="44" width="307" height="20"/>
 				<textElement verticalAlignment="Top">
 					<font size="12" isBold="false"/>
 				</textElement>
-				<text><![CDATA[CNPJ: 29.741.470/0001-98]]></text>
+				<text><![CDATA[CNPJ: 19.703.227/0002-02]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="45" width="301" height="20"/>
+				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="64" width="307" height="20"/>
 				<textElement verticalAlignment="Top">
 					<font size="12" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Inscrição Estadual: ]]></text>
+				<text><![CDATA[Inscrição Estadual: 002553629.01-34]]></text>
 			</staticText>
 		</band>
-		<band height="225">
+		<band height="207">
 			<staticText>
-				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="23" width="504" height="20"/>
+				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="22" width="504" height="20"/>
 				<textElement verticalAlignment="Top">
-					<font size="10" isBold="false"/>
+					<font size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[2. Por favor, faça esta ordem de acordo com o preço, condições, método de envio e as especificações listadas acima]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="63" width="504" height="20"/>
+				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="62" width="504" height="20"/>
 				<textElement verticalAlignment="Top">
-					<font size="10" isBold="false"/>
+					<font size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[4. Envie toda a correspondência para:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="83" width="504" height="20"/>
+				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="82" width="504" height="20"/>
 				<textElement verticalAlignment="Top">
-					<font size="10" isBold="false"/>
+					<font size="12" isBold="false"/>
 				</textElement>
-				<text><![CDATA[SUNEW COMERCIO GERADORES E SERVICOS S/A]]></text>
+				<text><![CDATA[SUNEW FILMES FOTOVOLTAICOS IMPRESSOS S.A]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="43" width="504" height="20"/>
+				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="42" width="504" height="20"/>
 				<textElement verticalAlignment="Top">
-					<font size="10" isBold="false"/>
+					<font size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[3. Por favor, avise-nos caso não seja possível enviar de acordo com as especificações.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="103" width="504" height="20"/>
+				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="102" width="504" height="20"/>
 				<textElement verticalAlignment="Top">
-					<font size="10" isBold="false"/>
+					<font size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Avenida José Candido da Silveira n° 2000 – Horto Belo Horizonte – Minas Gerais]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="123" width="504" height="20"/>
+				<reportElement uuid="eb4d9331-3879-4d9d-af90-d8a711c37893" x="28" y="122" width="504" height="20"/>
 				<textElement verticalAlignment="Top">
-					<font size="10" isBold="false"/>
+					<font size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Cep 31.035-536 Telefone (31) 3326-1600]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="b1f60ce0-4f57-466a-8a5d-df405a859305" x="28" y="3" width="504" height="20"/>
+				<reportElement uuid="b1f60ce0-4f57-466a-8a5d-df405a859305" x="28" y="2" width="504" height="20"/>
 				<textElement verticalAlignment="Top">
-					<font size="10"/>
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA["1. Favor enviar NF e arquivo XML para email: "+$F{EmailFunc}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="b1f60ce0-4f57-466a-8a5d-df405a859305" x="163" y="168" width="348" height="16"/>
+				<reportElement uuid="b1f60ce0-4f57-466a-8a5d-df405a859305" x="163" y="178" width="348" height="20"/>
 				<textElement verticalAlignment="Bottom">
-					<font size="10"/>
+					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["SUNEW Geradores - "+$F{Nome}+" - "+ new SimpleDateFormat("dd/MM/yyyy").format($F{DataSolicitacao})]]></textFieldExpression>
+				<textFieldExpression><![CDATA["SUNEW - "+$F{Nome}+" - "+ new SimpleDateFormat("dd/MM/yyyy").format($F{DataSolicitacao})]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement uuid="d5dc7411-a3e3-48e8-8a28-d5129384ef71" x="28" y="163" width="504" height="1"/>
+				<reportElement uuid="d5dc7411-a3e3-48e8-8a28-d5129384ef71" x="28" y="171" width="504" height="1"/>
 			</line>
-			<staticText>
-				<reportElement uuid="beab1d6a-dea8-4473-98a1-fbc9da59f59d" x="28" y="186" width="504" height="37"/>
-				<textElement verticalAlignment="Top">
-					<font size="9" isBold="false"/>
-				</textElement>
-				<text><![CDATA[“A Sunew não autoriza o fornecedor a ceder, total ou parcialmente os créditos oriundos desta compra. O não atendimento a esta disposição poderá dar ensejo à suspensão do pagamento, cancelamento do pedido e devolução da mercadoria ou serviço”.]]></text>
-			</staticText>
 		</band>
 	</detail>
 </jasperReport>
