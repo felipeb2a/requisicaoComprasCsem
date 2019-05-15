@@ -117,7 +117,7 @@ public class VerificaParametro {
         //Format format = new Format();
         String[] anoBd = nameDb.split("_");
         if (nameDb.equals("csem_" + anoBd[1])) {
-            nameReport[0] = "relatorio/view/RequisicaoCompraCsem.jasper";
+            nameReport[0] = "relatorio.view.RequisicaoCompraCsem.jasper";
 
             if (nivel.equals("RH")) {
                 nameReport[1] = path.RcRenomeada(path.getPastaRcCsemRh()+ anoBd[1], id);

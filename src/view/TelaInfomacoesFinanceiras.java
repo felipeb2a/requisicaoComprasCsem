@@ -31,7 +31,7 @@ public class TelaInfomacoesFinanceiras extends javax.swing.JFrame {
         initComponents();
         //RESTRINGIR BOTAO FECHAR DO JFRAME
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        //MaximizeTela();
+        MaximizeTela();
     }
     //LOGGER
 
