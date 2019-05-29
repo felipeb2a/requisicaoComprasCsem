@@ -7,7 +7,7 @@ import java.io.File;
  * @author felipe.ferreira
  */
 public class FilesPath {
-    
+
     //DEFINIR PASTAS PRINCIPAL
     //RC
     private static String pastaRcCsem = "\\\\15.0.0.3\\Team\\01. CSEM Brasil\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\01. CONTROLE DE COMPRAS\\02. ORDENS DE COMPRAS\\";
@@ -60,7 +60,7 @@ public class FilesPath {
     private static String pastaSunewGeradoresLog = "\\\\15.0.0.3\\Team\\06. SUNEW GERADORES\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\01. CONTROLE DE COMPRAS\\07. LOGs\\";
 
     /*###################################################################################################################################################################################*/
-    /*
+ /*
     //DEFINIR PASTAS TESTE
     //RC
     private static String pastaRcCsem = "\\\\15.0.0.3\\Team\\01. CSEM Brasil\\01. ADMINISTRATIVO-FINANCEIRO\\COMPRAS\\01. CONTROLE DE COMPRAS\\02. ORDENS DE COMPRAS\\01 - TESTE\\";
@@ -248,7 +248,11 @@ public class FilesPath {
         //PERSISTE A LISTA E VERIFICA SE EXISTE A PASTA FOI RENOMEADA
         for (String s : nomes) {
             if (s.contains(id)) {
-                retorno = caminho + "\\" + s;
+                retorno = s.substring(0, id.length());
+                if (retorno.equals(id)) {
+                    retorno = caminho + "\\" + s;
+                    break;
+                }
             }
         }
         return retorno;
