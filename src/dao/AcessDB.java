@@ -10,6 +10,7 @@ public class AcessDB {
 
     protected Connection conectar(String nameDb) throws ClassNotFoundException, SQLException {
         
+        
         //PRINCIPAL POOL CONECTIONs      
         //PROPRIEDADES DE CONEXAO DO BANCO       
         String endereco = "15.0.0.9";
@@ -17,7 +18,8 @@ public class AcessDB {
         //MYSQL 8.0 REQUER SSL E TIMEZONE
         String ssl = "?useSSL=false";
 //        String timeZone = "&useTimezone=true&serverTimezone=UTC";
-        String timeZone = "&useTimezone=true&serverTimezone=America/Sao_Paulo"; //adiconar o timezone correto para não dar erro nas impresoes de data e hora
+        //String timeZone = "&useTimezone=true&serverTimezone=America/Sao_Paulo"; //adiconar o timezone correto para não dar erro nas impresoes de data e hora
+        String timeZone = "&useTimezone=true&serverTimezone=America/Bahia"; //adiconar o timezone correto para não dar erro nas impresoes de data e hora
         
         String urlSSL = "jdbc:mysql://" + endereco + "/" + database + ssl + timeZone;
         String url = "jdbc:mysql://" + endereco + "/" + database;
@@ -76,7 +78,7 @@ public class AcessDB {
         //TESTE POOL CONECTIONs      
         //PROPRIEDADES DE CONEXAO DO BANCO
         //String endereco = "15.0.9.184";        
-        String endereco = "15.0.0.8";
+        String endereco = "15.0.10.38";
         String database = nameDb;
         //MYSQL 8.0 REQUER SSL E TIMEZONE
         String ssl = "?useSSL=false";
